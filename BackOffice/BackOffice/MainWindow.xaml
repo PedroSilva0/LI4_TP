@@ -1,0 +1,96 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BackOffice"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="BackOffice.MainWindow"
+        mc:Ignorable="d"
+        Title="Fiscalização Dank Restaurant" Height="351" Width="578">
+    <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="321" Margin="0,0,0,-1" VerticalAlignment="Top" Width="568">
+        <TabItem Header="Plano de trabalho">
+            <Grid Background="#FFE5E5E5">
+                <DockPanel HorizontalAlignment="Left" Height="216" LastChildFill="False" VerticalAlignment="Top" Width="384">
+                    <DockPanel.Background>
+                        <ImageBrush ImageSource="C:\Users\Utilizador\Desktop\BackOffice\mapa_modelo.png"/>
+                    </DockPanel.Background>
+                </DockPanel>
+                <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="258" Margin="389,0,0,0" VerticalAlignment="Top" Width="173" SelectionMode="Multiple">
+                    <System:String>Restaurante 1</System:String>
+                    <System:String>Restaurante 2</System:String>
+                    <System:String>Restaurante 3</System:String>
+                    <System:String>Restaurante 4</System:String>
+                    <System:String>Restaurante 5</System:String>
+                </ListBox>
+                <Button x:Name="button" Content="Criar plano" HorizontalAlignment="Left" Margin="59,245,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button x:Name="button1" Content="Limpar seleção" HorizontalAlignment="Left" Margin="253,245,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="33" Margin="389,258,0,0" TextWrapping="Wrap" Text="Pesquisar" VerticalAlignment="Top" Width="137"/>
+                <Button x:Name="button2" Content="" HorizontalAlignment="Left" Margin="526,258,0,0" VerticalAlignment="Top" Width="36" Height="33">
+                    <Button.Background>
+                        <ImageBrush ImageSource="C:\Users\Utilizador\Desktop\BackOffice\search_icon.png"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Inspeções" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68">
+            <Grid Background="#FFE5E5E5">
+                <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="255">
+                    <System:String>Inspeção 1</System:String>
+                    <System:String>Inspeção 2</System:String>
+                    <System:String>Inspeção 3</System:String>
+                    <System:String>Inspeção 4</System:String>
+                    <System:String>Inspeção 5</System:String>
+                    <System:String>Inspeção 6</System:String>
+                    <System:String>Inspeção 7</System:String>
+                </ListBox>
+                <Button x:Name="button3" Content="Criar Relatório" HorizontalAlignment="Left" Margin="365,122,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Relatórios">
+            <Grid HorizontalAlignment="Left" Height="294" Margin="0,-2,-3,-1" VerticalAlignment="Top" Width="565">
+                <ListBox x:Name="listBox2" HorizontalAlignment="Left" Height="253" VerticalAlignment="Top" Width="208">
+                    <System:String>Relatório 1</System:String>
+                    <System:String>Relatório 2</System:String>
+                    <System:String>Relatório 3</System:String>
+                    <System:String>Relatório 4</System:String>
+                    <System:String>Relatório 5</System:String>
+                    <System:String>Relatório 6</System:String>
+                </ListBox>
+                <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="41" Margin="0,253,0,0" TextWrapping="Wrap" Text="Pesquisar" VerticalAlignment="Top" Width="158"/>
+                <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="318,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+                <Button x:Name="button4" Content="" HorizontalAlignment="Left" Margin="163,253,0,0" VerticalAlignment="Top" Width="45" Height="41">
+                    <Button.Background>
+                        <ImageBrush ImageSource="C:\Users\Utilizador\Desktop\BackOffice\search_icon.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="button5" Content="Enviar relatório" HorizontalAlignment="Left" Margin="378,144,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label" Content="Para" HorizontalAlignment="Left" Margin="261,97,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Estabelecimentos">
+            <Grid HorizontalAlignment="Left" Height="297" Margin="0,-1,-4,-5" VerticalAlignment="Top" Width="566">
+                <Label x:Name="label1" Content="Nome" HorizontalAlignment="Left" Margin="36,36,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label2" Content="Morada" HorizontalAlignment="Left" Margin="36,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-0.173"/>
+                <Label x:Name="label3" Content="Coordenadas GPS" HorizontalAlignment="Left" Margin="36,114,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label x:Name="label4" Content="Longitude" HorizontalAlignment="Left" Margin="36,208,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label5" Content="Latitude" HorizontalAlignment="Left" Margin="36,162,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="button6" Content="Registar estabelecimento" HorizontalAlignment="Left" Margin="382,238,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="125,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
+                <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="125,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
+                <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="125,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
+                <TextBox x:Name="textBox6" HorizontalAlignment="Left" Height="23" Margin="125,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
+                <Image x:Name="image" HorizontalAlignment="Left" Height="109" Margin="318,36,0,0" VerticalAlignment="Top" Width="238" Source="C:\Users\Utilizador\Desktop\BackOffice\logo_rest.png" Stretch="Fill"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Conversão de voz">
+            <Grid>
+                <ListBox x:Name="listBox3" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="212">
+                    <System:String>Ficheiro Voz 1</System:String>
+                    <System:String>Ficheiro Voz 2</System:String>
+                    <System:String>Ficheiro Voz 3</System:String>
+                </ListBox>
+                <Button x:Name="button7" Content="Converter para XML" HorizontalAlignment="Left" Margin="314,116,0,0" VerticalAlignment="Top" Width="122" Height="19"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
