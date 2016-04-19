@@ -23,8 +23,8 @@ namespace BackOffice
         public MainWindow()
         {
             InitializeComponent();
-            //login l = new login();
-            //l.Show();
+            login l = new login();
+            l.Show();
         }
 
        

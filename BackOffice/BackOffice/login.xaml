@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Fiscalização Dank Restaurant" Height="351" Width="578">
     <Grid>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="128" Margin="105,40,0,0" VerticalAlignment="Top" Width="349" Source="C:\Users\Utilizador\Desktop\BackOffice\logo_rest.png" Stretch="Fill"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="128" Margin="105,40,0,0" VerticalAlignment="Top" Width="349" Source="imagens/logo_rest.png" Stretch="Fill"/>
         <Label x:Name="label" Content="Utilizador" HorizontalAlignment="Left" Margin="74,168,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="Password" HorizontalAlignment="Left" Margin="75,204,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="183,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="234"/>
