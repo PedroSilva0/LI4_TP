@@ -8,7 +8,7 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <TextView
-        android:text="Dank Restaurant"
+        android:text="Dank Restaurantwasedfg"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_weight="20"
