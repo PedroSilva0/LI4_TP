@@ -8,10 +8,9 @@ using Android.OS;
 
 namespace Mobile
 {
-    [Activity(Label = "Dank Restaurant", MainLauncher = true, Icon = "@drawable/Dank_icon")]
+    [Activity(Label = "Dank Restaurant", MainLauncher = true, Icon = "@drawable/Icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -20,11 +19,6 @@ namespace Mobile
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
-
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
         }
     }
 }
