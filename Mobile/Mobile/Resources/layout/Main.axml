@@ -24,6 +24,7 @@
         android:layout_height="0dp"
         android:layout_weight="15"
         android:id="@+id/buttonLogIn"
+        android:background="#000"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="15sp" />
