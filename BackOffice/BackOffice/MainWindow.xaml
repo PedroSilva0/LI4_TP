@@ -15,7 +15,7 @@
                         <ImageBrush ImageSource="imagens/mapa_modelo.png"/>
                     </DockPanel.Background>
                 </DockPanel>
-                <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="258" Margin="389,0,0,0" VerticalAlignment="Top" Width="173" SelectionMode="Multiple">
+                <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="291" Margin="389,0,0,0" VerticalAlignment="Top" Width="173" SelectionMode="Multiple">
                     <System:String>Restaurante 1</System:String>
                     <System:String>Restaurante 2</System:String>
                     <System:String>Restaurante 3</System:String>
@@ -24,12 +24,6 @@
                 </ListBox>
                 <Button x:Name="button" Content="Criar plano" HorizontalAlignment="Left" Margin="59,245,0,0" VerticalAlignment="Top" Width="75"/>
                 <Button x:Name="button1" Content="Limpar seleção" HorizontalAlignment="Left" Margin="253,245,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="33" Margin="389,258,0,0" TextWrapping="Wrap" Text="Pesquisar" VerticalAlignment="Top" Width="137"/>
-                <Button x:Name="button2" Content="" HorizontalAlignment="Left" Margin="526,258,0,0" VerticalAlignment="Top" Width="36" Height="33">
-                    <Button.Background>
-                        <ImageBrush ImageSource="imagens/search_icon.png"/>
-                    </Button.Background>
-                </Button>
             </Grid>
         </TabItem>
         <TabItem Header="Inspeções" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68">
@@ -48,7 +42,7 @@
         </TabItem>
         <TabItem Header="Relatórios">
             <Grid HorizontalAlignment="Left" Height="294" Margin="0,-2,-3,-1" VerticalAlignment="Top" Width="565">
-                <ListBox x:Name="listBox2" HorizontalAlignment="Left" Height="253" VerticalAlignment="Top" Width="208">
+                <ListBox x:Name="listBox2" HorizontalAlignment="Left" Height="294" VerticalAlignment="Top" Width="208">
                     <System:String>Relatório 1</System:String>
                     <System:String>Relatório 2</System:String>
                     <System:String>Relatório 3</System:String>
@@ -56,15 +50,10 @@
                     <System:String>Relatório 5</System:String>
                     <System:String>Relatório 6</System:String>
                 </ListBox>
-                <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="41" Margin="0,253,0,0" TextWrapping="Wrap" Text="Pesquisar" VerticalAlignment="Top" Width="158"/>
                 <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="318,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-                <Button x:Name="button4" Content="" HorizontalAlignment="Left" Margin="163,253,0,0" VerticalAlignment="Top" Width="45" Height="41">
-                    <Button.Background>
-                        <ImageBrush ImageSource="imagens/search_icon.png"/>
-                    </Button.Background>
-                </Button>
                 <Button x:Name="button5" Content="Enviar relatório" HorizontalAlignment="Left" Margin="378,144,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="label" Content="Para" HorizontalAlignment="Left" Margin="261,97,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="button4" Content="Consultar" HorizontalAlignment="Left" Margin="464,240,0,0" VerticalAlignment="Top" Width="75"/>
             </Grid>
         </TabItem>
         <TabItem Header="Estabelecimentos">
