@@ -24,6 +24,7 @@
                 </ListBox>
                 <Button x:Name="button" Content="Criar plano" HorizontalAlignment="Left" Margin="59,245,0,0" VerticalAlignment="Top" Width="75"/>
                 <Button x:Name="button1" Content="Limpar seleção" HorizontalAlignment="Left" Margin="253,245,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label7" Content="Avisos" HorizontalAlignment="Left" Margin="139,265,0,0" VerticalAlignment="Top" Width="114"/>
             </Grid>
         </TabItem>
         <TabItem Header="Inspeções" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68">
@@ -38,6 +39,7 @@
                     <System:String>Inspeção 7</System:String>
                 </ListBox>
                 <Button x:Name="button3" Content="Criar Relatório" HorizontalAlignment="Left" Margin="365,122,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label8" Content="Avisos" HorizontalAlignment="Left" Margin="324,219,0,0" VerticalAlignment="Top" Width="190"/>
             </Grid>
         </TabItem>
         <TabItem Header="Relatórios">
@@ -54,6 +56,7 @@
                 <Button x:Name="button5" Content="Enviar relatório" HorizontalAlignment="Left" Margin="378,144,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="label" Content="Para" HorizontalAlignment="Left" Margin="261,97,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="button4" Content="Consultar" HorizontalAlignment="Left" Margin="464,240,0,0" VerticalAlignment="Top" Width="75"/>
+                <Label x:Name="label9" Content="Avisos" HorizontalAlignment="Left" Height="29" Margin="261,240,0,0" VerticalAlignment="Top" Width="156"/>
             </Grid>
         </TabItem>
         <TabItem Header="Estabelecimentos">
@@ -69,6 +72,7 @@
                 <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="125,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
                 <TextBox x:Name="textBox6" HorizontalAlignment="Left" Height="23" Margin="125,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
                 <Image x:Name="image" HorizontalAlignment="Left" Height="109" Margin="318,36,0,0" VerticalAlignment="Top" Width="238" Source="imagens/logo_rest.png" Stretch="Fill"/>
+                <Label x:Name="label10" Content="Avisos" HorizontalAlignment="Left" Margin="110,258,0,0" VerticalAlignment="Top" Width="180"/>
             </Grid>
         </TabItem>
         <TabItem Header="Conversão de voz">
@@ -79,6 +83,7 @@
                     <System:String>Ficheiro Voz 3</System:String>
                 </ListBox>
                 <Button x:Name="button7" Content="Converter para XML" HorizontalAlignment="Left" Margin="314,116,0,0" VerticalAlignment="Top" Width="122" Height="19"/>
+                <Label x:Name="label6" Content="Avisos" HorizontalAlignment="Left" Margin="297,244,0,0" VerticalAlignment="Top" Width="165"/>
             </Grid>
         </TabItem>
     </TabControl>
