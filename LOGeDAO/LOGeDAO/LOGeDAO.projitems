@@ -13,6 +13,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)GPS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NotaTXT.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NotaVoz.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Plano.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Questao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Relatorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resposta.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Restaurante.cs" />

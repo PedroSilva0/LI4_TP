@@ -14,6 +14,7 @@ namespace LOGeDAO
         private List<NotaVoz> audios { get; }
         private List<Resposta> formulario { get; }
         private Relatorio relatorio { get; }
+        private Restaurante restaurante { get; }
 
         public Visita(int mId)
         {
