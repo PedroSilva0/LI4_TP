@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>1ff91be6-6887-4b2a-9c94-82cc9494eb53</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>LOGeDAO</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Foto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GPS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NotaTXT.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NotaVoz.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Relatorio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Resposta.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Restaurante.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Visita.cs" />
+  </ItemGroup>
+</Project>
