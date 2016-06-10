@@ -20,13 +20,21 @@ namespace BackOffice
     /// </summary>
     public partial class MainWindow : Window
     {
+        //private LI4Entities data;
+        private facade fac;
         public MainWindow()
         {
+
             InitializeComponent();
-            login l = new login();
-            l.Show();
+            fac = new facade();
+            //login l = new login();
+            //l.Show();
         }
 
-       
+        private void button6_Click(object sender, RoutedEventArgs e)
+        {
+            fac.registarRes(4, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text);
+            label10.Content = "Restaurante adicionado com sucesso";
+        }
     }
 }

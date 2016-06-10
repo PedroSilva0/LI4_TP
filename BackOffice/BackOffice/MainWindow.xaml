@@ -66,7 +66,7 @@
                 <Label x:Name="label3" Content="Coordenadas GPS" HorizontalAlignment="Left" Margin="36,114,0,0" VerticalAlignment="Top" FontSize="16"/>
                 <Label x:Name="label4" Content="Longitude" HorizontalAlignment="Left" Margin="36,208,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="label5" Content="Latitude" HorizontalAlignment="Left" Margin="36,162,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="button6" Content="Registar estabelecimento" HorizontalAlignment="Left" Margin="382,238,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="button6" Content="Registar estabelecimento" HorizontalAlignment="Left" Margin="382,238,0,0" VerticalAlignment="Top" Click="button6_Click"/>
                 <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="125,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
                 <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="125,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
                 <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="125,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
