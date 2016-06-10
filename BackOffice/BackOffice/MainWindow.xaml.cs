@@ -27,6 +27,8 @@ namespace BackOffice
 
             InitializeComponent();
             fac = new facade();
+            data_diagram_teste t = new data_diagram_teste();
+            t.Show();
             //login l = new login();
             //l.Show();
         }
