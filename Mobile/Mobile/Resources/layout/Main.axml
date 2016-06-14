@@ -3,11 +3,73 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-<Button  
-    android:id="@+id/MyButton"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/Hello"
-    />
+    android:id="@+id/mainView"
+    android:background="#D2D2D2"
+    android:weightSum="100"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_weight="30"
+        android:layout_height="0dp"
+        android:text="Bem Vindo!"
+        android:gravity="center"
+        android:textColor="#4A6EA9"
+        android:textSize="48sp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_weight="40"
+        android:layout_height="0dp"
+        android:id="@+id/linearLayout1">
+        <EditText
+            android:id="@+id/txtUserName"
+            android:hint="ID"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_style"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="#000" />
+        <EditText
+            android:id="@+id/txtPassword"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_style"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#000" />
+        <Button
+            android:id="@+id/btnLogin"
+            android:text="Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/button_login_style" />
+    </LinearLayout>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_weight="20"
+        android:layout_height="0dp"
+        android:id="@+id/relativeLayout1">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progBar"
+            android:indeterminate="true"
+            android:background="@drawable/progBar"
+            android:layout_centerInParent="true"
+            android:visibility="invisible" />
+    </RelativeLayout>
 </LinearLayout>
