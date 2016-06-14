@@ -13,7 +13,7 @@
             <Grid Background="#FFE5E5E5">
                 <Button x:Name="button" Content="Criar plano" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
                 <Button x:Name="button1" Content="Limpar seleção" HorizontalAlignment="Left" Margin="292,245,0,0" VerticalAlignment="Top" Click="button1_Click"/>
-                <Label x:Name="label7" Content="Avisos" HorizontalAlignment="Left" Margin="139,265,0,0" VerticalAlignment="Top" Width="114"/>
+                <Label x:Name="label7" Content="Avisos" HorizontalAlignment="Left" Margin="139,265,0,0" VerticalAlignment="Top"/>
                 <ListView x:Name="listView" HorizontalAlignment="Left" Height="291" Margin="389,0,0,0" VerticalAlignment="Top" Width="173" SelectionMode="Single">
                     <ListView.View>
                         <GridView>
@@ -82,13 +82,16 @@
         </TabItem>
         <TabItem Header="Conversão de voz">
             <Grid>
-                <ListBox x:Name="listBox3" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="212">
-                    <System:String>Ficheiro Voz 1</System:String>
-                    <System:String>Ficheiro Voz 2</System:String>
-                    <System:String>Ficheiro Voz 3</System:String>
-                </ListBox>
-                <Button x:Name="button7" Content="Converter para XML" HorizontalAlignment="Left" Margin="314,116,0,0" VerticalAlignment="Top" Width="122" Height="19"/>
+                <Button x:Name="button7" Content="Converter para XML" HorizontalAlignment="Left" Margin="314,116,0,0" VerticalAlignment="Top" Width="122" Height="19" Click="button7_Click"/>
                 <Label x:Name="label6" Content="Avisos" HorizontalAlignment="Left" Margin="297,244,0,0" VerticalAlignment="Top" Width="165"/>
+                <ListView x:Name="listView1" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="180">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Descrição" DisplayMemberBinding="{Binding descricao}" Width="179" />
+                            <GridViewColumn Header="id" DisplayMemberBinding="{Binding id_voz}" Width="0" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
         </TabItem>
     </TabControl>

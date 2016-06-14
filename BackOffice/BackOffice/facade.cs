@@ -1,17 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BackOffice
 {
-    
+    class MyWebClient : WebClient
+    {
+        protected override WebRequest GetWebRequest(Uri uri)
+        {
+            WebRequest w = base.GetWebRequest(uri);
+            w.Timeout = 30 * 60 * 1000;
+            return w;
+        }
+    }
+
     class facade
     {
-        private LI4Entities data=new LI4Entities();
+        private LI4Entities data = new LI4Entities();
 
-        public void registarRes(int id,string nome,string morada,string latitude,string longitude)
+        public void registarRes(int id, string nome, string morada, string latitude, string longitude)
         {
             id = Convert.ToInt32(id);
             double latitude2 = Convert.ToDouble(latitude);
@@ -34,18 +44,25 @@ namespace BackOffice
             return lista;
         }
 
-        public void criarPlano(int fiscal,List<int> estab)
+        public List<Voz> listarTodosVoz()
+        {
+            //var lista = (from t in data.tasks select new { t.id, t.name, type=t.taskType.name, username = t.user.name }).ToList(); 
+            var lista = data.Voz.ToList();
+            return lista;
+        }
+
+        public void criarPlano(int fiscal, List<int> estab)
         {
             //var new_id = (from t in data.Estabelecimento select max(id_est)).ToList();
             //return new_id;
-            int new_id_pla = data.Plano.Count()+1;
-            int new_id_vis = data.Visita.Count()+1;
+            int new_id_pla = data.Plano.Count() + 1;
+            int new_id_vis = data.Visita.Count() + 1;
             data.Plano.Add(new Plano()
             {
                 id_plano = new_id_pla,
                 disponivel = true,
                 FiscalCriador = fiscal,
-                Fiscal=fiscal                         //ESTA LINHA ESTÁ MAL COM A NOVA BD ATENÇÃO
+                Fiscal = fiscal                         //ESTA LINHA ESTÁ MAL COM A NOVA BD ATENÇÃO
             });
             foreach (int i in estab)
             {
@@ -55,8 +72,8 @@ namespace BackOffice
                     id_vis = new_id_vis,
                     plano = new_id_pla,
                     estabelecimento = i,
-                    concluido=false,
-                    dataVisita=DateTime.Now        //ESTA LINHA ESTÁ MAL COM A NOVA BD ATENÇÃO 
+                    concluido = false,
+                    dataVisita = DateTime.Now        //ESTA LINHA ESTÁ MAL COM A NOVA BD ATENÇÃO 
                 });
                 new_id_vis++;
             }
@@ -104,6 +121,38 @@ namespace BackOffice
             this.comboBox2.SelectedIndex = 0;*/
         }
 
+        public void convertXML()
+        {
+            // change these:
+            String user = "dankrestaurantli4@gmail.com";
+            String passwd = "5GPXP87483759G3";
+            String wavFile = "C:\\li4\\teste2.wav";
 
+            // send:
+            String url = "https://api.nexiwave.com/SpeechIndexing/file/storage/" + user + "/recording/?authData.passwd=" + passwd + "&response=application/json&targetDecodingConfigName=voicemail&auto-redirect=true";
+
+            // Comment this out to receive transcript in plain text (for SMS, for example)
+            //url = url + "&transcriptFormat=html";
+
+            using (MyWebClient wc = new MyWebClient())
+            {
+                byte[] myByteArray = wc.UploadFile(url, wavFile);
+                System.Text.Encoding enc = System.Text.Encoding.ASCII;
+                string json = enc.GetString(myByteArray);
+
+                // Note: you will need to add reference to System.Web.Extensions for JavaScriptSerializer
+                var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+                Dictionary<string, string> values = serializer.Deserialize<Dictionary<string, string>>(json);
+                string transcript = values["text"];
+
+                // perform magic with the transcript here:
+                //string text = "A class is the most powerful data type in C#. Like a structure, " +
+                // "a class defines the data and behavior of the data type. ";
+                System.IO.File.WriteAllText(@"C:\li4\testept.txt", transcript);
+                Console.Write(transcript);
+            }
+
+        }
     }
 }

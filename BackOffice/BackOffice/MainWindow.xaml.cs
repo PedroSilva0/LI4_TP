@@ -32,10 +32,11 @@ namespace BackOffice
         {
             InitializeComponent();
             fac = new facade();
-            lista_restaurantes();
+            listarRestaurantes();
+            listarTodosVoz();
         }
 
-        private void lista_restaurantes()
+        private void listarRestaurantes()
         {
             listView.Items.Clear();
             fac = new facade();
@@ -55,12 +56,31 @@ namespace BackOffice
             id_rest = lista_estabelecimento.Count+1;
         }
 
+        private void listarTodosVoz()
+        {
+            listView1.Items.Clear();
+            fac = new facade();
+            var lista_voz = fac.listarTodosVoz();
+            foreach (Voz item in lista_voz)
+            {
+
+                this.listView.Items.Add(new Voz
+                {
+                    descricao = item.descricao,
+                    id_voz = item.id_voz,
+                });
+            }
+            //id_rest = lista_estabelecimento.Count + 1;
+        }
+
+
+
 
 
         private void button6_Click(object sender, RoutedEventArgs e)
         {
             fac.registarRes(id_rest, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text);
-            lista_restaurantes();
+            listarRestaurantes();
             label10.Content = "Restaurante adicionado com sucesso";
         }
 
@@ -140,6 +160,11 @@ namespace BackOffice
             label7.Content = "Plano criado com sucesso";
             //Console.WriteLine(t);
 
+        }
+
+        private void button7_Click(object sender, RoutedEventArgs e)
+        {
+            fac.convertXML();
         }
     }
 }
