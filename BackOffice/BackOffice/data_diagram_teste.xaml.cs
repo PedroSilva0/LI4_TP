@@ -31,8 +31,6 @@ namespace BackOffice
             foreach (Estabelecimento item in lista)
             {
                 Console.WriteLine(item.nome);
-                string[] row2 = { Convert.ToString(item.id_est), item.nome, item.morada};
-                string[] row = { "1", "3", "4" };
                 this.listView.Items.Add(new Estabelecimento {nome = item.nome, id_est = item.id_est,
                                     morada=item.morada, latitude=item.latitude,longitude=item.longitude});
             }

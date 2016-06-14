@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:local="clr-namespace:BackOffice"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="BackOffice.MainWindow"
         mc:Ignorable="d"
@@ -10,21 +11,25 @@
     <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="321" Margin="0,0,0,-1" VerticalAlignment="Top" Width="568">
         <TabItem Header="Plano de trabalho">
             <Grid Background="#FFE5E5E5">
-                <DockPanel HorizontalAlignment="Left" Height="216" LastChildFill="False" VerticalAlignment="Top" Width="384">
-                    <DockPanel.Background>
-                        <ImageBrush ImageSource="imagens/mapa_modelo.png"/>
-                    </DockPanel.Background>
-                </DockPanel>
-                <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="291" Margin="389,0,0,0" VerticalAlignment="Top" Width="173" SelectionMode="Multiple">
-                    <System:String>Restaurante 1</System:String>
-                    <System:String>Restaurante 2</System:String>
-                    <System:String>Restaurante 3</System:String>
-                    <System:String>Restaurante 4</System:String>
-                    <System:String>Restaurante 5</System:String>
-                </ListBox>
-                <Button x:Name="button" Content="Criar plano" HorizontalAlignment="Left" Margin="59,245,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="button1" Content="Limpar seleção" HorizontalAlignment="Left" Margin="253,245,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="button" Content="Criar plano" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+                <Button x:Name="button1" Content="Limpar seleção" HorizontalAlignment="Left" Margin="292,245,0,0" VerticalAlignment="Top" Click="button1_Click"/>
                 <Label x:Name="label7" Content="Avisos" HorizontalAlignment="Left" Margin="139,265,0,0" VerticalAlignment="Top" Width="114"/>
+                <ListView x:Name="listView" HorizontalAlignment="Left" Height="291" Margin="389,0,0,0" VerticalAlignment="Top" Width="173" SelectionMode="Single">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Nome" DisplayMemberBinding="{Binding nome}" Width="172" />
+                            <GridViewColumn Header="id" DisplayMemberBinding="{Binding id_est}" Width="0" />
+                            <GridViewColumn Header="Morada" DisplayMemberBinding="{Binding morada}" Width="0" />
+                            <GridViewColumn Header="latitude" DisplayMemberBinding="{Binding latitude}" Width="0"/>
+                            <GridViewColumn Header="longitude" DisplayMemberBinding="{Binding longitude}" Width="0"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Grid HorizontalAlignment="Left" Height="210" VerticalAlignment="Top" Width="389">
+                    <m:Map x:Name="myMap" CredentialsProvider="ArjO1zxqYuy0JVVWTOpaBo0T0ea_HogtaMT9xwTHzyv0xTB8eoSxWGrAEBfiSWt-" Mode="Road" Center="41.559393,-8.39725" ZoomLevel="15"/>
+                </Grid>
+                <Button x:Name="add_to_map" Content="Adicionar" HorizontalAlignment="Left" Margin="106,245,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.067,0.9" Click="add_to_map_Click"/>
+                <Button x:Name="remove_from_map" Content="Remover" HorizontalAlignment="Left" Margin="201,245,0,0" VerticalAlignment="Top" Width="75" Click="remove_from_map_Click"/>
             </Grid>
         </TabItem>
         <TabItem Header="Inspeções" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68">
