@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -165,9 +166,11 @@ namespace BackOffice
 
         private void button7_Click(object sender, RoutedEventArgs e)
         {
+            
             Voz est = (Voz)listView1.SelectedItems[0];
-            fac.playAudio(est.id_voz);
-            //fac.convertXML();
+            //fac.playAudio(est.id_voz);
+            String xml=fac.convertXML(est.id_voz);
+            label6.Content="Ficheiro convertido com sucesso";
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)

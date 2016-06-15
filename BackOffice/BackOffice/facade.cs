@@ -123,12 +123,19 @@ namespace BackOffice
             this.comboBox2.SelectedIndex = 0;*/
         }
 
-        public void convertXML()
+        public string convertXML(int id_voz)
         {
+            //buscar a bd, por no pc
+            var lista = data.Voz.ToList();
+            Voz v = lista.ElementAt(id_voz - 1);
+            String path_voz = "C:\\Windows\\Temp\\voz" + v.id_voz.ToString() + ".wav";
+            String path_xml= "C:\\Windows\\Temp\\xml" + v.id_voz.ToString() + ".xml";
+            System.IO.File.WriteAllBytes(path_voz, v.voz_file);
+
             // change these:
             String user = "dankrestaurantli4@gmail.com";
             String passwd = "5GPXP87483759G3";
-            String wavFile = "C:\\li4\\teste2.wav";
+            String wavFile = path_voz;
 
             // send:
             String url = "https://api.nexiwave.com/SpeechIndexing/file/storage/" + user + "/recording/?authData.passwd=" + passwd + "&response=application/json&targetDecodingConfigName=voicemail&auto-redirect=true";
@@ -151,24 +158,44 @@ namespace BackOffice
                 // perform magic with the transcript here:
                 //string text = "A class is the most powerful data type in C#. Like a structure, " +
                 // "a class defines the data and behavior of the data type. ";
-                System.IO.File.WriteAllText(@"C:\li4\testept.txt", transcript);
+                //System.IO.File.WriteAllText(path_xml, transcript);
+                String res = parse_xml(transcript,id_voz);
+                
                 Console.Write(transcript);
+                return res;
             }
 
+        }
+        
+        public string parse_xml(string transcript,int id)   //mudar para private depois do teste
+        {                                              //mudar string teste para string transcript depois do teste
+            String teste = "Access good wheelchair ready Storage no problem Fridge rusty and old must be replaced Kitchen no problem Toilet doesnt flush needs to be fixed";
+            teste.ToLower();
+            String res = "";
+            string[] ssize = teste.Split(null);
+            foreach(String s in ssize)
+            {
+                if (s.Equals("access")){
+
+                }
+            }
+            String res="";
+            return res;
         }
 
         public void playAudio(int id_voz)
         {
-            Console.WriteLine(id_voz);
+            //Console.WriteLine(id_voz);
             var lista = data.Voz.ToList();
-            //byte[] teste = (byte[]) audioFile.ElementAt(0);
-            //audioFile.ElementAt(0);
-            Stream stream = new MemoryStream(lista.ElementAt(id_voz-1).voz_file);
-            //audioFile.Stream();
-            //System.IO.File.WriteAllBytes(f.id_foto.ToString() + ".jpg", f.foto_file);
-            SoundPlayer simpleSound = new SoundPlayer(@"C:\temp\teste1.wav");
-            simpleSound.Load();
+            Voz v = lista.ElementAt(id_voz - 1);
+            var stream = new MemoryStream(v.voz_file,true);
+            //System.IO.File.WriteAllBytes("C:\\Windows\\Temp\\" + v.id_voz.ToString() + ".wav", v.voz_file);
+            SoundPlayer simpleSound = new SoundPlayer(stream);
+            simpleSound.Stream.Seek(0, SeekOrigin.Begin);
+            simpleSound.Stream.Write(v.voz_file, 0, v.voz_file.Length);
             simpleSound.Play();
+            //simpleSound.Load();
+            //simpleSound.PlaySync();
             Console.WriteLine("ficheiro tocado");
         }
     }
