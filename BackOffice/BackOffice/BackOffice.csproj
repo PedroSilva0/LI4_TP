@@ -115,6 +115,7 @@
     <Compile Include="Visita.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="visitaDTO.cs" />
     <Compile Include="VisitaQuestao.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

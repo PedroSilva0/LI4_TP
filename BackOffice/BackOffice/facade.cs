@@ -53,6 +53,14 @@ namespace BackOffice
             return lista;
         }
 
+        public List<Visita> listarVisitas()
+        {
+            var lista2 = data.Visita.SqlQuery("select * from Visita where concluido=1").ToList();
+            //var lista = data.Visita.ToList();
+            //for(int i=lista.Count()-1;i>=0;i--)
+            return lista2;
+        }
+
         public void criarPlano(int fiscal, List<int> estab)
         {
             //var new_id = (from t in data.Estabelecimento select max(id_est)).ToList();
@@ -179,7 +187,6 @@ namespace BackOffice
 
                 }
             }
-            String res="";
             return res;
         }
 

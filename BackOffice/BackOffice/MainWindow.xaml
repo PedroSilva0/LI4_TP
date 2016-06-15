@@ -34,17 +34,16 @@
         </TabItem>
         <TabItem Header="Inspeções" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68">
             <Grid Background="#FFE5E5E5">
-                <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="255">
-                    <System:String>Inspeção 1</System:String>
-                    <System:String>Inspeção 2</System:String>
-                    <System:String>Inspeção 3</System:String>
-                    <System:String>Inspeção 4</System:String>
-                    <System:String>Inspeção 5</System:String>
-                    <System:String>Inspeção 6</System:String>
-                    <System:String>Inspeção 7</System:String>
-                </ListBox>
                 <Button x:Name="button3" Content="Criar Relatório" HorizontalAlignment="Left" Margin="365,122,0,0" VerticalAlignment="Top" Click="button3_Click"/>
                 <Label x:Name="label8" Content="Avisos" HorizontalAlignment="Left" Margin="324,219,0,0" VerticalAlignment="Top" Width="190"/>
+                <ListView x:Name="listView2" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="199">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Descriçao" DisplayMemberBinding="{Binding desc}" Width="198" />
+                            <GridViewColumn Header="id" DisplayMemberBinding="{Binding id_vis}" Width="0" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
         </TabItem>
         <TabItem Header="Relatórios">

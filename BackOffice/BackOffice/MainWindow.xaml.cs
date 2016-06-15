@@ -27,7 +27,7 @@ namespace BackOffice
         private facade fac;
         private int id_rest;
         private int id_planos;
-        private int id_fiscal=1;
+        private int id_fiscal = 1;
 
         public MainWindow()
         {
@@ -35,7 +35,31 @@ namespace BackOffice
             fac = new facade();
             listarRestaurantes();
             listarTodosVoz();
+            listaVisitas();
         }
+
+        private void listaVisitas()
+        {
+            fac = new facade();
+            var lista_visita = fac.listarVisitas();
+            foreach (Visita item in lista_visita)
+            {
+                Estabelecimento aux = (Estabelecimento) listView.Items[item.estabelecimento-1];
+                String des = "" + aux.nome + " - " + item.dataVisita.Date.ToString("d");
+
+                this.listView2.Items.Add(new visitaDTO
+                {
+                    id_vis = item.id_vis,
+                    desc=des
+                    //descricao = item.id_est,
+                    
+                });
+            }
+            //d_rest = lista_estabelecimento.Count + 1;
+        }
+    
+
+    
 
         private void listarRestaurantes()
         {
@@ -175,9 +199,11 @@ namespace BackOffice
 
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            if (listBox1.SelectedValue != null)
+            
+            if (listView2.SelectedItem != null)
             {
-                int visita = Convert.ToInt32(listBox1.SelectedValue);
+                visitaDTO vis = (visitaDTO) listView2.SelectedItems[0];
+                int visita = Convert.ToInt32(vis.id_vis);
                 CriarRelatorio newWindow = new CriarRelatorio(visita);
                 newWindow.Show();
             }
