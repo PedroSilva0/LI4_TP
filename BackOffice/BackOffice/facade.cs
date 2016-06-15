@@ -23,7 +23,7 @@ namespace BackOffice
     {
         private LI4Entities data = new LI4Entities();
 
-        public void registarRes(int id, string nome, string morada, string latitude, string longitude)
+                public void registarRes(int id, string nome, string morada, string latitude, string longitude)
         {
             id = Convert.ToInt32(id);
             double latitude2 = Convert.ToDouble(latitude);

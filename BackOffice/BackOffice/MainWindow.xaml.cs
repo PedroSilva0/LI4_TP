@@ -169,5 +169,15 @@ namespace BackOffice
             fac.playAudio(est.id_voz);
             //fac.convertXML();
         }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            if (listBox1.SelectedValue != null)
+            {
+                int visita = Convert.ToInt32(listBox1.SelectedValue);
+                CriarRelatorio newWindow = new CriarRelatorio(visita);
+                newWindow.Show();
+            }
+        }
     }
 }

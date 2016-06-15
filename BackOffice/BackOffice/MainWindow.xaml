@@ -43,7 +43,7 @@
                     <System:String>Inspeção 6</System:String>
                     <System:String>Inspeção 7</System:String>
                 </ListBox>
-                <Button x:Name="button3" Content="Criar Relatório" HorizontalAlignment="Left" Margin="365,122,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="button3" Content="Criar Relatório" HorizontalAlignment="Left" Margin="365,122,0,0" VerticalAlignment="Top" Click="button3_Click"/>
                 <Label x:Name="label8" Content="Avisos" HorizontalAlignment="Left" Margin="324,219,0,0" VerticalAlignment="Top" Width="190"/>
             </Grid>
         </TabItem>

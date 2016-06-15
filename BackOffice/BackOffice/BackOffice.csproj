@@ -71,6 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CriarRelatorio.xaml.cs">
+      <DependentUpon>CriarRelatorio.xaml</DependentUpon>
+    </Compile>
     <Compile Include="data_diagram_teste.xaml.cs">
       <DependentUpon>data_diagram_teste.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,7 @@
     <Compile Include="Questao.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Relatorio.cs" />
     <Compile Include="restauranteDTO.cs" />
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -117,6 +121,10 @@
     <Compile Include="Voz.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Page Include="CriarRelatorio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="data_diagram_teste.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
