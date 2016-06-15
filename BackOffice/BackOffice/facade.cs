@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -153,6 +155,21 @@ namespace BackOffice
                 Console.Write(transcript);
             }
 
+        }
+
+        public void playAudio(int id_voz)
+        {
+            Console.WriteLine(id_voz);
+            var lista = data.Voz.ToList();
+            //byte[] teste = (byte[]) audioFile.ElementAt(0);
+            //audioFile.ElementAt(0);
+            Stream stream = new MemoryStream(lista.ElementAt(id_voz-1).voz_file);
+            //audioFile.Stream();
+            //System.IO.File.WriteAllBytes(f.id_foto.ToString() + ".jpg", f.foto_file);
+            SoundPlayer simpleSound = new SoundPlayer(@"C:\temp\teste1.wav");
+            simpleSound.Load();
+            simpleSound.Play();
+            Console.WriteLine("ficheiro tocado");
         }
     }
 }

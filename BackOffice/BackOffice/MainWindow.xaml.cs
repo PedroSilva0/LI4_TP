@@ -41,6 +41,7 @@ namespace BackOffice
             listView.Items.Clear();
             fac = new facade();
             var lista_estabelecimento = fac.listarRestaurantes();
+            Estabelecimento e = lista_estabelecimento.ElementAt(0);
             foreach (Estabelecimento item in lista_estabelecimento)
             {
                 
@@ -63,8 +64,8 @@ namespace BackOffice
             var lista_voz = fac.listarTodosVoz();
             foreach (Voz item in lista_voz)
             {
-
-                this.listView.Items.Add(new Voz
+                //Console.WriteLine("Ficheiro de voz");
+                this.listView1.Items.Add(new Voz
                 {
                     descricao = item.descricao,
                     id_voz = item.id_voz,
@@ -164,7 +165,9 @@ namespace BackOffice
 
         private void button7_Click(object sender, RoutedEventArgs e)
         {
-            fac.convertXML();
+            Voz est = (Voz)listView1.SelectedItems[0];
+            fac.playAudio(est.id_voz);
+            //fac.convertXML();
         }
     }
 }
