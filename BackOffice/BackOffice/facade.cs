@@ -240,7 +240,7 @@ namespace BackOffice
             return res;
         }
 
-        public bool login(string id_fiscal,string password)
+        public bool login(int id_fiscal,string password)
         {
             Fiscal f = data.Fiscal.Find(id_fiscal);
             if (f!=null)

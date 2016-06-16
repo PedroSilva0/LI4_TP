@@ -39,6 +39,17 @@ namespace BackOffice
             listaRelatorios();
         }
 
+        public MainWindow(int id_fisc)
+        {
+            InitializeComponent();
+            fac = new facade();
+            id_fiscal = id_fisc;
+            listarRestaurantes();
+            listarTodosVoz();
+            listaVisitas();
+            listaRelatorios();
+        }
+
         private void listaVisitas()
         {
             listView2.Items.Clear();
@@ -51,7 +62,6 @@ namespace BackOffice
                 {
                     id_vis = item.id_vis,
                     desc = item.desc
-                    //descricao = item.id_est,
 
                 });
             }
