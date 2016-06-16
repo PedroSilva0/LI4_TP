@@ -48,19 +48,19 @@
         </TabItem>
         <TabItem Header="Relatórios">
             <Grid HorizontalAlignment="Left" Height="294" Margin="0,-2,-3,-1" VerticalAlignment="Top" Width="565">
-                <ListBox x:Name="listBox2" HorizontalAlignment="Left" Height="294" VerticalAlignment="Top" Width="208">
-                    <System:String>Relatório 1</System:String>
-                    <System:String>Relatório 2</System:String>
-                    <System:String>Relatório 3</System:String>
-                    <System:String>Relatório 4</System:String>
-                    <System:String>Relatório 5</System:String>
-                    <System:String>Relatório 6</System:String>
-                </ListBox>
                 <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="318,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
                 <Button x:Name="button5" Content="Enviar relatório" HorizontalAlignment="Left" Margin="378,144,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="label" Content="Para" HorizontalAlignment="Left" Margin="261,97,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="button4" Content="Consultar" HorizontalAlignment="Left" Margin="464,240,0,0" VerticalAlignment="Top" Width="75"/>
                 <Label x:Name="label9" Content="Avisos" HorizontalAlignment="Left" Height="29" Margin="261,240,0,0" VerticalAlignment="Top" Width="156"/>
+                <ListView x:Name="listView3" HorizontalAlignment="Left" Height="294" VerticalAlignment="Top" Width="204">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Descriçao" DisplayMemberBinding="{Binding desc}" Width="203" />
+                            <GridViewColumn Header="id" DisplayMemberBinding="{Binding id_vis}" Width="0" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
         </TabItem>
         <TabItem Header="Estabelecimentos">
@@ -81,7 +81,7 @@
         </TabItem>
         <TabItem Header="Conversão de voz">
             <Grid>
-                <Button x:Name="button7" Content="Converter para XML" HorizontalAlignment="Left" Margin="314,116,0,0" VerticalAlignment="Top" Width="122" Height="19" Click="button7_Click"/>
+                <Button x:Name="button7" Content="Converter para XML" HorizontalAlignment="Left" Margin="317,175,0,0" VerticalAlignment="Top" Width="122" Height="19" Click="button7_Click"/>
                 <Label x:Name="label6" Content="Avisos" HorizontalAlignment="Left" Margin="297,244,0,0" VerticalAlignment="Top"/>
                 <ListView x:Name="listView1" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="180">
                     <ListView.View>
@@ -91,6 +91,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="134" Margin="200,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="352"/>
             </Grid>
         </TabItem>
     </TabControl>

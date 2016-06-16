@@ -36,31 +36,45 @@ namespace BackOffice
             listarRestaurantes();
             listarTodosVoz();
             listaVisitas();
+            listaRelatorios();
         }
 
         private void listaVisitas()
         {
+            listView2.Items.Clear();
             fac = new facade();
             var lista_visita = fac.listarVisitas();
-            foreach (Visita item in lista_visita)
-            {
-                Estabelecimento aux = (Estabelecimento) listView.Items[item.estabelecimento-1];
-                String des = "" + aux.nome + " - " + item.dataVisita.Date.ToString("d");
 
+            foreach (visitaDTO item in lista_visita)
+            {
                 this.listView2.Items.Add(new visitaDTO
                 {
                     id_vis = item.id_vis,
-                    desc=des
+                    desc = item.desc
                     //descricao = item.id_est,
-                    
+
                 });
             }
-            //d_rest = lista_estabelecimento.Count + 1;
         }
-    
 
-    
+        private void listaRelatorios()
+        {
+            listView3.Items.Clear();
+            fac = new facade();
+            var lista_relatorios = fac.listarRelatorios();
 
+            foreach (visitaDTO item in lista_relatorios)
+            {
+                this.listView3.Items.Add(new visitaDTO
+                {
+                    id_vis = item.id_vis,
+                    desc = item.desc
+                });
+            }
+
+        }
+
+        
         private void listarRestaurantes()
         {
             listView.Items.Clear();
@@ -193,7 +207,9 @@ namespace BackOffice
             
             Voz est = (Voz)listView1.SelectedItems[0];
             //fac.playAudio(est.id_voz);
-            String xml=fac.convertXML(est.id_voz);
+            string xml=fac.convertXML(est.id_voz);
+            //String xml = fac.pa("", 2);
+            textBox.Text = xml;
             label6.Content="Ficheiro convertido com sucesso";
         }
 

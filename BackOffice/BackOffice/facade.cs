@@ -53,13 +53,44 @@ namespace BackOffice
             return lista;
         }
 
-        public List<Visita> listarVisitas()
+        /*public List<Visita> listarVisitas()
         {
             var lista2 = data.Visita.SqlQuery("select * from Visita where concluido=1").ToList();
             //var lista = data.Visita.ToList();
             //for(int i=lista.Count()-1;i>=0;i--)
             return lista2;
+        }*/
+
+        public List<visitaDTO> listarVisitas()
+        {
+            var lista2 = data.Visita.SqlQuery("select * from Visita where concluido=1").ToList();
+            List<visitaDTO> res = new List<visitaDTO>();
+            foreach (Visita item in lista2)
+            {
+                Estabelecimento aux = data.Estabelecimento.Find(item.estabelecimento);
+                //String des = "" + aux.nome + " - " + item.dataVisita.Date.ToString("d");
+
+                string itDesc = aux.nome + ", " + ((DateTime)item.dataVisita).ToShortDateString();
+                res.Add(new visitaDTO { id_vis = item.id_vis, desc = itDesc });
+            }
+
+            return res;
         }
+
+        public List<visitaDTO> listarRelatorios()
+        {
+            List<Visita> lista = data.Visita.SqlQuery("select * from Visita where dataRelatorio is not null").ToList();
+            List<visitaDTO> res = new List<visitaDTO>();
+            foreach (Visita item in lista)
+            {
+                Estabelecimento aux = data.Estabelecimento.Find(item.estabelecimento);
+                string itDesc = aux.nome + ", " + ((DateTime)item.dataRelatorio).ToShortDateString();
+                res.Add(new visitaDTO { id_vis = item.id_vis, desc = itDesc });
+            }
+
+            return res;
+        }
+
 
         public void criarPlano(int fiscal, List<int> estab)
         {
@@ -71,8 +102,7 @@ namespace BackOffice
             {
                 id_plano = new_id_pla,
                 disponivel = true,
-                FiscalCriador = fiscal,
-                Fiscal = fiscal                         //ESTA LINHA ESTÁ MAL COM A NOVA BD ATENÇÃO
+                FiscalCriador = fiscal
             });
             foreach (int i in estab)
             {
@@ -82,55 +112,14 @@ namespace BackOffice
                     id_vis = new_id_vis,
                     plano = new_id_pla,
                     estabelecimento = i,
-                    concluido = false,
-                    dataVisita = DateTime.Now        //ESTA LINHA ESTÁ MAL COM A NOVA BD ATENÇÃO 
+                    concluido = false
+                    
                 });
                 new_id_vis++;
             }
             data.SaveChanges();
         }
-
-        public List<restauranteDTO> listTeste()
-        {
-            //var lista = (from t in data.tasks select new { t.id, t.name, type=t.taskType.name, username = t.user.name }).ToList(); 
-            var lista = data.Estabelecimento.ToList();
-            //this.dataGrid.ItemsSource = lista;
-
-            //comboxBox
-            var listRest = new List<restauranteDTO>();
-            listRest.Add(new restauranteDTO() { id_est = 0, nome = "Todos Restaurante", morada = "sitio", latitude = 0, longitude = 0 });
-            var restList = (from u in data.Estabelecimento
-                            select new restauranteDTO
-                            {
-                                id_est = u.id_est,
-                                nome = u.nome,
-                                morada = u.morada,
-                                latitude = u.latitude,
-                                longitude = u.longitude
-                            }).ToList();
-            listRest.AddRange(restList);
-            return listRest;
-            /*this.comboBox.ItemsSource = listUsers;
-            this.comboBox.DisplayMemberPath = "name";
-            this.comboBox.SelectedValuePath = "id";
-
-            this.comboBox.SelectedIndex = 0;
-
-            //Combobox (user) insert
-            var listaByUser = (from t in data.users
-                               select new { t.id, t.name }).ToList();
-            var listaByTaskType = (from t in data.taskTypes
-                                   select new { t.id, t.name }).ToList();
-            this.comboBox1.ItemsSource = listaByTaskType;
-            this.comboBox1.DisplayMemberPath = "name";
-            this.comboBox1.SelectedValuePath = "id";
-            this.comboBox1.SelectedIndex = 0;
-            this.comboBox2.ItemsSource = listaByUser;
-            this.comboBox2.DisplayMemberPath = "name";
-            this.comboBox2.SelectedValuePath = "id";
-            this.comboBox2.SelectedIndex = 0;*/
-        }
-
+        
         public string convertXML(int id_voz)
         {
             //buscar a bd, por no pc
@@ -169,27 +158,89 @@ namespace BackOffice
                 //System.IO.File.WriteAllText(path_xml, transcript);
                 String res = parse_xml(transcript,id_voz);
                 
-                Console.Write(transcript);
+                //Console.Write(transcript);
                 return res;
             }
 
         }
         
-        public string parse_xml(string transcript,int id)   //mudar para private depois do teste
+        private string parse_xml(string transcript,int id)  
         {                                              //mudar string teste para string transcript depois do teste
-            String teste = "Access good wheelchair ready Storage no problem Fridge rusty and old must be replaced Kitchen no problem Toilet doesnt flush needs to be fixed";
-            teste.ToLower();
-            String res = "";
-            string[] ssize = teste.Split(null);
-            foreach(String s in ssize)
+            //string teste = "Access good wheelchair ready Storage no problem Fridge rusty and old must be replaced Kitchen no problem Toilet doesnt flush needs to be fixed";
+            transcript=transcript.ToLower();
+            //Console.Write(teste);
+            string res = "";
+            string[] ssize = transcript.Split(null);
+            for(int i=0;i<ssize.Count();i++)
             {
-                if (s.Equals("access")){
-
+                if (ssize[i].Equals("access")){
+                    res = res + "<access>\n\t<content=\"";
+                    i++;
+                    while((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("toilet"))))
+                    {
+                        //Console.Write((!(ssize[i].Equals("storage")) || !(ssize[i].Equals("frigde")) || !(ssize[i].Equals("kitchen")) || !(ssize[i].Equals("toilet"))));
+                        res = res +" "+ ssize[i];
+                        i++;
+                    }
+                    res = res + "\"/>\n</access>\n";
+                }else
+                if (ssize[i].Equals("storage"))
+                {
+                    res = res + "<storage>\n\t<content=\"";
+                    i++;
+                    while ((i < ssize.Count()) && (!(ssize[i].Equals("access")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("toilet"))))
+                    {
+                        res = res + " " + ssize[i];
+                        i++;
+                    }
+                    res = res + "\"/>\n</storage>\n";
+                }else
+                if (ssize[i].Equals("fridge"))
+                {
+                    res = res + "<fridge>\n\t<content=\"";
+                    i++;
+                    while ((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("access")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("toilet"))))
+                    {
+                        res = res + " " + ssize[i];
+                        i++;
+                    }
+                    res = res + "\"/>\n</fridge>\n";
+                }else
+                if (ssize[i].Equals("kitchen"))
+                {
+                    res = res + "<kitchen>\n\t<content=\"";
+                    i++;
+                    while ((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("access")) && !(ssize[i].Equals("toilet"))))
+                    {
+                        res = res + " " + ssize[i];
+                        i++;
+                    }
+                    res = res + "\"/>\n</kitchen>\n";
+                }else
+                if (ssize[i].Equals("toilet"))
+                {
+                    res = res + "<toilet>\n\t<content=\"";
+                    i++;
+                    while ((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("access"))))
+                    {
+                        res = res + " " + ssize[i];
+                        i++;
+                    }
+                    res = res + "\"/>\n</toilet>\n";
                 }
+                i--;
             }
+            //Console.Write(res);
+            //string query = "update Voz set xml_file='" + res + "' where id_voz=" + id +"\ngo";
+            //Console.Write(query);
+            //data.Voz.SqlQuery(query);
+            Voz v = data.Voz.Find(id);
+            v.xml_file = res;
+            data.SaveChanges();
             return res;
         }
 
+        //nao da
         public void playAudio(int id_voz)
         {
             //Console.WriteLine(id_voz);
