@@ -11,9 +11,9 @@
     <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="321" Margin="0,0,0,-1" VerticalAlignment="Top" Width="568">
         <TabItem Header="Plano de trabalho">
             <Grid Background="#FFE5E5E5">
-                <Button x:Name="button" Content="Criar plano" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-                <Button x:Name="button1" Content="Limpar seleção" HorizontalAlignment="Left" Margin="292,245,0,0" VerticalAlignment="Top" Click="button1_Click"/>
-                <Label x:Name="label7" Content="Avisos" HorizontalAlignment="Left" Margin="139,265,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="button" Content="Criar plano" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="75" Click="criar_plano_Click"/>
+                <Button x:Name="button1" Content="Limpar seleção" HorizontalAlignment="Left" Margin="292,245,0,0" VerticalAlignment="Top" Click="limpar_selecao_Click"/>
+                <Label x:Name="label7" Content="Avisos" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top"/>
                 <ListView x:Name="listView" HorizontalAlignment="Left" Height="291" Margin="389,0,0,0" VerticalAlignment="Top" Width="173" SelectionMode="Single">
                     <ListView.View>
                         <GridView>
@@ -34,7 +34,7 @@
         </TabItem>
         <TabItem Header="Inspeções" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68">
             <Grid Background="#FFE5E5E5">
-                <Button x:Name="button3" Content="Criar Relatório" HorizontalAlignment="Left" Margin="365,122,0,0" VerticalAlignment="Top" Click="button3_Click"/>
+                <Button x:Name="button3" Content="Criar Relatório" HorizontalAlignment="Left" Margin="365,122,0,0" VerticalAlignment="Top" Click="criar_relatorio_Click"/>
                 <Label x:Name="label8" Content="Avisos" HorizontalAlignment="Left" Margin="324,219,0,0" VerticalAlignment="Top" Width="190"/>
                 <ListView x:Name="listView2" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="199">
                     <ListView.View>
@@ -49,10 +49,10 @@
         <TabItem Header="Relatórios">
             <Grid HorizontalAlignment="Left" Height="294" Margin="0,-2,-3,-1" VerticalAlignment="Top" Width="565">
                 <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="225,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274"/>
-                <Button x:Name="button5" Content="Enviar" HorizontalAlignment="Left" Margin="517,37,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="button5" Content="Enviar" HorizontalAlignment="Left" Margin="517,37,0,0" VerticalAlignment="Top" Click="enviar_relatorio_Click"/>
                 <Label x:Name="label" Content="Email de destino:" HorizontalAlignment="Left" Margin="225,5,0,0" VerticalAlignment="Top" Width="139"/>
-                <Button x:Name="button4" Content="Consultar Relatorio" HorizontalAlignment="Left" Margin="225,121,0,0" VerticalAlignment="Top" Width="129" Click="button4_Click"/>
-                <Label x:Name="label9" Content="Avisos" HorizontalAlignment="Left" Height="29" Margin="261,240,0,0" VerticalAlignment="Top" Width="156"/>
+                <Button x:Name="button4" Content="Consultar Relatorio" HorizontalAlignment="Left" Margin="225,121,0,0" VerticalAlignment="Top" Width="129" Click="consultar_relatorio_Click"/>
+                <Label x:Name="label9" Content="Avisos" HorizontalAlignment="Left" Margin="261,240,0,0" VerticalAlignment="Top"/>
                 <ListView x:Name="listView3" HorizontalAlignment="Left" Height="294" VerticalAlignment="Top" Width="204">
                     <ListView.View>
                         <GridView>
@@ -65,12 +65,22 @@
         </TabItem>
         <TabItem Header="Estabelecimentos">
             <Grid HorizontalAlignment="Left" Height="297" Margin="0,-1,-4,-5" VerticalAlignment="Top" Width="566">
+                <Popup Placement="RelativePoint"  Name="Popup1" Width="400" Height="64" HorizontalOffset="135" VerticalOffset="60" IsOpen="False">
+                    <StackPanel>
+                        <TextBlock Name="McTextBlock"   
+             Background="LightBlue" >  
+            Já existe um estabelecimento próximo deseja inserir este estabelecimento?
+                        </TextBlock>
+                        <Button Content="Sim" Click="Button_Click_1" />
+                        <Button Content="Não" Click="Button_Click_2" />
+                    </StackPanel>
+                </Popup>
                 <Label x:Name="label1" Content="Nome" HorizontalAlignment="Left" Margin="36,36,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="label2" Content="Morada" HorizontalAlignment="Left" Margin="36,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-0.173"/>
                 <Label x:Name="label3" Content="Coordenadas GPS" HorizontalAlignment="Left" Margin="36,114,0,0" VerticalAlignment="Top" FontSize="16"/>
                 <Label x:Name="label4" Content="Longitude" HorizontalAlignment="Left" Margin="36,208,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="label5" Content="Latitude" HorizontalAlignment="Left" Margin="36,162,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="button6" Content="Registar estabelecimento" HorizontalAlignment="Left" Margin="382,238,0,0" VerticalAlignment="Top" Click="button6_Click"/>
+                <Button x:Name="button6" Content="Registar estabelecimento" HorizontalAlignment="Left" Margin="382,238,0,0" VerticalAlignment="Top" Click="registar_estabelecimento_Click"/>
                 <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="125,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
                 <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="125,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
                 <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="125,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
@@ -81,7 +91,7 @@
         </TabItem>
         <TabItem Header="Conversão de voz">
             <Grid>
-                <Button x:Name="button7" Content="Converter para XML" HorizontalAlignment="Left" Margin="317,175,0,0" VerticalAlignment="Top" Width="122" Height="19" Click="button7_Click"/>
+                <Button x:Name="button7" Content="Converter para XML" HorizontalAlignment="Left" Margin="317,175,0,0" VerticalAlignment="Top" Width="122" Height="19" Click="converter_xml_Click"/>
                 <Label x:Name="label6" Content="Avisos" HorizontalAlignment="Left" Margin="297,244,0,0" VerticalAlignment="Top"/>
                 <ListView x:Name="listView1" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="180">
                     <ListView.View>
