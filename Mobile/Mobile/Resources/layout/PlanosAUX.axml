@@ -5,11 +5,10 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:id="@+id/listView" />
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

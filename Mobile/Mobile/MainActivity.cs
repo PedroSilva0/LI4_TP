@@ -39,7 +39,6 @@ namespace Mobile
             mId = FindViewById<EditText>(Resource.Id.txtUserName);
             mPassword = FindViewById<EditText>(Resource.Id.txtPassword);
 
-
             mLogIn.Click += MLogIn_Click;
             mLinearLayout.Click += mLinearLayout_Click;
         }
@@ -63,7 +62,6 @@ namespace Mobile
             RunOnUiThread(() =>
             {
                 string result = Encoding.UTF8.GetString(e.Result);
-                
                 if (result.Equals("ok"))
                 {
                     mprogBar.Visibility = ViewStates.Invisible;

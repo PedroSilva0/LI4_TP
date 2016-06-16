@@ -161,16 +161,19 @@ namespace Mobile
 			public const int ic_action_forward = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int photo = 2130837509;
+			public const int ic_action_info = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int progBar = 2130837510;
+			public const int photo = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int text = 2130837511;
+			public const int progBar = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int voice = 2130837512;
+			public const int text = 2130837512;
+			
+			// aapt resource value: 0x7f020009
+			public const int voice = 2130837513;
 			
 			static Drawable()
 			{
@@ -188,20 +191,29 @@ namespace Mobile
 			// aapt resource value: 0x7f050005
 			public const int btnLogin = 2131034117;
 			
+			// aapt resource value: 0x7f05000a
+			public const int imageButton1 = 2131034122;
+			
+			// aapt resource value: 0x7f05000b
+			public const int imageButton3 = 2131034123;
+			
 			// aapt resource value: 0x7f050000
 			public const int item_touch_helper_previous_elevation = 2131034112;
 			
 			// aapt resource value: 0x7f050002
 			public const int linearLayout1 = 2131034114;
 			
-			// aapt resource value: 0x7f05000a
-			public const int listView = 2131034122;
+			// aapt resource value: 0x7f05000d
+			public const int listView = 2131034125;
 			
 			// aapt resource value: 0x7f050001
 			public const int mainView = 2131034113;
 			
 			// aapt resource value: 0x7f050007
 			public const int progBar = 2131034119;
+			
+			// aapt resource value: 0x7f05000c
+			public const int recyclerView = 2131034124;
 			
 			// aapt resource value: 0x7f050006
 			public const int relativeLayout1 = 2131034118;
@@ -232,13 +244,22 @@ namespace Mobile
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int dialogInfo = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int plano = 2130903041;
+			public const int Main = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Planos = 2130903042;
+			public const int plano = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int planoAUX = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int Planos = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int PlanosAUX = 2130903045;
 			
 			static Layout()
 			{
