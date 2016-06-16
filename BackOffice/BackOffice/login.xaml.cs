@@ -24,10 +24,30 @@ namespace BackOffice
         {
             InitializeComponent();
         }
-
-        private void login_fiscal()
+        
+        private void button_Click(object sender, RoutedEventArgs e)
         {
             facade fac = new facade();
+            int id_fiscal = Convert.ToInt32(textBox.Text);
+            bool sucesso = fac.login(id_fiscal, passwordBox.Password);
+            if (sucesso)
+            {
+                MainWindow newWindow = new MainWindow(id_fiscal);
+                newWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                Popup1.IsOpen = true;
+                textBox.Text = "";
+                passwordBox.Password = "";
+
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Popup1.IsOpen = false;
         }
     }
 }
