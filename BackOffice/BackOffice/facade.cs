@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace BackOffice
     {
         private LI4Entities data = new LI4Entities();
 
-                public void registarRes(int id, string nome, string morada, string latitude, string longitude)
+        public void registarRes(int id, string nome, string morada, string latitude, string longitude)
         {
             id = Convert.ToInt32(id);
             double latitude2 = Convert.ToDouble(latitude);
@@ -113,20 +114,20 @@ namespace BackOffice
                     plano = new_id_pla,
                     estabelecimento = i,
                     concluido = false
-                    
+
                 });
                 new_id_vis++;
             }
             data.SaveChanges();
         }
-        
+
         public string convertXML(int id_voz)
         {
             //buscar a bd, por no pc
             var lista = data.Voz.ToList();
             Voz v = lista.ElementAt(id_voz - 1);
             String path_voz = "C:\\Windows\\Temp\\voz" + v.id_voz.ToString() + ".wav";
-            String path_xml= "C:\\Windows\\Temp\\xml" + v.id_voz.ToString() + ".xml";
+            String path_xml = "C:\\Windows\\Temp\\xml" + v.id_voz.ToString() + ".xml";
             System.IO.File.WriteAllBytes(path_voz, v.voz_file);
 
             // change these:
@@ -156,34 +157,34 @@ namespace BackOffice
                 //string text = "A class is the most powerful data type in C#. Like a structure, " +
                 // "a class defines the data and behavior of the data type. ";
                 //System.IO.File.WriteAllText(path_xml, transcript);
-                String res = parse_xml(transcript,id_voz);
-                
+                String res = parse_xml(transcript, id_voz);
+
                 //Console.Write(transcript);
                 return res;
             }
 
         }
-        
-        private string parse_xml(string transcript,int id)  
+
+        private string parse_xml(string transcript, int id)
         {                                              //mudar string teste para string transcript depois do teste
             //string teste = "Access good wheelchair ready Storage no problem Fridge rusty and old must be replaced Kitchen no problem Toilet doesnt flush needs to be fixed";
-            transcript=transcript.ToLower();
+            transcript = transcript.ToLower();
             //Console.Write(teste);
             string res = "";
             string[] ssize = transcript.Split(null);
-            for(int i=0;i<ssize.Count();i++)
+            for (int i = 0; i < ssize.Count(); i++)
             {
-                if (ssize[i].Equals("access")){
+                if (ssize[i].Equals("access")) {
                     res = res + "<access>\n\t<content=\"";
                     i++;
-                    while((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("toilet"))))
+                    while ((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("toilet"))))
                     {
                         //Console.Write((!(ssize[i].Equals("storage")) || !(ssize[i].Equals("frigde")) || !(ssize[i].Equals("kitchen")) || !(ssize[i].Equals("toilet"))));
-                        res = res +" "+ ssize[i];
+                        res = res + " " + ssize[i];
                         i++;
                     }
                     res = res + "\"/>\n</access>\n";
-                }else
+                } else
                 if (ssize[i].Equals("storage"))
                 {
                     res = res + "<storage>\n\t<content=\"";
@@ -194,7 +195,7 @@ namespace BackOffice
                         i++;
                     }
                     res = res + "\"/>\n</storage>\n";
-                }else
+                } else
                 if (ssize[i].Equals("fridge"))
                 {
                     res = res + "<fridge>\n\t<content=\"";
@@ -205,7 +206,7 @@ namespace BackOffice
                         i++;
                     }
                     res = res + "\"/>\n</fridge>\n";
-                }else
+                } else
                 if (ssize[i].Equals("kitchen"))
                 {
                     res = res + "<kitchen>\n\t<content=\"";
@@ -216,7 +217,7 @@ namespace BackOffice
                         i++;
                     }
                     res = res + "\"/>\n</kitchen>\n";
-                }else
+                } else
                 if (ssize[i].Equals("toilet"))
                 {
                     res = res + "<toilet>\n\t<content=\"";
@@ -230,20 +231,16 @@ namespace BackOffice
                 }
                 i--;
             }
-            //Console.Write(res);
-            //string query = "update Voz set xml_file='" + res + "' where id_voz=" + id +"\ngo";
-            //Console.Write(query);
-            //data.Voz.SqlQuery(query);
             Voz v = data.Voz.Find(id);
             v.xml_file = res;
             data.SaveChanges();
             return res;
         }
 
-        public bool login(int id_fiscal,string password)
+        public bool login(int id_fiscal, string password)
         {
             Fiscal f = data.Fiscal.Find(id_fiscal);
-            if (f!=null)
+            if (f != null)
             {
                 if (f.pass.Equals(password))
                 {
@@ -252,6 +249,8 @@ namespace BackOffice
             }
             return false;
         }
+
+        
 
         //nao da
         public void playAudio(int id_voz)

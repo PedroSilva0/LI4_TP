@@ -234,5 +234,27 @@ namespace BackOffice
                 newWindow.Show();
             }
         }
+
+        private void button5_Click(object sender, RoutedEventArgs e)
+        {
+            fac = new facade();
+            if (listView3.SelectedItem != null)
+            {
+                visitaDTO vis = (visitaDTO)listView3.SelectedItems[0];
+                int visita = Convert.ToInt32(vis.id_vis);
+                Relatorio r = new Relatorio(visita);
+                bool env=r.enviarRelatorio(textBox2.Text,vis.desc);
+                if (env)
+                {
+                    label9.Content = "Relatório enviado com sucesso";
+                }else
+                {
+                    label9.Content = "Falha no envio do relatório";
+                }
+            }
+        }
+
+
+
     }
 }

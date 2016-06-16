@@ -49,10 +49,10 @@
         <TabItem Header="Relatórios">
             <Grid HorizontalAlignment="Left" Height="294" Margin="0,-2,-3,-1" VerticalAlignment="Top" Width="565">
                 <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="318,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-                <Button x:Name="button5" Content="Enviar relatório" HorizontalAlignment="Left" Margin="378,144,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="button5" Content="Enviar relatório" HorizontalAlignment="Left" Margin="378,144,0,0" VerticalAlignment="Top" Click="button5_Click"/>
                 <Label x:Name="label" Content="Para" HorizontalAlignment="Left" Margin="261,97,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="button4" Content="Consultar" HorizontalAlignment="Left" Margin="464,240,0,0" VerticalAlignment="Top" Width="75"/>
-                <Label x:Name="label9" Content="Avisos" HorizontalAlignment="Left" Height="29" Margin="261,240,0,0" VerticalAlignment="Top" Width="156"/>
+                <Label x:Name="label9" Content="Avisos" HorizontalAlignment="Left" Margin="261,240,0,0" VerticalAlignment="Top"/>
                 <ListView x:Name="listView3" HorizontalAlignment="Left" Height="294" VerticalAlignment="Top" Width="204">
                     <ListView.View>
                         <GridView>

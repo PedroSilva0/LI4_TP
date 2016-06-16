@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using TheArtOfDev.HtmlRenderer.PdfSharp;
@@ -139,19 +140,50 @@ namespace BackOffice
             data.SaveChanges();
         }
 
+        public bool enviarRelatorio(string para, string desc)
+        {
+            try
+            {
+                SmtpClient mailServer = new SmtpClient("smtp.gmail.com", 587);
+                mailServer.EnableSsl = true;
+                mailServer.Credentials = new System.Net.NetworkCredential("dankrestaurantli4@gmail.com", "li42016dk");
+
+                string from = "dankrestaurantli4@gmail.com";
+                string to = para;
+                MailMessage msg = new MailMessage(from, to);
+                msg.Subject = "Relatório de inspeção, " + desc;                          //assunto
+                msg.Body = "Segue em anexo o relatório de inspeção," + desc + "\n\n\nDankRestaurantInspections";//corpo da mensagem
+                string attach=this.geraPDF();
+                //Console.WriteLine(attach);
+                msg.Attachments.Add(new Attachment(attach)); //anexo
+                mailServer.Send(msg);
+                mailServer.Dispose();
+
+            }
+            catch (SmtpFailedRecipientException ex)
+            {
+                //Console.WriteLine("bla");
+                Console.WriteLine("Unable to send email. Error : " + ex);
+                return false;
+            }
+            return true;
+        }
+
         /**
          * @return filepath
          * */
         private string geraPDF()
         {
+            //Console.WriteLine("escreve isto");
             string html = data.Visita.Find(myVisita).html_file;
             string filePath = "C:\\Windows\\Temp\\RelatorioVisita" + myVisita.ToString() + ".pdf";
             PdfSharp.Pdf.PdfDocument pdf;
 
             pdf = PdfGenerator.GeneratePdf(html, PageSize.A4);
-
+            // Console.Write(filePath + "\n\n\n\n\n");
+            //Console.WriteLine("escreve isto");
             pdf.Save(filePath);
-
+            //Console.WriteLine(filePath);
             return filePath;
         }
 
