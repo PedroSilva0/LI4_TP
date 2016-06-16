@@ -224,5 +224,16 @@ namespace BackOffice
                 newWindow.Show();
             }
         }
+
+        private void button4_Click(object sender, RoutedEventArgs e)
+        {
+            if (listView3.SelectedItem != null)
+            {
+                visitaDTO vis = (visitaDTO)listView3.SelectedItems[0];
+                int visita = Convert.ToInt32(vis.id_vis);
+                ConsultarRelatorio newWindow = new ConsultarRelatorio(visita);
+                newWindow.Show();
+            }
+        }
     }
 }

@@ -48,10 +48,10 @@
         </TabItem>
         <TabItem Header="Relatórios">
             <Grid HorizontalAlignment="Left" Height="294" Margin="0,-2,-3,-1" VerticalAlignment="Top" Width="565">
-                <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="318,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-                <Button x:Name="button5" Content="Enviar relatório" HorizontalAlignment="Left" Margin="378,144,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="label" Content="Para" HorizontalAlignment="Left" Margin="261,97,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="button4" Content="Consultar" HorizontalAlignment="Left" Margin="464,240,0,0" VerticalAlignment="Top" Width="75"/>
+                <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="225,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274"/>
+                <Button x:Name="button5" Content="Enviar" HorizontalAlignment="Left" Margin="517,37,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label" Content="Email de destino:" HorizontalAlignment="Left" Margin="225,5,0,0" VerticalAlignment="Top" Width="139"/>
+                <Button x:Name="button4" Content="Consultar Relatorio" HorizontalAlignment="Left" Margin="225,121,0,0" VerticalAlignment="Top" Width="129" Click="button4_Click"/>
                 <Label x:Name="label9" Content="Avisos" HorizontalAlignment="Left" Height="29" Margin="261,240,0,0" VerticalAlignment="Top" Width="156"/>
                 <ListView x:Name="listView3" HorizontalAlignment="Left" Height="294" VerticalAlignment="Top" Width="204">
                     <ListView.View>
