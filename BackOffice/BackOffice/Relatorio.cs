@@ -1,8 +1,10 @@
-﻿using System;
+﻿using PdfSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 namespace BackOffice
 {
@@ -17,32 +19,15 @@ namespace BackOffice
             myVisita = idVisita;
         }
 
-        /*TODO
-        public List<Visita> listVisitasSemRelatorio()
-        {
-            List<Visita> res = data.Visita.ToList();
-
-            foreach(Visita v in res)
-            {
-                if (!v.concluido)//visita ainda nao concluida
-                    res.Remove(v);
-                if(v.dataRelatorio != null)//ja tem relatorio
-                    res.Remove(v);
-            }
-
-            return res;
-        }
-        */
-
         private string loadTemplate()
         {
-            string html = "<div id=\"header\">\n<h1>Relatório de Inspeção</h1>\n</div>\n\n<div id=\"nav\">\n<i>Estabelecimento:</i><br>\n<!--estabelecimento--><br>\n<i>Morada:</i><br>\n<!--morada--><br>\n<i>Coordenadas:</i><br>\n<!--coordenadas--><br>\n<i>Data da visita:</i><br>\n<!--dataVisita--><br>\n<i>No. fiscal:</i><br>\n<!--fiscal--><br>\n<i>Data do relatório:</i><br>\n<!--dataRel-->\n</div>\n\n<div id=\"section\">\n\n<h2>Formulário da visita</h2>\n<!--formulario-->\n\n<h2>Notas da visita</h2>\n<!--notasTxt-->\n<!--notasVoz-->\n\n<h2>Registo Fotográfico</h2>\n<!--fotos-->\n";
+            string html = "<div id=\"header\">\n<h1>Relatório de Inspeção</h1>\n</div>\n\n<div id=\"nav\">\n<i>Estabelecimento: </i><!--estabelecimento--> -- <i>Morada: </i><!--morada--> -- <i>Coordenadas: </i><!--coordenadas--><br>\n<i>Data da visita: </i><!--dataVisita--> -- <i>No. fiscal: </i><!--fiscal--> -- <i>Data do relatório: </i><!--dataRel-->\n</div>\n\n<div id=\"section\">\n\n<h2>Formulário da visita</h2>\n<!--formulario-->\n\n<h2>Notas da visita</h2>\n<!--notasTxt-->\n<!--notasVoz-->\n\n<h2>Registo Fotográfico</h2>\n<!--fotos-->\n";
             return html;
         }
 
         public string loadCabecalho()
         {
-            string html = "<head>\n<meta charset=\"UTF-8\">\n<title>Relatório de Inspeção --- Dank Restaurant</title>\n<style>\n#header {\n    background-color:black;\n    color:white;\n    text-align:center;\n    padding:5px;\n}\n#nav {\n    line-height:30px;\n    background-color:#eeeeee;\n    width:20%;\n    float:left;\n    padding:5px; \n}\n#section {\n    width:80%;\n    float:left;\n    padding:10px; \n}\n#footer {\n    background-color:black;\n    color:white;\n    clear:both;\n    text-align:center;\n    padding:5px; \n}\n</style>\n</head>\n";
+            string html = "<head>\n<meta charset=\"UTF-8\">\n<title>Relatório de Inspeção --- Dank Restaurant</title>\n<style>\n#header {\n    background-color:black;\n    color:white;\n    text-align:center;\n    padding:5px;\n}\n#nav {\n    line-height:30px;\n    background-color:#eeeeee;\n    width:100%;\n    float:left;\n    padding:5px; \n}\n#section {\n    width:100%;\n    float:left;\n    padding:10px; \n}\n#footer {\n    background-color:black;\n    color:white;\n    clear:both;\n    text-align:center;\n    padding:5px; \n}\n</style>\n</head>\n";
             return html;
         }
 
@@ -93,7 +78,7 @@ namespace BackOffice
                 foreach (var r in respostas)
                 {
                     form.Append("<i>").Append(data.Questao.Find(r.Questao).pergunta).Append("</i><br>\n");
-                    form.Append(r.resposta).Append("<br>\n");
+                    form.Append(r.resposta).Append("<br><br>\n");
                 }
                 res = res.Replace("<!--formulario-->", form.ToString());
             }
@@ -135,7 +120,7 @@ namespace BackOffice
 
 
                     System.IO.File.WriteAllBytes("C:\\Windows\\Temp\\" + f.id_foto.ToString() + ".jpg", f.foto_file);
-                    fotosStr.Append("<img src=\"file:///C:/Windows/Temp/").Append(f.id_foto.ToString() + ".jpg").Append("\" width=\"80%\"/>").Append("<br>\n");
+                    fotosStr.Append("<img src=\"file:///C:/Windows/Temp/").Append(f.id_foto.ToString() + ".jpg").Append("\" width=\"70%\"/>").Append("<br>\n");
                     fotosStr.Append(f.descricao).Append("<br>\n");
 
                 }
@@ -154,11 +139,20 @@ namespace BackOffice
             data.SaveChanges();
         }
 
-        public byte[] geraPDF()
+        /**
+         * @return filepath
+         * */
+        private string geraPDF()
         {
+            string html = data.Visita.Find(myVisita).html_file;
+            string filePath = "C:\\Windows\\Temp\\RelatorioVisita" + myVisita.ToString() + ".pdf";
+            PdfSharp.Pdf.PdfDocument pdf;
 
+            pdf = PdfGenerator.GeneratePdf(html, PageSize.A4);
 
-            return null;
+            pdf.Save(filePath);
+
+            return filePath;
         }
 
 
