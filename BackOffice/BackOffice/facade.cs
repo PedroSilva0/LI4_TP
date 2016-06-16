@@ -240,6 +240,19 @@ namespace BackOffice
             return res;
         }
 
+        public bool login(string id_fiscal,string password)
+        {
+            Fiscal f = data.Fiscal.Find(id_fiscal);
+            if (f!=null)
+            {
+                if (f.pass.Equals(password))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         //nao da
         public void playAudio(int id_voz)
         {
@@ -256,5 +269,6 @@ namespace BackOffice
             //simpleSound.PlaySync();
             Console.WriteLine("ficheiro tocado");
         }
+
     }
 }
