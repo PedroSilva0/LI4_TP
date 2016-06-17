@@ -47,7 +47,7 @@ namespace Mobile
         {
             mprogBar.Visibility = ViewStates.Visible;
             WebClient client = new WebClient();
-            Uri uri = new Uri("http://192.168.1.69:8080/LogIn.php");
+            Uri uri = new Uri("http://172.26.10.5:8080/LogIn.php");
             NameValueCollection parameters = new NameValueCollection();
 
             parameters.Add("id_fisc", mId.Text);

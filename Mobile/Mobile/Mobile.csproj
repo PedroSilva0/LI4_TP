@@ -66,18 +66,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitmapHelpers.cs" />
     <Compile Include="Estabelecimento.cs" />
     <Compile Include="EstabelecimentosAdapter.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Photo.cs" />
     <Compile Include="Plano.cs" />
     <Compile Include="PlanoA.cs" />
     <Compile Include="PlanoI.cs" />
     <Compile Include="PlanoIA.cs" />
     <Compile Include="Planos.cs" />
     <Compile Include="PlanosAdapter.cs" />
+    <Compile Include="PVFN.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visitas.cs" />
+    <Compile Include="VisitasGPSA.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -106,6 +110,15 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\visita.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\VisitasGPSAccept.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PVFN.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Photo.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

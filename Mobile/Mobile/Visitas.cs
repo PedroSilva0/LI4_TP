@@ -29,6 +29,8 @@ namespace Mobile
         private Uri mUri;
         private string mId;
         private string mFiscal;
+        private string mEstabelecimento;
+        private TextView estabelecimentoTV;
         //bool doubleBackToExitPressedOnce = false;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -41,7 +43,7 @@ namespace Mobile
             mFiscal = Intent.GetStringExtra("Fiscal");
 
             mClient = new WebClient();
-            mUri = new Uri("http://192.168.1.69:8080/UpdateGetEstabelecimentos.php");
+            mUri = new Uri("http://172.26.10.5:8080/UpdateGetEstabelecimentos.php");
 
             mId = Intent.GetStringExtra("Id");
             NameValueCollection parameters = new NameValueCollection();
@@ -49,24 +51,33 @@ namespace Mobile
             parameters.Add("Fiscal", mFiscal);
             mClient.UploadValuesCompleted += MClient_UploadValuesCompleted;
             mClient.UploadValuesAsync(mUri, parameters);
+            mListView.ItemClick += MListView_ItemClick;
         }
-        /*
-        public override void OnBackPressed()
+
+        private void MListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            if (doubleBackToExitPressedOnce)
-            {
-                base.OnBackPressed();
-                return;
-            }
-            this.doubleBackToExitPressedOnce = true;
-            Toast.MakeText(this, "Please click BACK again to exit", ToastLength.Short).Show();
-            RunOnUiThread(() =>
-            {
-                Thread.Sleep(2000);
-                
-            });
-            doubleBackToExitPressedOnce = false;
-        }*/
+            Intent intent = new Intent(this, typeof(VisitasGPSA));
+            intent.PutExtra("Nome",mEstabelecimentos[e.Position].nome);
+            this.StartActivity(intent);
+        }
+
+        /*
+public override void OnBackPressed()
+{
+   if (doubleBackToExitPressedOnce)
+   {
+       base.OnBackPressed();
+       return;
+   }
+   this.doubleBackToExitPressedOnce = true;
+   Toast.MakeText(this, "Please click BACK again to exit", ToastLength.Short).Show();
+   RunOnUiThread(() =>
+   {
+       Thread.Sleep(2000);
+
+   });
+   doubleBackToExitPressedOnce = false;
+}*/
 
         private void MClient_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
