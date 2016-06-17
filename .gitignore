@@ -282,3 +282,5 @@ $RECYCLE.BIN/
 BackOffice/BackOffice/App.config
 BackOffice/BackOffice/App.config
 BackOffice/BackOffice/BackOffice.csproj
+*.config
+*.csproj
