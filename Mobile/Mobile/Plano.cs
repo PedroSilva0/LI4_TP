@@ -14,7 +14,7 @@ namespace Mobile
 {
     public class Plano
     {
-        private int id { get; }
+        public int id { get; set; }
         private bool disponivel { get; }
         private int fiscalCria { get; }
         private int fiscalExecuta { get; }

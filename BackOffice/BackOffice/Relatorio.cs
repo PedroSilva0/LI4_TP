@@ -153,6 +153,7 @@ namespace BackOffice
                 MailMessage msg = new MailMessage(from, to);
                 msg.Subject = "Relatório de inspeção, " + desc;                          //assunto
                 msg.Body = "Segue em anexo o relatório de inspeção," + desc + "\n\n\nDankRestaurantInspections";//corpo da mensagem
+                Console.WriteLine("");
                 string attach=this.geraPDF();
                 //Console.WriteLine(attach);
                 msg.Attachments.Add(new Attachment(attach)); //anexo

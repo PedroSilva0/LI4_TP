@@ -19,7 +19,7 @@ if (isset($_POST['id_fisc']) && isset($_POST['pass']))
 	
 	else
 	{
-		$query = 'SELECT * FROM [Fiscal] WHERE id_fisc = ? AND pass = ? ';
+		$query = 'SELECT * FROM Fiscal WHERE id_fisc = ? AND pass = ?';
 		$parameters = array($id, $pass);
 		$options =  array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
 		

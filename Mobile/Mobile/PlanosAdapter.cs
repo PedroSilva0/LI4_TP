@@ -51,14 +51,8 @@ namespace Mobile
 
             //row.FindViewById<TextView>(Resource.Id.txtIdPlano).Text = mPlanos[position].id.ToString();
             row.FindViewById<TextView>(Resource.Id.txtIdPlano).Text = position.ToString();
-            row.FindViewById<ImageButton>(Resource.Id.imageButton1).Click += PlanosAdapter_Click;
 
             return row;
-        }
-
-        private void PlanosAdapter_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

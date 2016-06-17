@@ -24,20 +24,32 @@ namespace BackOffice
     {
         private LI4Entities data = new LI4Entities();
 
-        public void registarRes(int id, string nome, string morada, string latitude, string longitude)
+        public void registarRes(string nome, string morada, double latitude, double longitude)
         {
-            id = Convert.ToInt32(id);
-            double latitude2 = Convert.ToDouble(latitude);
-            double longitude2 = Convert.ToDouble(longitude);
+            int id = data.Estabelecimento.Count()+1;
+            
             data.Estabelecimento.Add(new Estabelecimento()
             {
                 id_est = id,
-                latitude = latitude2,
+                latitude = latitude,
                 morada = morada,
                 nome = nome,
-                longitude = longitude2
+                longitude = longitude
             });
             data.SaveChanges();
+        }
+
+        public bool demasiado_perto(double latitude,double longitude)
+        {
+            var lista = data.Estabelecimento.ToList();
+            foreach(Estabelecimento e in lista)
+            {
+                if(e.latitude==latitude && e.longitude == longitude)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<Estabelecimento> listarRestaurantes()

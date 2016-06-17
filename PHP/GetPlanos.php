@@ -18,10 +18,7 @@
 	else
 	{
 		//Create query to retrieve all planos
-		//$query = 'SELECT * FROM Plano WHERE disponivel = 1 AND Fiscal = ?';
-		$query = 'SELECT * FROM Plano';
-		//$parameters = array($fiscal);
-		//$stmt = sqlsrv_query($connectionInfo->conn, $query, $parameters);
+		$query = 'SELECT * FROM Plano WHERE disponivel = 1';
 		$stmt = sqlsrv_query($connectionInfo->conn, $query);
 		
 		if (!$stmt)
