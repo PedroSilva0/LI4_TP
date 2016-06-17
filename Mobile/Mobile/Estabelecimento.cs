@@ -12,11 +12,12 @@ using Android.Widget;
 
 namespace Mobile
 {
-    public class Plano
+    class Estabelecimento
     {
-        public int id { get; set; }
-        private bool disponivel { get; }
-        private int fiscalCria { get; }
-        private int fiscalExecuta { get; }
+        private int id { get; set; }
+        public string nome { get; set; }
+        private string morada { get; set; }
+        private float latitude { get; set; }
+        private float longitude { get; set; }
     }
 }

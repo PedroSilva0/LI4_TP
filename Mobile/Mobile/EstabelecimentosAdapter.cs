@@ -12,27 +12,33 @@ using Android.Widget;
 
 namespace Mobile
 {
-    class PlanosAdapter : BaseAdapter<Plano>
+    class EstabelecimentosAdapter : BaseAdapter<Estabelecimento>
     {
         private Context mContext;
         private int mLayout;
-        private List<Plano> mPlanos;
+        private List<Estabelecimento> mEstabelecimentos;
 
-        public PlanosAdapter(Context context, int layout, List<Plano> planos)
+        public EstabelecimentosAdapter(Context context, int layout, List<Estabelecimento> estabelecimentos)
         {
             mContext = context;
             mLayout = layout;
-            mPlanos = planos;
+            mEstabelecimentos = estabelecimentos;
         }
 
-        public override Plano this[int position]
+        public override Estabelecimento this[int position]
         {
-            get { return mPlanos[position]; }
+            get
+            {
+                return mEstabelecimentos[position];
+            }
         }
 
         public override int Count
         {
-            get { return mPlanos.Count; }
+            get
+            {
+               return  mEstabelecimentos.Count;
+            }
         }
 
         public override long GetItemId(int position)
@@ -49,8 +55,7 @@ namespace Mobile
                 row = LayoutInflater.From(mContext).Inflate(mLayout, parent, false);
             }
 
-            //row.FindViewById<TextView>(Resource.Id.txtIdPlano).Text = mPlanos[position].id.ToString();
-            row.FindViewById<TextView>(Resource.Id.txtIdPlano).Text = position.ToString();
+            row.FindViewById<TextView>(Resource.Id.txtEstabelecimento).Text = mEstabelecimentos[position].nome;
 
             return row;
         }
