@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Speech;
+using System.Speech.Recognition;
 
 namespace BackOffice
 {
@@ -59,11 +61,25 @@ namespace BackOffice
             return lista;
         }
 
-        public List<Voz> listarTodosVoz()
+        public List<Display_aux> listarTodosVoz()
         {
             //var lista = (from t in data.tasks select new { t.id, t.name, type=t.taskType.name, username = t.user.name }).ToList(); 
             var lista = data.Voz.ToList();
-            return lista;
+            List<Display_aux> res = new List<Display_aux>();
+            foreach(Voz v in lista)
+            {
+                Visita vi = data.Visita.Find(v.visita);
+                if (vi.concluido)
+                {
+                    Estabelecimento aux = data.Estabelecimento.Find(vi.estabelecimento);
+                    //String des = "" + aux.nome + " - " + item.dataVisita.Date.ToString("d");
+
+                    string itDesc = aux.nome + ", " + ((DateTime)vi.dataVisita).ToShortDateString()+", "+v.descricao;
+                    res.Add(new Display_aux { id = v.id_voz, desc = itDesc });
+
+                }
+            }
+            return res;
         }
 
         /*public List<Visita> listarVisitas()
@@ -74,31 +90,31 @@ namespace BackOffice
             return lista2;
         }*/
 
-        public List<visitaDTO> listarVisitas()
+        public List<Display_aux> listarVisitas()
         {
             var lista2 = data.Visita.SqlQuery("select * from Visita where concluido=1").ToList();
-            List<visitaDTO> res = new List<visitaDTO>();
+            List<Display_aux> res = new List<Display_aux>();
             foreach (Visita item in lista2)
             {
                 Estabelecimento aux = data.Estabelecimento.Find(item.estabelecimento);
                 //String des = "" + aux.nome + " - " + item.dataVisita.Date.ToString("d");
 
                 string itDesc = aux.nome + ", " + ((DateTime)item.dataVisita).ToShortDateString();
-                res.Add(new visitaDTO { id_vis = item.id_vis, desc = itDesc });
+                res.Add(new Display_aux { id = item.id_vis, desc = itDesc });
             }
 
             return res;
         }
 
-        public List<visitaDTO> listarRelatorios()
+        public List<Display_aux> listarRelatorios()
         {
             List<Visita> lista = data.Visita.SqlQuery("select * from Visita where dataRelatorio is not null").ToList();
-            List<visitaDTO> res = new List<visitaDTO>();
+            List<Display_aux> res = new List<Display_aux>();
             foreach (Visita item in lista)
             {
                 Estabelecimento aux = data.Estabelecimento.Find(item.estabelecimento);
                 string itDesc = aux.nome + ", " + ((DateTime)item.dataRelatorio).ToShortDateString();
-                res.Add(new visitaDTO { id_vis = item.id_vis, desc = itDesc });
+                res.Add(new Display_aux { id = item.id_vis, desc = itDesc });
             }
 
             return res;
@@ -133,7 +149,7 @@ namespace BackOffice
             data.SaveChanges();
         }
 
-        public string convertXML(int id_voz)
+        /*public string convertXML(int id_voz)
         {
             //buscar a bd, por no pc
             var lista = data.Voz.ToList();
@@ -168,6 +184,10 @@ namespace BackOffice
                 // perform magic with the transcript here:
                 //string text = "A class is the most powerful data type in C#. Like a structure, " +
                 // "a class defines the data and behavior of the data type. ";
+                Voz voz = data.Voz.Find(id_voz);
+                transcript = transcript.ToLower();
+                voz.xml_file = transcript;
+                data.SaveChanges();
                 //System.IO.File.WriteAllText(path_xml, transcript);
                 String res = parse_xml(transcript, id_voz);
 
@@ -175,79 +195,8 @@ namespace BackOffice
                 return res;
             }
 
-        }
-
-        private string parse_xml(string transcript, int id)
-        {                                              //mudar string teste para string transcript depois do teste
-            //string teste = "Access good wheelchair ready Storage no problem Fridge rusty and old must be replaced Kitchen no problem Toilet doesnt flush needs to be fixed";
-            transcript = transcript.ToLower();
-            //Console.Write(teste);
-            string res = "";
-            string[] ssize = transcript.Split(null);
-            for (int i = 0; i < ssize.Count(); i++)
-            {
-                if (ssize[i].Equals("access")) {
-                    res = res + "<access>\n\t<content=\"";
-                    i++;
-                    while ((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("toilet"))))
-                    {
-                        //Console.Write((!(ssize[i].Equals("storage")) || !(ssize[i].Equals("frigde")) || !(ssize[i].Equals("kitchen")) || !(ssize[i].Equals("toilet"))));
-                        res = res + " " + ssize[i];
-                        i++;
-                    }
-                    res = res + "\"/>\n</access>\n";
-                } else
-                if (ssize[i].Equals("storage"))
-                {
-                    res = res + "<storage>\n\t<content=\"";
-                    i++;
-                    while ((i < ssize.Count()) && (!(ssize[i].Equals("access")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("toilet"))))
-                    {
-                        res = res + " " + ssize[i];
-                        i++;
-                    }
-                    res = res + "\"/>\n</storage>\n";
-                } else
-                if (ssize[i].Equals("fridge"))
-                {
-                    res = res + "<fridge>\n\t<content=\"";
-                    i++;
-                    while ((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("access")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("toilet"))))
-                    {
-                        res = res + " " + ssize[i];
-                        i++;
-                    }
-                    res = res + "\"/>\n</fridge>\n";
-                } else
-                if (ssize[i].Equals("kitchen"))
-                {
-                    res = res + "<kitchen>\n\t<content=\"";
-                    i++;
-                    while ((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("access")) && !(ssize[i].Equals("toilet"))))
-                    {
-                        res = res + " " + ssize[i];
-                        i++;
-                    }
-                    res = res + "\"/>\n</kitchen>\n";
-                } else
-                if (ssize[i].Equals("toilet"))
-                {
-                    res = res + "<toilet>\n\t<content=\"";
-                    i++;
-                    while ((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("access"))))
-                    {
-                        res = res + " " + ssize[i];
-                        i++;
-                    }
-                    res = res + "\"/>\n</toilet>\n";
-                }
-                i--;
-            }
-            Voz v = data.Voz.Find(id);
-            v.xml_file = res;
-            data.SaveChanges();
-            return res;
-        }
+        }*/
+        
 
         public bool login(int id_fiscal, string password)
         {
@@ -264,21 +213,26 @@ namespace BackOffice
 
         
 
-        //nao da
+        
         public void playAudio(int id_voz)
         {
             //Console.WriteLine(id_voz);
-            var lista = data.Voz.ToList();
-            Voz v = lista.ElementAt(id_voz - 1);
+            //var file = File.ReadAllBytes("C: \\li4\\teste6.mp3");
+            //var lista = data.Voz.ToList();
+            Voz v = data.Voz.Find(id_voz);
             var stream = new MemoryStream(v.voz_file,true);
             //System.IO.File.WriteAllBytes("C:\\Windows\\Temp\\" + v.id_voz.ToString() + ".wav", v.voz_file);
             SoundPlayer simpleSound = new SoundPlayer(stream);
-            simpleSound.Stream.Seek(0, SeekOrigin.Begin);
-            simpleSound.Stream.Write(v.voz_file, 0, v.voz_file.Length);
+            //simpleSound.Stream.Seek(0, SeekOrigin.Begin);
+            //simpleSound.Stream.Write(v.voz_file, 0, v.voz_file.Length);
             simpleSound.Play();
             //simpleSound.Load();
             //simpleSound.PlaySync();
-            Console.WriteLine("ficheiro tocado");
+            /*foreach(RecognizerInfo ri in SpeechRecognitionEngine.InstalledRecognizers())
+            {
+                Console.WriteLine(ri.Culture.Name);
+            }*/
+            //Console.WriteLine("ficheiro tocado");
         }
 
     }

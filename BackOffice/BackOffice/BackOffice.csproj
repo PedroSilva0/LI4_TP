@@ -72,6 +72,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -92,9 +93,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Add_Est_PopUp.xaml.cs">
+      <DependentUpon>Add_Est_PopUp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ConsultarRelatorio.xaml.cs">
       <DependentUpon>ConsultarRelatorio.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Nota_Voz.cs" />
     <Compile Include="CriarRelatorio.xaml.cs">
       <DependentUpon>CriarRelatorio.xaml</DependentUpon>
     </Compile>
@@ -142,13 +147,17 @@
     <Compile Include="Visita.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="visitaDTO.cs" />
+    <Compile Include="Display_aux.cs" />
     <Compile Include="VisitaQuestao.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Voz.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Page Include="Add_Est_PopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConsultarRelatorio.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

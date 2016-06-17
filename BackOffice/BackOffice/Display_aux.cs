@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BackOffice
 {
-    class visitaDTO
+    class Display_aux
     {
-        public int id_vis { get; set; }
+        public int id { get; set; }
         public string desc { get; set; }
     }
 }

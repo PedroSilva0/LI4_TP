@@ -79,7 +79,7 @@ namespace BackOffice
                 foreach (var r in respostas)
                 {
                     form.Append("<i>").Append(data.Questao.Find(r.Questao).pergunta).Append("</i><br>\n");
-                    form.Append(r.resposta).Append("<br><br>\n");
+                    form.Append(r.resposta).Append("<br><br><br>\n");
                 }
                 res = res.Replace("<!--formulario-->", form.ToString());
             }
@@ -153,11 +153,16 @@ namespace BackOffice
                 MailMessage msg = new MailMessage(from, to);
                 msg.Subject = "Relatório de inspeção, " + desc;                          //assunto
                 msg.Body = "Segue em anexo o relatório de inspeção," + desc + "\n\n\nDankRestaurantInspections";//corpo da mensagem
-                Console.WriteLine("");
+               
                 string attach=this.geraPDF();
+               
                 //Console.WriteLine(attach);
-                msg.Attachments.Add(new Attachment(attach)); //anexo
+                Attachment a = new Attachment(attach);
+                msg.Attachments.Add(a); //anexo
+
+                
                 mailServer.Send(msg);
+                a.Dispose();
                 mailServer.Dispose();
 
             }
@@ -175,16 +180,14 @@ namespace BackOffice
          * */
         private string geraPDF()
         {
-            //Console.WriteLine("escreve isto");
+            
             string html = data.Visita.Find(myVisita).html_file;
             string filePath = "C:\\Windows\\Temp\\RelatorioVisita" + myVisita.ToString() + ".pdf";
             PdfSharp.Pdf.PdfDocument pdf;
 
             pdf = PdfGenerator.GeneratePdf(html, PageSize.A4);
-            // Console.Write(filePath + "\n\n\n\n\n");
-            //Console.WriteLine("escreve isto");
             pdf.Save(filePath);
-            //Console.WriteLine(filePath);
+            pdf.Close();
             return filePath;
         }
 

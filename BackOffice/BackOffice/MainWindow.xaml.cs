@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Maps.MapControl.WPF;
+﻿using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +7,7 @@ using System.Media;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,26 +21,43 @@ using System.Windows.Shapes;
 
 namespace BackOffice
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        
         private facade fac;
         private int id_fiscal;
-        private bool inserir = true;
 
         public MainWindow(int i)
         {
             InitializeComponent();
             fac = new facade();
+            //fac.playAudio(0);
             id_fiscal = i;
             listarRestaurantes();
             listarTodosVoz();
             listaVisitas();
             listaRelatorios();
         }
+
+        private void inspectionTabSelected(object sender, RoutedEventArgs e)
+        {
+            var tab = sender as TabItem;
+            if (tab != null)
+            {
+                listaVisitas();
+                //Console.WriteLine("selecionei visitas");
+            }
+        }
+
+        private void vozTabSelected(object sender, RoutedEventArgs e)
+        {
+            var tab = sender as TabItem;
+            if (tab != null)
+            {
+                listarTodosVoz();
+                //Console.WriteLine("selecionei voz");
+            }
+        }
+
 
         private void listaVisitas()
         {
@@ -53,16 +70,17 @@ namespace BackOffice
             }
             else
             {
-                foreach (visitaDTO item in lista_visita)
+                foreach (Display_aux item in lista_visita)
                 {
-                    this.listView2.Items.Add(new visitaDTO
+                    this.listView2.Items.Add(new Display_aux
                     {
-                        id_vis = item.id_vis,
+                        id = item.id,
                         desc = item.desc
 
 
                     });
                 }
+                label8.Content = "";
             }
         }
 
@@ -77,11 +95,11 @@ namespace BackOffice
                 label9.Content = "Não existem relatórios";
             }
             else
-                foreach (visitaDTO item in lista_relatorios)
+                foreach (Display_aux item in lista_relatorios)
                 {
-                    this.listView3.Items.Add(new visitaDTO
+                    this.listView3.Items.Add(new Display_aux
                     {
-                        id_vis = item.id_vis,
+                        id = item.id,
                         desc = item.desc
                     });
                 }
@@ -120,20 +138,23 @@ namespace BackOffice
             {
                 label6.Content = "Não existem ficheiros de voz";
             }
-            else
-                foreach (Voz item in lista_voz)
+            else { 
+            foreach (Display_aux item in lista_voz)
+            {
+                this.listView1.Items.Add(new Voz
                 {
-                    this.listView1.Items.Add(new Voz
-                    {
-                        descricao = item.descricao,
-                        id_voz = item.id_voz,
-                    });
-                }
+                    descricao = item.desc,
+                    id_voz = item.id,
+                });
+            }
+                label6.Content = "";
+            }
         }
 
         private void registar_estabelecimento_Click(object sender, RoutedEventArgs e)
         {
-            //bool inserir = true;
+            bool inserir = true;
+            
             double latitude = 0;
             double longitude = 0;
             if(textBox3.Text.Equals("")|| textBox4.Text.Equals("") || textBox5.Text.Equals("") || textBox6.Text.Equals(""))
@@ -154,10 +175,15 @@ namespace BackOffice
                     longitude = Convert.ToDouble(textBox5.Text.Replace('.', ','));
                     if (fac.demasiado_perto(latitude,longitude))
                     {
-                        Popup1.IsOpen = true;
+                        Add_Est_PopUp getup = new Add_Est_PopUp();
+                        //this.Hide();
+                        getup.ShowDialog();
+                        //this.Show();
+                        inserir = getup.resposta;
                     }
                 }
             }
+            
             if (inserir)
             {
                 fac.registarRes(textBox3.Text, textBox4.Text, latitude, longitude);
@@ -295,8 +321,11 @@ namespace BackOffice
             if (listView1.SelectedItem != null)
             {
                 Voz est = (Voz)listView1.SelectedItems[0];
-                string xml = fac.convertXML(est.id_voz);
-                textBox.Text = xml;
+                Nota_Voz c = new Nota_Voz(est.id_voz);
+                Thread t = new Thread(c.convert);
+                t.Start();
+                t.Join();
+                textBox.Text = c.parse_xml();
                 label6.Content = "Ficheiro convertido com sucesso";
             }else
             {
@@ -309,8 +338,8 @@ namespace BackOffice
             
             if (listView2.SelectedItem != null)
             {
-                visitaDTO vis = (visitaDTO) listView2.SelectedItems[0];
-                int visita = Convert.ToInt32(vis.id_vis);
+                Display_aux vis = (Display_aux) listView2.SelectedItems[0];
+                int visita = Convert.ToInt32(vis.id);
                 CriarRelatorio newWindow = new CriarRelatorio(visita);
                 newWindow.Show();
             }else
@@ -323,8 +352,8 @@ namespace BackOffice
         {
             if (listView3.SelectedItem != null)
             {
-                visitaDTO vis = (visitaDTO)listView3.SelectedItems[0];
-                int visita = Convert.ToInt32(vis.id_vis);
+                Display_aux vis = (Display_aux)listView3.SelectedItems[0];
+                int visita = Convert.ToInt32(vis.id);
                 ConsultarRelatorio newWindow = new ConsultarRelatorio(visita);
                 newWindow.Show();
             }else
@@ -333,32 +362,20 @@ namespace BackOffice
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            inserir = true;
-            Popup1.IsOpen = false;
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            inserir = false;
-            Popup1.IsOpen = false;
-        }
-
         private void enviar_relatorio_Click(object sender, RoutedEventArgs e)
         {
             if (listView3.SelectedItem != null)
             {
                 if (!textBox2.Text.Equals(""))
                 {
-                    visitaDTO vis = (visitaDTO)listView2.SelectedItems[0];
-                    int visita = Convert.ToInt32(vis.id_vis);
+                    Display_aux vis = (Display_aux)listView3.SelectedItems[0];
+                    int visita = Convert.ToInt32(vis.id);
                     Relatorio r = new Relatorio(visita);
                     r.enviarRelatorio(textBox2.Text, vis.desc);
                     label9.Content = "Relatório enviado com sucesso";
                 }else
                 {
-                    label9.Content = "Por favor insira o e-mail do recepiente";
+                    label9.Content = "Por favor insira o e-mail do destinatário";
                 }
             }else
             {
@@ -366,23 +383,19 @@ namespace BackOffice
             }
         }
 
-
-        private void GetResponse(Uri uri, Action<Response> callback)
+        private void ouvir_voz_Click(object sender, RoutedEventArgs e)
         {
-            WebClient wc = new WebClient();
-            wc.OpenReadCompleted += (o, a) =>
+            if (listView1.SelectedItem != null)
             {
-                if (callback != null)
-                {
-                    DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Response));
-                    callback(ser.ReadObject(a.Result) as Response);
-                }
-            };
-            wc.OpenReadAsync(uri);
+                Voz est = (Voz)listView1.SelectedItems[0];
+                fac.playAudio(est.id_voz);
+                //textBox.Text = xml;
+                label6.Content = "A tocar ficheiro";
+            }
+            else
+            {
+                label6.Content = "Por favor selecione um ficheiro a ouvir";
+            }
         }
-
-        
-
-        
     }
 }
