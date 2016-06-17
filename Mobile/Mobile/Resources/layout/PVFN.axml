@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:id="@+id/button1"
+            android:id="@+id/btnFinVis"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 </LinearLayout>

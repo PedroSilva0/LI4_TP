@@ -43,7 +43,7 @@ namespace Mobile
             mFiscal = Intent.GetStringExtra("Fiscal");
 
             mClient = new WebClient();
-            mUri = new Uri("http://172.26.10.5:8080/UpdateGetEstabelecimentos.php");
+            mUri = new Uri("http://192.168.1.69:8080/UpdateGetEstabelecimentos.php");
 
             mId = Intent.GetStringExtra("Id");
             NameValueCollection parameters = new NameValueCollection();
