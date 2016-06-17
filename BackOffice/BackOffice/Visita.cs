@@ -23,7 +23,7 @@ namespace BackOffice
         }
     
         public int id_vis { get; set; }
-        public System.DateTime dataVisita { get; set; }
+        public Nullable<System.DateTime> dataVisita { get; set; }
         public int plano { get; set; }
         public int estabelecimento { get; set; }
         public Nullable<System.DateTime> dataRelatorio { get; set; }

@@ -71,7 +71,7 @@ namespace BackOffice
             //formulario
             var respostas = (from f in data.VisitaQuestao
                              where f.Visita == myVisita
-                             select new { f.Visita, f.Questao, f.resposta }
+                             select new { f.Visita, f.Questao, f.Resposta }
                             ).ToList();
             if (respostas.Count != 0) //fazer skip de null
             {
@@ -79,7 +79,7 @@ namespace BackOffice
                 foreach (var r in respostas)
                 {
                     form.Append("<i>").Append(data.Questao.Find(r.Questao).pergunta).Append("</i><br>\n");
-                    form.Append(r.resposta).Append("<br><br><br>\n");
+                    form.Append(r.Resposta).Append("<br><br><br>\n");
                 }
                 res = res.Replace("<!--formulario-->", form.ToString());
             }

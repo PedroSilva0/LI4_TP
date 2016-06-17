@@ -141,10 +141,10 @@ namespace BackOffice
             else { 
             foreach (Display_aux item in lista_voz)
             {
-                this.listView1.Items.Add(new Voz
+                this.listView1.Items.Add(new Display_aux
                 {
-                    descricao = item.desc,
-                    id_voz = item.id,
+                    desc = item.desc,
+                    id = item.id,
                 });
             }
                 label6.Content = "";
@@ -320,8 +320,9 @@ namespace BackOffice
         {
             if (listView1.SelectedItem != null)
             {
-                Voz est = (Voz)listView1.SelectedItems[0];
-                Nota_Voz c = new Nota_Voz(est.id_voz);
+                Display_aux vozAux = (Display_aux) listView1.SelectedItems[0];
+                
+                Nota_Voz c = new Nota_Voz(vozAux.id);
                 Thread t = new Thread(c.convert);
                 t.Start();
                 t.Join();
@@ -387,8 +388,8 @@ namespace BackOffice
         {
             if (listView1.SelectedItem != null)
             {
-                Voz est = (Voz)listView1.SelectedItems[0];
-                fac.playAudio(est.id_voz);
+                Display_aux est = (Display_aux)listView1.SelectedItems[0];
+                fac.playAudio(est.id);
                 //textBox.Text = xml;
                 label6.Content = "A tocar ficheiro";
             }

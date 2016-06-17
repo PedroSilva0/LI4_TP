@@ -21,9 +21,9 @@ namespace BackOffice
     
         public int id_est { get; set; }
         public double latitude { get; set; }
+        public double longitude { get; set; }
         public string morada { get; set; }
         public string nome { get; set; }
-        public double longitude { get; set; }
     
         public virtual ICollection<Visita> Visita { get; set; }
     }

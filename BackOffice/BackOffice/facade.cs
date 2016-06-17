@@ -68,7 +68,7 @@ namespace BackOffice
             List<Display_aux> res = new List<Display_aux>();
             foreach(Voz v in lista)
             {
-                Visita vi = data.Visita.Find(v.visita);
+                Visita vi = data.Visita.Find(v.Visita);
                 if (vi.concluido)
                 {
                     Estabelecimento aux = data.Estabelecimento.Find(vi.estabelecimento);

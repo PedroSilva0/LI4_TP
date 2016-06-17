@@ -11,9 +11,9 @@
           </Key>
           <Property Name="id_est" Type="int" Nullable="false" />
           <Property Name="latitude" Type="float" Nullable="false" />
+          <Property Name="longitude" Type="float" Nullable="false" />
           <Property Name="morada" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="nome" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="longitude" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Fiscal">
           <Key>
@@ -46,7 +46,7 @@
           </Key>
           <Property Name="id_plano" Type="int" Nullable="false" />
           <Property Name="disponivel" Type="bit" Nullable="false" />
-          <Property Name="Fiscal" Type="int" Nullable="false" />
+          <Property Name="Fiscal" Type="int" />
           <Property Name="FiscalCriador" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Questao">
@@ -71,7 +71,7 @@
             <PropertyRef Name="id_vis" />
           </Key>
           <Property Name="id_vis" Type="int" Nullable="false" />
-          <Property Name="dataVisita" Type="date" Nullable="false" />
+          <Property Name="dataVisita" Type="date" />
           <Property Name="plano" Type="int" Nullable="false" />
           <Property Name="estabelecimento" Type="int" Nullable="false" />
           <Property Name="dataRelatorio" Type="date" />
@@ -79,17 +79,14 @@
           <Property Name="html_file" Type="text" />
           <Property Name="concluido" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'LI4.dbo.VisitaQuestao' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VisitaQuestao">
           <Key>
             <PropertyRef Name="Questao" />
             <PropertyRef Name="Visita" />
-            <PropertyRef Name="resposta" />
           </Key>
           <Property Name="Questao" Type="int" Nullable="false" />
           <Property Name="Visita" Type="int" Nullable="false" />
-          <Property Name="resposta" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Resposta" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Voz">
           <Key>
@@ -98,8 +95,8 @@ warning 6002: The table/view 'LI4.dbo.VisitaQuestao' does not have a primary key
           <Property Name="id_voz" Type="int" Nullable="false" />
           <Property Name="descricao" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="voz_file" Type="varbinary(max)" Nullable="false" />
-          <Property Name="xml_file" Type="xml" Nullable="false" />
-          <Property Name="visita" Type="int" Nullable="false" />
+          <Property Name="Visita" Type="int" Nullable="false" />
+          <Property Name="xml_file" Type="text" />
         </EntityType>
         <Association Name="FK_Foto_Visita">
           <End Role="Visita" Type="Self.Visita" Multiplicity="1" />
@@ -133,7 +130,7 @@ warning 6002: The table/view 'LI4.dbo.VisitaQuestao' does not have a primary key
               <PropertyRef Name="id_fisc" />
             </Principal>
             <Dependent Role="Plano">
-              <PropertyRef Name="Fiscal" />
+              <PropertyRef Name="FiscalCriador" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -205,41 +202,10 @@ warning 6002: The table/view 'LI4.dbo.VisitaQuestao' does not have a primary key
               <PropertyRef Name="id_vis" />
             </Principal>
             <Dependent Role="Voz">
-              <PropertyRef Name="visita" />
+              <PropertyRef Name="Visita" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="LI4ModelStoreContainer">
           <EntitySet Name="Estabelecimento" EntityType="Self.Estabelecimento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fiscal" EntityType="Self.Fiscal" Schema="dbo" store:Type="Tables" />
@@ -249,14 +215,8 @@ warning 6002: The table/view 'LI4.dbo.VisitaQuestao' does not have a primary key
           <EntitySet Name="Questao" EntityType="Self.Questao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Visita" EntityType="Self.Visita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitaQuestao" EntityType="Self.VisitaQuestao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voz" EntityType="Self.Voz" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="VisitaQuestao" EntityType="Self.VisitaQuestao" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[VisitaQuestao].[Questao] AS [Questao], 
-[VisitaQuestao].[Visita] AS [Visita], 
-[VisitaQuestao].[resposta] AS [resposta]
-FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Foto_Visita" Association="Self.FK_Foto_Visita">
             <End Role="Visita" EntitySet="Visita" />
             <End Role="Foto" EntitySet="Foto" />
@@ -305,9 +265,9 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
           </Key>
           <Property Name="id_est" Type="Int32" Nullable="false" />
           <Property Name="latitude" Type="Double" Nullable="false" />
+          <Property Name="longitude" Type="Double" Nullable="false" />
           <Property Name="morada" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="longitude" Type="Double" Nullable="false" />
           <NavigationProperty Name="Visita" Relationship="Self.FK_Visita_Estabelecimento" FromRole="Estabelecimento" ToRole="Visita" />
         </EntityType>
         <EntityType Name="Fiscal">
@@ -345,7 +305,7 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
           </Key>
           <Property Name="id_plano" Type="Int32" Nullable="false" />
           <Property Name="disponivel" Type="Boolean" Nullable="false" />
-          <Property Name="Fiscal" Type="Int32" Nullable="false" />
+          <Property Name="Fiscal" Type="Int32" />
           <Property Name="FiscalCriador" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Fiscal1" Relationship="Self.FK_Plano_Fiscal" FromRole="Plano" ToRole="Fiscal" />
           <NavigationProperty Name="Fiscal2" Relationship="Self.FK_Plano_Fiscal1" FromRole="Plano" ToRole="Fiscal" />
@@ -374,7 +334,7 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
             <PropertyRef Name="id_vis" />
           </Key>
           <Property Name="id_vis" Type="Int32" Nullable="false" />
-          <Property Name="dataVisita" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dataVisita" Type="DateTime" Precision="0" />
           <Property Name="plano" Type="Int32" Nullable="false" />
           <Property Name="estabelecimento" Type="Int32" Nullable="false" />
           <Property Name="dataRelatorio" Type="DateTime" Precision="0" />
@@ -388,6 +348,17 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
           <NavigationProperty Name="VisitaQuestao" Relationship="Self.FK_VisitaQuestao_Visita" FromRole="Visita" ToRole="VisitaQuestao" />
           <NavigationProperty Name="Voz" Relationship="Self.FK_Voz_Visita" FromRole="Visita" ToRole="Voz" />
         </EntityType>
+        <EntityType Name="VisitaQuestao">
+          <Key>
+            <PropertyRef Name="Questao" />
+            <PropertyRef Name="Visita" />
+          </Key>
+          <Property Name="Questao" Type="Int32" Nullable="false" />
+          <Property Name="Visita" Type="Int32" Nullable="false" />
+          <Property Name="Resposta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Questao1" Relationship="Self.FK_VisitaQuestao_Questao" FromRole="VisitaQuestao" ToRole="Questao" />
+          <NavigationProperty Name="Visita1" Relationship="Self.FK_VisitaQuestao_Visita" FromRole="VisitaQuestao" ToRole="Visita" />
+        </EntityType>
         <EntityType Name="Voz">
           <Key>
             <PropertyRef Name="id_voz" />
@@ -395,21 +366,9 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
           <Property Name="id_voz" Type="Int32" Nullable="false" />
           <Property Name="descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="voz_file" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="xml_file" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="visita" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Visita1" Relationship="Self.FK_Voz_Visita" FromRole="Voz" ToRole="Visita" />
-        </EntityType>
-        <EntityType Name="VisitaQuestao">
-          <Key>
-            <PropertyRef Name="Questao" />
-            <PropertyRef Name="Visita" />
-            <PropertyRef Name="resposta" />
-          </Key>
-          <Property Name="Questao" Type="Int32" Nullable="false" />
           <Property Name="Visita" Type="Int32" Nullable="false" />
-          <Property Name="resposta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Questao1" Relationship="Self.FK_VisitaQuestao_Questao" FromRole="VisitaQuestao" ToRole="Questao" />
-          <NavigationProperty Name="Visita1" Relationship="Self.FK_VisitaQuestao_Visita" FromRole="VisitaQuestao" ToRole="Visita" />
+          <Property Name="xml_file" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Visita1" Relationship="Self.FK_Voz_Visita" FromRole="Voz" ToRole="Visita" />
         </EntityType>
         <Association Name="FK_Visita_Estabelecimento">
           <End Role="Estabelecimento" Type="Self.Estabelecimento" Multiplicity="1" />
@@ -431,7 +390,7 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
               <PropertyRef Name="id_fisc" />
             </Principal>
             <Dependent Role="Plano">
-              <PropertyRef Name="Fiscal" />
+              <PropertyRef Name="FiscalCriador" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -515,7 +474,7 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
               <PropertyRef Name="id_vis" />
             </Principal>
             <Dependent Role="Voz">
-              <PropertyRef Name="visita" />
+              <PropertyRef Name="Visita" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -528,8 +487,8 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
           <EntitySet Name="Questao" EntityType="Self.Questao" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Visita" EntityType="Self.Visita" />
-          <EntitySet Name="Voz" EntityType="Self.Voz" />
           <EntitySet Name="VisitaQuestao" EntityType="Self.VisitaQuestao" />
+          <EntitySet Name="Voz" EntityType="Self.Voz" />
           <AssociationSet Name="FK_Visita_Estabelecimento" Association="Self.FK_Visita_Estabelecimento">
             <End Role="Estabelecimento" EntitySet="Estabelecimento" />
             <End Role="Visita" EntitySet="Visita" />
@@ -566,48 +525,7 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
             <End Role="Visita" EntitySet="Visita" />
             <End Role="Voz" EntitySet="Voz" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(LI4Model.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(LI4Model.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -619,9 +537,9 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
               <MappingFragment StoreEntitySet="Estabelecimento">
                 <ScalarProperty Name="id_est" ColumnName="id_est" />
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
                 <ScalarProperty Name="morada" ColumnName="morada" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -696,50 +614,26 @@ FROM [dbo].[VisitaQuestao] AS [VisitaQuestao]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VisitaQuestao">
+            <EntityTypeMapping TypeName="LI4Model.VisitaQuestao">
+              <MappingFragment StoreEntitySet="VisitaQuestao">
+                <ScalarProperty Name="Questao" ColumnName="Questao" />
+                <ScalarProperty Name="Visita" ColumnName="Visita" />
+                <ScalarProperty Name="Resposta" ColumnName="Resposta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Voz">
             <EntityTypeMapping TypeName="LI4Model.Voz">
               <MappingFragment StoreEntitySet="Voz">
                 <ScalarProperty Name="id_voz" ColumnName="id_voz" />
                 <ScalarProperty Name="descricao" ColumnName="descricao" />
                 <ScalarProperty Name="voz_file" ColumnName="voz_file" />
-                <ScalarProperty Name="xml_file" ColumnName="xml_file" />
-                <ScalarProperty Name="visita" ColumnName="visita" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VisitaQuestao">
-            <EntityTypeMapping TypeName="LI4Model.VisitaQuestao">
-              <MappingFragment StoreEntitySet="VisitaQuestao">
-                <ScalarProperty Name="Questao" ColumnName="Questao" />
                 <ScalarProperty Name="Visita" ColumnName="Visita" />
-                <ScalarProperty Name="resposta" ColumnName="resposta" />
+                <ScalarProperty Name="xml_file" ColumnName="xml_file" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="LI4Model.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="LI4Model.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="LI4Model.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="LI4Model.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LI4Model.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="LI4Model.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LI4Model.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="LI4Model.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="LI4Model.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

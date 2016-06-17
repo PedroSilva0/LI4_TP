@@ -279,3 +279,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+BackOffice/BackOffice/App.config
+BackOffice/BackOffice/App.config
+BackOffice/BackOffice/BackOffice.csproj

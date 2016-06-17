@@ -21,7 +21,7 @@ namespace BackOffice
     
         public int id_plano { get; set; }
         public bool disponivel { get; set; }
-        public int Fiscal { get; set; }
+        public Nullable<int> Fiscal { get; set; }
         public int FiscalCriador { get; set; }
     
         public virtual Fiscal Fiscal1 { get; set; }

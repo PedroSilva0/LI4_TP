@@ -16,7 +16,7 @@ namespace BackOffice
     {
         public int Questao { get; set; }
         public int Visita { get; set; }
-        public string resposta { get; set; }
+        public string Resposta { get; set; }
     
         public virtual Questao Questao1 { get; set; }
         public virtual Visita Visita1 { get; set; }

@@ -17,8 +17,8 @@ namespace BackOffice
         public int id_voz { get; set; }
         public string descricao { get; set; }
         public byte[] voz_file { get; set; }
+        public int Visita { get; set; }
         public string xml_file { get; set; }
-        public int visita { get; set; }
     
         public virtual Visita Visita1 { get; set; }
     }

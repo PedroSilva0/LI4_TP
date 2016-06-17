@@ -86,8 +86,8 @@
                 <ListView x:Name="listView1" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="218">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Descrição" DisplayMemberBinding="{Binding descricao}" Width="217" />
-                            <GridViewColumn Header="id" DisplayMemberBinding="{Binding id_voz}" Width="0" />
+                            <GridViewColumn Header="Descrição" DisplayMemberBinding="{Binding desc}" Width="217" />
+                            <GridViewColumn Header="id" DisplayMemberBinding="{Binding id}" Width="0" />
                         </GridView>
                     </ListView.View>
                 </ListView>
