@@ -58,6 +58,16 @@ namespace BackOffice
             }
         }
 
+        private void relatorioTabSelected(object sender, RoutedEventArgs e)
+        {
+            var tab = sender as TabItem;
+            if (tab != null)
+            {
+                listaRelatorios();
+                //Console.WriteLine("selecionei voz");
+            }
+        }
+
 
         private void listaVisitas()
         {

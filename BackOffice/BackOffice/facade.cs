@@ -92,7 +92,7 @@ namespace BackOffice
 
         public List<Display_aux> listarVisitas()
         {
-            var lista2 = data.Visita.SqlQuery("select * from Visita where concluido=1").ToList();
+            var lista2 = data.Visita.SqlQuery("select * from Visita where concluido=1 and dataRelatorio is null").ToList();
             List<Display_aux> res = new List<Display_aux>();
             foreach (Visita item in lista2)
             {

@@ -17,6 +17,11 @@ namespace BackOffice
         private LI4Entities data = new LI4Entities();
         private string transcript;
 
+        public string getTranscript()
+        {
+            return transcript;
+        }
+
         public Nota_Voz(int id)
         {
             id_voz = id;
@@ -25,34 +30,42 @@ namespace BackOffice
         public void convert()
         {
             Voz v = data.Voz.Find(id_voz);
-            String path_voz = "C:\\Windows\\Temp\\voz" + v.id_voz.ToString() + ".wav";
-            //String path_xml = "C:\\Windows\\Temp\\xml" + v.id_voz.ToString() + ".xml";
-            System.IO.File.WriteAllBytes(path_voz, v.voz_file);
-            SpeechRecognitionEngine sre = new SpeechRecognitionEngine();
-            Grammar gr = new DictationGrammar();
-            sre.LoadGrammar(gr);
-            sre.SetInputToWaveFile(path_voz);
-            StringBuilder sb = new StringBuilder();
-            while (true)
+
+            if(v.xml_file != null)//skip se ja converteu
             {
-                try
+                this.transcript = v.xml_file;
+            }
+            else { 
+                String path_voz = "C:\\Windows\\Temp\\voz" + v.id_voz.ToString() + ".wav";
+                //String path_xml = "C:\\Windows\\Temp\\xml" + v.id_voz.ToString() + ".xml";
+                System.IO.File.WriteAllBytes(path_voz, v.voz_file);
+                CultureInfo c = new System.Globalization.CultureInfo("en-US");
+                SpeechRecognitionEngine sre = new SpeechRecognitionEngine(c);
+                Grammar gr = new DictationGrammar();
+                sre.LoadGrammar(gr);
+                sre.SetInputToWaveFile(path_voz);
+                StringBuilder sb = new StringBuilder();
+                while (true)
                 {
-                    RecognitionResult recText = sre.Recognize();
-                    if (recText == null)
+                    try
                     {
+                        RecognitionResult recText = sre.Recognize();
+                        if (recText == null)
+                        {
+                            break;
+                        }
+                        sb.Append(recText.Text);
+                    }
+                    catch (Exception ex)
+                    {   
                         break;
                     }
-                    sb.Append(recText.Text);
                 }
-                catch (Exception ex)
-                {   
-                    break;
-                }
+                sre.UnloadAllGrammars();
+                transcript = sb.ToString().ToLower();
+                v.xml_file = transcript;
+                data.SaveChanges();
             }
-            sre.UnloadAllGrammars();
-            transcript = sb.ToString();
-            v.xml_file = transcript;
-            data.SaveChanges();
         }
 
         public string parse_xml()

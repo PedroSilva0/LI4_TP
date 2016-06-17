@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TheArtOfDev.HtmlRenderer.PdfSharp;
 
@@ -95,11 +96,38 @@ namespace BackOffice
                 foreach (var n in notas)
                 {
                     notasStr.Append("<i>").Append(n.descricao).Append(":</i><br>\n");
-                    notasStr.Append(n.text_file).Append("<br>\n");
+                    notasStr.Append(n.text_file).Append("<br><br>\n");
                 }
                 res = res.Replace("<!--notasTxt-->", notasStr.ToString());
             }
-            //notasVoz TODO
+            
+            //notasVoz
+            var notasVoz = (from n in data.Voz
+                            where n.Visita == myVisita
+                            select new { n.id_voz, n.descricao, n.xml_file, n.Visita }
+                            ).ToList();
+            if (notas.Count != 0)
+            { //skip null
+                StringBuilder notasVozStr = new StringBuilder();
+                foreach (var n in notasVoz)
+                {
+                    if(n.xml_file == null)
+                    {
+                        Nota_Voz aux = new Nota_Voz(n.id_voz);
+                        Thread t = new Thread(aux.convert);
+                        t.Start();
+                        t.Join();
+                        notasVozStr.Append("<i>").Append(n.descricao).Append(":</i><br>\n");
+                        notasVozStr.Append(aux.getTranscript()).Append("<br><br>\n");
+                    }
+                    else {
+                        notasVozStr.Append("<i>").Append(n.descricao).Append(":</i><br>\n");
+                        notasVozStr.Append(n.xml_file).Append("<br><br>\n");
+                    }
+                    
+                }
+                res = res.Replace("<!--notasVoz-->", notasVozStr.ToString());
+            }
 
             //Fotos
             var fotos = (from f in data.Foto
