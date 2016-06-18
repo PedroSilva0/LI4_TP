@@ -73,6 +73,7 @@
     <Compile Include="FormAdapter.cs" />
     <Compile Include="Form_row.cs" />
     <Compile Include="Foto.cs" />
+    <Compile Include="GravaVoz.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Notas_Texto.cs" />
     <Compile Include="Photo.cs" />
@@ -134,6 +135,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Notas_Texto.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\GravaVoz.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
