@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 namespace BackOffice
@@ -19,6 +18,11 @@ namespace BackOffice
         {
             data = new LI4Entities();
             myVisita = idVisita;
+        }
+
+        public Relatorio()
+        {
+
         }
 
         private string loadTemplate()
@@ -100,7 +104,7 @@ namespace BackOffice
                 }
                 res = res.Replace("<!--notasTxt-->", notasStr.ToString());
             }
-            
+
             //notasVoz
             var notasVoz = (from n in data.Voz
                             where n.Visita == myVisita
@@ -111,7 +115,7 @@ namespace BackOffice
                 StringBuilder notasVozStr = new StringBuilder();
                 foreach (var n in notasVoz)
                 {
-                    if(n.xml_file == null)
+                    if (n.xml_file == null)
                     {
                         Nota_Voz aux = new Nota_Voz(n.id_voz);
                         Thread t = new Thread(aux.convert);
@@ -120,11 +124,12 @@ namespace BackOffice
                         notasVozStr.Append("<i>").Append(n.descricao).Append(":</i><br>\n");
                         notasVozStr.Append(aux.getTranscript()).Append("<br><br>\n");
                     }
-                    else {
+                    else
+                    {
                         notasVozStr.Append("<i>").Append(n.descricao).Append(":</i><br>\n");
                         notasVozStr.Append(n.xml_file).Append("<br><br>\n");
                     }
-                    
+
                 }
                 res = res.Replace("<!--notasVoz-->", notasVozStr.ToString());
             }
@@ -140,18 +145,9 @@ namespace BackOffice
                 StringBuilder fotosStr = new StringBuilder();
                 foreach (var f in fotos)
                 {
-                    /*
-                    string imageBase64 = Convert.ToBase64String(f.foto_file);
-                    string imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
-                    fotosStr.Append("<img src=\"").Append(imageSrc).Append("\" width=\"80%\"/>").Append("<br>\n");
-                    fotosStr.Append(f.descricao).Append("<br>\n");
-                    */
-
-
                     System.IO.File.WriteAllBytes("C:\\Windows\\Temp\\" + f.id_foto.ToString() + ".jpg", f.foto_file);
                     fotosStr.Append("<img src=\"file:///C:/Windows/Temp/").Append(f.id_foto.ToString() + ".jpg").Append("\" width=\"70%\"/>").Append("<br>\n");
                     fotosStr.Append(f.descricao).Append("<br>\n");
-
                 }
                 res = res.Replace("<!--fotos-->", fotosStr.ToString());
             }
@@ -181,14 +177,13 @@ namespace BackOffice
                 MailMessage msg = new MailMessage(from, to);
                 msg.Subject = "Relatório de inspeção, " + desc;                          //assunto
                 msg.Body = "Segue em anexo o relatório de inspeção," + desc + "\n\n\nDankRestaurantInspections";//corpo da mensagem
-               
-                string attach=this.geraPDF();
-               
-                //Console.WriteLine(attach);
+
+                string attach = this.geraPDF();
+
                 Attachment a = new Attachment(attach);
                 msg.Attachments.Add(a); //anexo
 
-                
+
                 mailServer.Send(msg);
                 a.Dispose();
                 mailServer.Dispose();
@@ -196,7 +191,6 @@ namespace BackOffice
             }
             catch (SmtpFailedRecipientException ex)
             {
-                //Console.WriteLine("bla");
                 Console.WriteLine("Unable to send email. Error : " + ex);
                 return false;
             }
@@ -208,7 +202,7 @@ namespace BackOffice
          * */
         private string geraPDF()
         {
-            
+
             string html = data.Visita.Find(myVisita).html_file;
             string filePath = "C:\\Windows\\Temp\\RelatorioVisita" + myVisita.ToString() + ".pdf";
             PdfSharp.Pdf.PdfDocument pdf;
@@ -219,7 +213,19 @@ namespace BackOffice
             return filePath;
         }
 
+        public List<Display_aux> listarRelatorios()
+        {
+            List<Visita> lista = data.Visita.SqlQuery("select * from Visita where dataRelatorio is not null").ToList();
+            List<Display_aux> res = new List<Display_aux>();
+            foreach (Visita item in lista)
+            {
+                Estabelecimento aux = data.Estabelecimento.Find(item.estabelecimento);
+                string itDesc = aux.nome + ", " + ((DateTime)item.dataRelatorio).ToShortDateString();
+                res.Add(new Display_aux { id = item.id_vis, desc = itDesc });
+            }
 
+            return res;
+        }
 
     }
 }

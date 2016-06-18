@@ -99,19 +99,16 @@
     <Compile Include="ConsultarRelatorio.xaml.cs">
       <DependentUpon>ConsultarRelatorio.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EstabelecimentoDTO.cs" />
+    <Compile Include="Fiscais.cs" />
     <Compile Include="Nota_Voz.cs" />
     <Compile Include="CriarRelatorio.xaml.cs">
       <DependentUpon>CriarRelatorio.xaml</DependentUpon>
     </Compile>
-    <Compile Include="data_diagram_teste.xaml.cs">
-      <DependentUpon>data_diagram_teste.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Estabelecimento.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="facade.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="facade.cs" />
     <Compile Include="Fiscal.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -129,12 +126,11 @@
     <Compile Include="Plano.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="PlanoDTO.cs" />
     <Compile Include="Questao.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Relatorio.cs" />
-    <Compile Include="restauranteDTO.cs" />
-    <Compile Include="rotas.cs" />
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -163,10 +159,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="CriarRelatorio.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="data_diagram_teste.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

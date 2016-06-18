@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BackOffice
 {
-    /// <summary>
-    /// Interaction logic for CriarRelatorio.xaml
-    /// </summary>
+
     public partial class CriarRelatorio : Window
     {
         Relatorio r;//ler o numero da visita antes

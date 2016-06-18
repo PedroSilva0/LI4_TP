@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Speech.Recognition;
-using System.Speech.Recognition.SrgsGrammar;
-using System.Speech.AudioFormat;
 using System.Text;
-using System.Threading.Tasks;
 using System.Globalization;
+using System.Collections.Generic;
+using System.Media;
+using System.IO;
 
 namespace BackOffice
 {
@@ -27,17 +25,22 @@ namespace BackOffice
             id_voz = id;
         }
 
+        public Nota_Voz()
+        {
+
+        }
+
         public void convert()
         {
             Voz v = data.Voz.Find(id_voz);
 
-            if(v.xml_file != null)//skip se ja converteu
+            if (v.xml_file != null)//skip se ja converteu
             {
                 this.transcript = v.xml_file;
             }
-            else { 
+            else
+            {
                 String path_voz = "C:\\Windows\\Temp\\voz" + v.id_voz.ToString() + ".wav";
-                //String path_xml = "C:\\Windows\\Temp\\xml" + v.id_voz.ToString() + ".xml";
                 System.IO.File.WriteAllBytes(path_voz, v.voz_file);
                 CultureInfo c = new System.Globalization.CultureInfo("en-US");
                 SpeechRecognitionEngine sre = new SpeechRecognitionEngine(c);
@@ -57,7 +60,7 @@ namespace BackOffice
                         sb.Append(recText.Text);
                     }
                     catch (Exception ex)
-                    {   
+                    {
                         break;
                     }
                 }
@@ -70,7 +73,7 @@ namespace BackOffice
 
         public string parse_xml()
         {
-            
+
             string res = "";
             string[] ssize = transcript.Split(null);
             for (int i = 0; i < ssize.Count(); i++)
@@ -81,7 +84,6 @@ namespace BackOffice
                     i++;
                     while ((i < ssize.Count()) && (!(ssize[i].Equals("storage")) && !(ssize[i].Equals("frigde")) && !(ssize[i].Equals("kitchen")) && !(ssize[i].Equals("toilet"))))
                     {
-                        //Console.Write((!(ssize[i].Equals("storage")) || !(ssize[i].Equals("frigde")) || !(ssize[i].Equals("kitchen")) || !(ssize[i].Equals("toilet"))));
                         res = res + " " + ssize[i];
                         i++;
                     }
@@ -139,5 +141,31 @@ namespace BackOffice
             }
             return res;
         }
+
+        public List<Display_aux> listarTodosVoz()
+        {
+            var lista = data.Voz.ToList();
+            List<Display_aux> res = new List<Display_aux>();
+            foreach (Voz v in lista)
+            {
+                Visita vi = data.Visita.Find(v.Visita);
+                if (vi.concluido)
+                {
+                    Estabelecimento aux = data.Estabelecimento.Find(vi.estabelecimento);
+                    string itDesc = aux.nome + ", " + ((DateTime)vi.dataVisita).ToShortDateString() + ", " + v.descricao;
+                    res.Add(new Display_aux { id = v.id_voz, desc = itDesc });
+                }
+            }
+            return res;
+        }
+
+        public void playAudio(int id_voz)
+        {
+            Voz v = data.Voz.Find(id_voz);
+            var stream = new MemoryStream(v.voz_file, true);
+            SoundPlayer simpleSound = new SoundPlayer(stream);
+            simpleSound.Play();
+        }
+
     }
 }
