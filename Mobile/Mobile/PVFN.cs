@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.Net;
+using System.Collections.Specialized;
 
 namespace Mobile
 {
@@ -21,6 +23,8 @@ namespace Mobile
         private ImageButton mVoice;
         private Button mFinVis;
         private string mIdVis;
+        private string mPlano;
+        private string mFiscal;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,6 +37,8 @@ namespace Mobile
             mVoice = FindViewById<ImageButton>(Resource.Id.imgBtnVoice);
             mFinVis = FindViewById<Button>(Resource.Id.btnFinVis);
             mIdVis = Intent.GetStringExtra("IdVis");
+            mPlano = Intent.GetStringExtra("IdPlano");
+            mFiscal = Intent.GetStringExtra("IdFiscal");
 
             mPhoto.Click += MPhoto_Click;
             mNote.Click += MNote_Click;
@@ -43,7 +49,27 @@ namespace Mobile
 
         private void MFinVis_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            WebClient client = new WebClient();
+            Uri uri = new Uri("http://192.168.1.69:8080/TerminarVisita.php");
+            NameValueCollection parameters = new NameValueCollection();
+            //Toast.MakeText(this, mIdVis, ToastLength.Long).Show();
+            parameters.Add("id_vis", mIdVis);
+
+            client.UploadValuesCompleted += Client_UploadValuesCompleted;
+            client.UploadValuesAsync(uri, parameters);
+
+            Intent intent = new Intent(this, typeof(Visitas));
+            intent.PutExtra("Id", mPlano);
+            intent.PutExtra("Fiscal", mFiscal);
+            this.StartActivity(intent);
+        }
+
+        private void Client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
+        {
+            RunOnUiThread(() =>
+            {
+                System.Console.WriteLine(Encoding.UTF8.GetString(e.Result));
+            });
         }
 
         private void MVoice_Click(object sender, EventArgs e)

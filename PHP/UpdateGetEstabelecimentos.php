@@ -28,7 +28,7 @@ if (isset($_POST['Plano']) && isset($_POST['Fiscal']))
   						ON ES.id_est=VI.estabelecimento
   						INNER JOIN Plano AS PL
    							ON PL.id_plano=VI.plano
- 					WHERE PL.id_plano = ?';
+ 					WHERE PL.id_plano = ? and VI.concluido=0';
 
  		$parameters1 = array($fiscal, $plano);
 		$parameters2 = array($plano);

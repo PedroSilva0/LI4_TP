@@ -53,13 +53,16 @@ namespace Mobile
             mClient.UploadValuesCompleted += MClient_UploadValuesCompleted;
             mClient.UploadValuesAsync(mUri, parameters);
             mListView.ItemClick += MListView_ItemClick;
+
         }
 
         private void MListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             Intent intent = new Intent(this, typeof(VisitasGPSA));
-            intent.PutExtra("Nome",mEstabelecimentos[e.Position].nome);
+            intent.PutExtra("Nome", mEstabelecimentos[e.Position].nome);
             intent.PutExtra("IdVis", mEstabelecimentos[e.Position].id_vis.ToString());
+            intent.PutExtra("IdPlano", mId);
+            intent.PutExtra("IdFiscal", mFiscal);
             this.StartActivity(intent);
         }
 
@@ -90,6 +93,13 @@ public override void OnBackPressed()
                 mAdapter = new EstabelecimentosAdapter(this, Resource.Layout.visita, mEstabelecimentos);
                 mListView.Adapter = mAdapter;
                 mProgressBar.Visibility = ViewStates.Gone;
+                if (mListView.Count == 0)
+                {
+                    Intent intent = new Intent(this, typeof(Planos));
+                    intent.PutExtra("Fiscal", mFiscal);
+                    this.StartActivity(intent);
+                    Toast.MakeText(this, "Plano concluido", ToastLength.Long).Show();
+                }
             });
         }
     }

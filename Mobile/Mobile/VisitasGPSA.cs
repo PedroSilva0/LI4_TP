@@ -20,6 +20,8 @@ namespace Mobile
         private TextView estabelecimentoTV;
         private Button mIniciar;
         private string mIdVis;
+        private string mPlano;
+        private string mFiscal;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,6 +33,8 @@ namespace Mobile
             estabelecimentoTV = FindViewById<TextView>(Resource.Id.txtEstabelecimento);
             mIniciar = FindViewById<Button>(Resource.Id.btnIniciar);
             mIdVis = Intent.GetStringExtra("IdVis");
+            mPlano = Intent.GetStringExtra("IdPlano");
+            mFiscal = Intent.GetStringExtra("IdFiscal");
 
             mEstabelecimento = Intent.GetStringExtra("Nome");
             estabelecimentoTV.Text = mEstabelecimento;
@@ -55,6 +59,8 @@ namespace Mobile
         {
             Intent intent = new Intent(this, typeof(PVFN));
             intent.PutExtra("IdVis", mIdVis);
+            intent.PutExtra("IdPlano", mPlano);
+            intent.PutExtra("IdFiscal", mFiscal);
             this.StartActivity(intent);
         }
     }
