@@ -74,6 +74,7 @@
     <Compile Include="Form_row.cs" />
     <Compile Include="Foto.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Notas_Texto.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="Plano.cs" />
     <Compile Include="PlanoA.cs" />
@@ -130,6 +131,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\form_row.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Notas_Texto.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

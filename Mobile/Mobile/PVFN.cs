@@ -59,7 +59,9 @@ namespace Mobile
 
         private void MNote_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Intent intent = new Intent(this, typeof(Notas_Texto));
+            intent.PutExtra("visita", mIdVis);
+            this.StartActivity(intent);
         }
 
         private void MPhoto_Click(object sender, EventArgs e)
