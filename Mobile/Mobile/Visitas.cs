@@ -24,6 +24,7 @@ namespace Mobile
         private ListView mListView;
         private WebClient mClient;
         private List<Estabelecimento> mEstabelecimentos;
+        private List<Visita> mVisitas;
         private BaseAdapter<Estabelecimento> mAdapter;
         private ProgressBar mProgressBar;
         private Uri mUri;
@@ -58,6 +59,7 @@ namespace Mobile
         {
             Intent intent = new Intent(this, typeof(VisitasGPSA));
             intent.PutExtra("Nome",mEstabelecimentos[e.Position].nome);
+            intent.PutExtra("IdVis", mEstabelecimentos[e.Position].id_vis.ToString());
             this.StartActivity(intent);
         }
 

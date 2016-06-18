@@ -24,7 +24,7 @@ if (isset($_POST['Plano']) && isset($_POST['Fiscal']))
 						disponivel = 0
 					where id_plano = ?';
 
-		$query2 = '  SELECT ES.nome FROM Estabelecimento AS ES INNER JOIN Visita AS VI 
+		$query2 = '  SELECT ES.nome, VI.id_vis FROM Estabelecimento AS ES INNER JOIN Visita AS VI 
   						ON ES.id_est=VI.estabelecimento
   						INNER JOIN Plano AS PL
    							ON PL.id_plano=VI.plano
@@ -56,7 +56,9 @@ if (isset($_POST['Plano']) && isset($_POST['Fiscal']))
 			{
 				//Create an associative array to hold the current plano
 				//the names must match exactly the property names in the estabelecimento class in our C# code.
-				$estabelecimento = array("nome" => $row['nome']);
+				$estabelecimento = array("nome" => $row['nome'],
+										 "id_vis" => $row['id_vis']
+										 );
 								 
 				//Add the estabelecimento to the estabelecimentos array
 				array_push($estabelecimentos, $estabelecimento);

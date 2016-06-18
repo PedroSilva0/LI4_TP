@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.Net;
 
 namespace Mobile
 {
@@ -18,6 +19,7 @@ namespace Mobile
         private string mEstabelecimento;
         private TextView estabelecimentoTV;
         private Button mIniciar;
+        private string mIdVis;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -27,9 +29,12 @@ namespace Mobile
             ActionBar.SetHomeButtonEnabled(true);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             estabelecimentoTV = FindViewById<TextView>(Resource.Id.txtEstabelecimento);
+            mIniciar = FindViewById<Button>(Resource.Id.btnIniciar);
+            mIdVis = Intent.GetStringExtra("IdVis");
+
             mEstabelecimento = Intent.GetStringExtra("Nome");
             estabelecimentoTV.Text = mEstabelecimento;
-            mIniciar = FindViewById<Button>(Resource.Id.btnIniciar);
+            
             mIniciar.Click += MIniciar_Click;
         }
 
@@ -49,6 +54,7 @@ namespace Mobile
         private void MIniciar_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(PVFN));
+            intent.PutExtra("IdVis", mIdVis);
             this.StartActivity(intent);
         }
     }

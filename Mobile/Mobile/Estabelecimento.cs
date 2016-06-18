@@ -15,6 +15,7 @@ namespace Mobile
     class Estabelecimento
     {
         private int id { get; set; }
+        public int id_vis { get; set; }
         public string nome { get; set; }
         private string morada { get; set; }
         private float latitude { get; set; }

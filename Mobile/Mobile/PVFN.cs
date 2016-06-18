@@ -15,11 +15,12 @@ namespace Mobile
     [Activity(Label = "Opções", Icon = "@android:color/transparent")]
     public class PVFN : Activity
     {
-        ImageButton mPhoto;
-        ImageButton mNote;
-        ImageButton mForm;
-        ImageButton mVoice;
-        Button mFinVis;
+        private ImageButton mPhoto;
+        private ImageButton mNote;
+        private ImageButton mForm;
+        private ImageButton mVoice;
+        private Button mFinVis;
+        private string mIdVis;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,6 +32,7 @@ namespace Mobile
             mForm = FindViewById<ImageButton>(Resource.Id.imgBtnForm);
             mVoice = FindViewById<ImageButton>(Resource.Id.imgBtnVoice);
             mFinVis = FindViewById<Button>(Resource.Id.btnFinVis);
+            mIdVis = Intent.GetStringExtra("IdVis");
 
             mPhoto.Click += MPhoto_Click;
             mNote.Click += MNote_Click;
@@ -63,6 +65,7 @@ namespace Mobile
         private void MPhoto_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(Photo));
+            intent.PutExtra("IdVis", mIdVis);
             this.StartActivity(intent);
         }
     }
