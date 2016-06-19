@@ -211,13 +211,29 @@ namespace BackOffice
         {
             if (listView.SelectedItem != null)
             {
+                var pushPins = this.myMap.Children.OfType<Pushpin>();
+                bool add = true;
                 Estabelecimento est = (Estabelecimento)listView.SelectedItems[0];
-                Pushpin pushpin = new Pushpin();
-                pushpin.Tag = est.id_est;
-                MapLayer.SetPosition(pushpin, new Location(est.latitude, est.longitude));
-                pushpin.Location = new Location(est.latitude, est.longitude);
-                myMap.Children.Add(pushpin);
-                label7.Content = "Estabelecimento adicionado";
+                for (int i = pushPins.Count() - 1; i >= 0; i--)
+                {
+                    Pushpin p = pushPins.ElementAt(i);
+                    if (p.Tag.Equals(est.id_est))
+                    {
+                        add = false;
+                    }
+                }
+                if (add)
+                {
+                    Pushpin pushpin = new Pushpin();
+                    pushpin.Tag = est.id_est;
+                    MapLayer.SetPosition(pushpin, new Location(est.latitude, est.longitude));
+                    pushpin.Location = new Location(est.latitude, est.longitude);
+                    myMap.Children.Add(pushpin);
+                    label7.Content = "Estabelecimento adicionado";
+                }else
+                {
+                    label7.Content = "Estabelecimento já adicionado";
+                }
             }
             else
             {

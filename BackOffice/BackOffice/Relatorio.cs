@@ -22,6 +22,7 @@ namespace BackOffice
 
         public Relatorio()
         {
+            data = new LI4Entities();
 
         }
 
@@ -215,14 +216,20 @@ namespace BackOffice
 
         public List<Display_aux> listarRelatorios()
         {
-            List<Visita> lista = data.Visita.SqlQuery("select * from Visita where dataRelatorio is not null").ToList();
             List<Display_aux> res = new List<Display_aux>();
+
+
+            var lista = data.Visita.SqlQuery("select * from Visita where concluido=1 and dataRelatorio is not null").ToList();
+
+            
             foreach (Visita item in lista)
             {
                 Estabelecimento aux = data.Estabelecimento.Find(item.estabelecimento);
                 string itDesc = aux.nome + ", " + ((DateTime)item.dataRelatorio).ToShortDateString();
                 res.Add(new Display_aux { id = item.id_vis, desc = itDesc });
             }
+           
+
 
             return res;
         }

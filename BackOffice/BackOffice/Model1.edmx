@@ -26,8 +26,8 @@
           <Key>
             <PropertyRef Name="id_foto" />
           </Key>
-          <Property Name="id_foto" Type="int" Nullable="false" />
-          <Property Name="descricao" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="id_foto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="nvarchar" MaxLength="200" />
           <Property Name="foto_file" Type="varbinary(max)" Nullable="false" />
           <Property Name="visita" Type="int" Nullable="false" />
         </EntityType>
@@ -35,8 +35,8 @@
           <Key>
             <PropertyRef Name="id_nota" />
           </Key>
-          <Property Name="id_nota" Type="int" Nullable="false" />
-          <Property Name="descricao" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="id_nota" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="nvarchar" MaxLength="200" />
           <Property Name="text_file" Type="text" Nullable="false" />
           <Property Name="visita" Type="int" Nullable="false" />
         </EntityType>
@@ -92,8 +92,8 @@
           <Key>
             <PropertyRef Name="id_voz" />
           </Key>
-          <Property Name="id_voz" Type="int" Nullable="false" />
-          <Property Name="descricao" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="id_voz" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="nvarchar" MaxLength="200" />
           <Property Name="voz_file" Type="varbinary(max)" Nullable="false" />
           <Property Name="Visita" Type="int" Nullable="false" />
           <Property Name="xml_file" Type="text" />
@@ -283,8 +283,8 @@
           <Key>
             <PropertyRef Name="id_foto" />
           </Key>
-          <Property Name="id_foto" Type="Int32" Nullable="false" />
-          <Property Name="descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_foto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="foto_file" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="visita" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Visita1" Relationship="Self.FK_Foto_Visita" FromRole="Foto" ToRole="Visita" />
@@ -293,8 +293,8 @@
           <Key>
             <PropertyRef Name="id_nota" />
           </Key>
-          <Property Name="id_nota" Type="Int32" Nullable="false" />
-          <Property Name="descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_nota" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="text_file" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="visita" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Visita1" Relationship="Self.FK_Nota_Visita" FromRole="Nota" ToRole="Visita" />
@@ -363,8 +363,8 @@
           <Key>
             <PropertyRef Name="id_voz" />
           </Key>
-          <Property Name="id_voz" Type="Int32" Nullable="false" />
-          <Property Name="descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_voz" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="voz_file" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Visita" Type="Int32" Nullable="false" />
           <Property Name="xml_file" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
