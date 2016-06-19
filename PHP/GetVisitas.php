@@ -20,7 +20,7 @@ if (isset($_POST['id_plano']))
 	{
 		$query = '  SELECT * FROM Visita AS V INNER JOIN Plano AS P 
 						ON V.plano = P.id_plano
-					WHERE id_plano = ? and v.concluido=0';
+					WHERE id_plano = ? and V.concluido = 0';
 					
 		$parameters = array($plano);
 		
