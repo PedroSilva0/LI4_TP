@@ -12,7 +12,9 @@ using Android.Widget;
 
 namespace Mobile
 {
-    class Form_row
+    public class Form_row
     {
+        public int id_pergunta { get; set; }
+        public string pergunta { get; set; }
     }
 }

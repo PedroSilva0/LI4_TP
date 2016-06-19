@@ -71,7 +71,6 @@
     <Compile Include="Form.cs" />
     <Compile Include="FormAdapter.cs" />
     <Compile Include="Form_row.cs" />
-    <Compile Include="Foto.cs" />
     <Compile Include="GravaVoz.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Notas_Texto.cs" />

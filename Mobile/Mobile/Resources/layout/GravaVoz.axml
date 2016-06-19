@@ -17,4 +17,10 @@
         android:enabled="false"
         android:background="@drawable/button_login_style"
         android:text="Stop Recording" />
+    <Button
+        android:id="@+id/gravar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_login_style"
+        android:text="Gravar ficheiro de voz" />
 </LinearLayout>

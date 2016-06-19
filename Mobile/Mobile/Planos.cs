@@ -54,7 +54,7 @@ namespace Mobile
             mClient = new WebClient();
             mUri = new Uri("http://192.168.1.69:8080/GetPlanos.php");
 
-            NameValueCollection parameters = new NameValueCollection();
+            //NameValueCollection parameters = new NameValueCollection();
             //parameters.Add("Fiscal", mFiscal);
             mClient.DownloadDataAsync(mUri);
             mClient.DownloadDataCompleted += MClient_DownloadDataCompleted;

@@ -49,8 +49,7 @@ namespace Mobile
                 row = LayoutInflater.From(mContext).Inflate(mLayout, parent, false);
             }
 
-            //row.FindViewById<TextView>(Resource.Id.txtIdPlano).Text = mPlanos[position].id.ToString();
-            row.FindViewById<TextView>(Resource.Id.txtIdPlano).Text = position.ToString();
+            row.FindViewById<TextView>(Resource.Id.txtPergunta).Text = mForm[position].pergunta;
 
             return row;
         }

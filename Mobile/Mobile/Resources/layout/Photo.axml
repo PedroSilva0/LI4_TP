@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/linearLayout"
+    android:background="#D2D2D2"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <ImageView
@@ -26,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
+        android:background="@drawable/button_login_style"
         android:text="@string/openCamera" />
     <Button
         android:id="@+id/btnGallery"
@@ -33,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
+        android:background="@drawable/button_login_style"
         android:text="Abrir Galeria" />
     <Button
         android:id="@+id/btnAdd"
@@ -40,5 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
+        android:background="@drawable/button_login_style"
         android:text="Guardar Foto" />
 </LinearLayout>

@@ -16,6 +16,7 @@ using Android.Support.V7.Widget;
 using Android.Support.V4.Widget;
 using System.ComponentModel;
 using Java.Lang;
+using Android.Views.InputMethods;
 
 namespace Mobile
 {
@@ -27,6 +28,7 @@ namespace Mobile
         private EditText mDescricao;
         private EditText mNota;
         private int visita;
+        private LinearLayout mLinearLayout;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,18 +39,24 @@ namespace Mobile
 
             mSaveNota = FindViewById<Button>(Resource.Id.btnNota);
             mDescricao = FindViewById<EditText>(Resource.Id.txtDescricao);
+            mLinearLayout = FindViewById<LinearLayout>(Resource.Id.mainView);
             mNota = FindViewById<EditText>(Resource.Id.txtNota);
             visita = Convert.ToInt32(Intent.GetStringExtra("visita"));
 
             mSaveNota.Click += MGuardar_Nota_Click;
-            //mLinearLayout.Click += mLinearLayout_Click;
+            mLinearLayout.Click += MLinearLayout_Click;
+        }
+
+        private void MLinearLayout_Click(object sender, EventArgs e)
+        {
+            InputMethodManager inputManager = (InputMethodManager)this.GetSystemService(Activity.InputMethodService);
+            inputManager.HideSoftInputFromWindow(this.CurrentFocus.WindowToken, HideSoftInputFlags.None);
         }
 
         private void MGuardar_Nota_Click(object sender, EventArgs e)
         {
-            if(mSaveNota.Text != "")
+            if(mNota.Text != "")
             {
-                //mprogBar.Visibility = ViewStates.Visible;
                 WebClient client = new WebClient();
                 Uri uri = new Uri("http://192.168.1.69:8080/InsertNota.php");
                 NameValueCollection parameters = new NameValueCollection();

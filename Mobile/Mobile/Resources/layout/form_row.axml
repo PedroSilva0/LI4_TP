@@ -18,7 +18,7 @@
         android:id="@+id/txtResposta"
         android:hint="Resposta"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="64.0dp"
         android:background="@drawable/edit_text_style"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"

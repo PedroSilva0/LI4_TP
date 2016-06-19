@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="1dp"
-    android:background="#FFFFFF"
+    android:background="#D2D2D2"
     android:weightSum="100">
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:layout_weight="65"
                 android:gravity="center"
                 android:textSize="18sp"
-                android:textColor="#000" />
+                android:textColor="#4A6EA9" />
             <TextView
                 android:id="@+id/txtIdPlano"
                 android:text="Id do Plano"
@@ -33,7 +33,7 @@
                 android:layout_weight="65"
                 android:gravity="center"
                 android:textSize="18sp"
-                android:textColor="#000" />
+                android:textColor="#4A6EA9" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
