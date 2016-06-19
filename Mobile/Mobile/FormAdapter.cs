@@ -12,27 +12,27 @@ using Android.Widget;
 
 namespace Mobile
 {
-    class FormAdapter : BaseAdapter<Form_row>
+    class FormAdapter : BaseAdapter<TextView>
     {
         private Context mContext;
         private int mLayout;
-        private List<Form_row> mForm;
+        private List<TextView> mPerguntas;
 
-        public FormAdapter(Context context, int layout, List<Form_row> form)
+        public FormAdapter(Context context, int layout, List<TextView> perguntas)
         {
             mContext = context;
             mLayout = layout;
-            mForm = form;
+            mPerguntas = perguntas;
         }
 
-        public override Form_row this[int position]
+        public override TextView this[int position]
         {
-            get { return mForm[position]; }
+            get { return mPerguntas[position]; }
         }
 
         public override int Count
         {
-            get { return mForm.Count; }
+            get { return mPerguntas.Count; }
         }
 
         public override long GetItemId(int position)
@@ -49,7 +49,7 @@ namespace Mobile
                 row = LayoutInflater.From(mContext).Inflate(mLayout, parent, false);
             }
 
-            row.FindViewById<TextView>(Resource.Id.txtPergunta).Text = mForm[position].pergunta;
+            row.FindViewById<TextView>(Resource.Id.txtPergunta1).Text = mPerguntas[position].Text;
 
             return row;
         }

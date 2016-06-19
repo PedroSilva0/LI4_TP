@@ -16,5 +16,6 @@ namespace Mobile
     {
         public int id_pergunta { get; set; }
         public string pergunta { get; set; }
+        public string resposta { get; set; }
     }
 }

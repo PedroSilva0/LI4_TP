@@ -82,6 +82,7 @@ namespace Mobile
         private void MForm_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(Form));
+            intent.PutExtra("visita", mIdVis);
             this.StartActivity(intent);
         }
 

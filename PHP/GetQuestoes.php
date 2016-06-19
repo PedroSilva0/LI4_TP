@@ -11,7 +11,7 @@
 	}
 	else
 	{
-		$query = 'SELECT * FROM Questao';
+		$query = 'SELECT pergunta FROM Questao';
 
 		//Execute query
 		$stmt = sqlsrv_query($connectionInfo->conn, $query);
@@ -29,16 +29,17 @@
 			{
 				//Create an associative array to hold the current questao
 				//the names must match exactly the property names in the questao class in our C# code.
-				$questao = array("id_pergunta" => $row['id_quest'],
-								 "pergunta" => $row['pergunta']
-								 );
+				//$questao = array("pergunta" => $row['pergunta']);
+				$questao = array($row['pergunta']);
 								 
 				//Add the questao to the questoes array
 				array_push($questoes, $questao);
 			}
 			
 			//Echo out the questoes array in JSON format
-			echo json_encode($questoes);
+			//echo json_encode($questoes);
+			return $questoes;
+
 		}
 	}
 ?>
