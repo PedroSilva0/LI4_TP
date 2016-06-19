@@ -47,6 +47,10 @@ namespace BackOffice
                 Grammar gr = new DictationGrammar();
                 sre.LoadGrammar(gr);
                 sre.SetInputToWaveFile(path_voz);
+                sre.BabbleTimeout = new TimeSpan(Int32.MaxValue);
+                sre.InitialSilenceTimeout = new TimeSpan(Int32.MaxValue);
+                sre.EndSilenceTimeout = new TimeSpan(100000000);
+                sre.EndSilenceTimeoutAmbiguous = new TimeSpan(100000000);
                 StringBuilder sb = new StringBuilder();
                 while (true)
                 {
@@ -64,6 +68,7 @@ namespace BackOffice
                         break;
                     }
                 }
+
                 sre.UnloadAllGrammars();
                 transcript = sb.ToString().ToLower();
                 v.xml_file = transcript;
