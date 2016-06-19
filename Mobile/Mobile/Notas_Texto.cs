@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,31 +46,38 @@ namespace Mobile
 
         private void MGuardar_Nota_Click(object sender, EventArgs e)
         {
-            //mprogBar.Visibility = ViewStates.Visible;
-            WebClient client = new WebClient();
-            Uri uri = new Uri("http://192.168.1.69:8080/InsertNota.php");
-            NameValueCollection parameters = new NameValueCollection();
+            if(mSaveNota.Text != "")
+            {
+                //mprogBar.Visibility = ViewStates.Visible;
+                WebClient client = new WebClient();
+                Uri uri = new Uri("http://192.168.1.69:8080/InsertNota.php");
+                NameValueCollection parameters = new NameValueCollection();
 
-            parameters.Add("descricao", mDescricao.Text);
-            parameters.Add("visita", visita.ToString());
-            parameters.Add("nota", mNota.Text);
+                parameters.Add("descricao", mDescricao.Text);
+                parameters.Add("visita", visita.ToString());
+                parameters.Add("nota", mNota.Text);
 
 
 
 
-            client.UploadValuesCompleted += Client_UploadValuesCompleted;
-            client.UploadValuesAsync(uri, parameters);
+                client.UploadValuesCompleted += Client_UploadValuesCompleted;
+                client.UploadValuesAsync(uri, parameters);
+
+
+                mDescricao.Text = "";
+                mNota.Text = "";
+            }else
+            {
+                Toast.MakeText(this, "Insira um Nota", ToastLength.Long).Show();
+            }
             
-
-            mDescricao.Text = "";
-            mNota.Text = "";
         }
 
         private void Client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
             RunOnUiThread(() =>
             {
-                System.Console.WriteLine(Encoding.UTF8.GetString(e.Result));
+                Toast.MakeText(this, "Nota inserida com sucesso", ToastLength.Long).Show();
             });
         }
 
