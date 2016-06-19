@@ -18,10 +18,7 @@ if (isset($_POST['id_vis']))
 	
 	else
 	{
-		$query = 'UPDATE visita 
-					set concluido=1,
-					dataVisita = ? 
-					WHERE id_vis = ?';
+		$query = 'UPDATE visita set concluido=1 WHERE id_vis = ?';
 					
 		$parameters = array($visita);
 		
