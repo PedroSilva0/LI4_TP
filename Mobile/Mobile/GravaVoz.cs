@@ -40,6 +40,7 @@ namespace Mobile
 
             _start.Click += delegate
             {
+                _start.Enabled = !_start.Enabled;
                 _stop.Enabled = !_stop.Enabled;
                 _recorder.SetAudioSource(AudioSource.Mic);
                 _recorder.SetOutputFormat(OutputFormat.ThreeGpp);
