@@ -97,7 +97,6 @@ public override void OnBackPressed()
                     Intent intent = new Intent(this, typeof(Planos));
                     intent.PutExtra("Fiscal", mFiscal);
                     this.StartActivity(intent);
-                    Toast.MakeText(this, "Plano concluido", ToastLength.Long).Show();
                 }
             });
         }

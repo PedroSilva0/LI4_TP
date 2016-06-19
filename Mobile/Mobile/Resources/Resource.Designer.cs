@@ -146,37 +146,40 @@ namespace Mobile
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int button_login_style = 2130837504;
+			public const int border = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int Dank = 2130837505;
+			public const int button_login_style = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int edit_text_style = 2130837506;
+			public const int Dank = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int form = 2130837507;
+			public const int edit_text_style = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int ic_action_forward = 2130837508;
+			public const int form = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int ic_action_info = 2130837509;
+			public const int ic_action_forward = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int ic_menu_gallery = 2130837510;
+			public const int ic_action_info = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int photo = 2130837511;
+			public const int ic_menu_gallery = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int progBar = 2130837512;
+			public const int photo = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int text = 2130837513;
+			public const int progBar = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int voice = 2130837514;
+			public const int text = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int voice = 2130837515;
 			
 			static Drawable()
 			{

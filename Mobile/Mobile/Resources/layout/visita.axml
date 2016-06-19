@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF">
+    android:background="@drawable/border">
     <TextView
         android:id="@+id/txtEstabelecimento"
         android:text="Estabelecimento"
@@ -11,5 +11,5 @@
         android:layout_height="match_parent"
         android:layout_weight="65"
         android:textSize="40sp"
-        android:textColor="#000" />
+        android:textColor="#4A6EA9" />
 </LinearLayout>
