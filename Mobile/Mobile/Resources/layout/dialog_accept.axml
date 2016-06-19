@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#DEDEDC"
+    android:background="#D2D2D2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="300dp"
@@ -8,7 +8,7 @@
     android:orientation="vertical">
     <TextView
         android:text="Aceitar plano de trabalho?"
-        android:textColor="#000000"
+        android:textColor="#4A6EA9"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,6 +33,7 @@
             android:layout_toLeftOf="@+id/view"
             android:layout_marginRight="4dip"
             android:text="Aceitar"
+            android:background="@drawable/button_login_style"
             android:textColor="#FFFFFF" />
         <View
             android:id="@+id/view"
@@ -49,6 +50,7 @@
             android:layout_toRightOf="@+id/view"
             android:layout_marginRight="4dip"
             android:text="Cancelar"
+            android:background="@drawable/button_login_style"
             android:textColor="#FFFFFF" />
     </RelativeLayout>
 </LinearLayout>

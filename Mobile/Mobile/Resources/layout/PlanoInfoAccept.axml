@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:background="@drawable/button_login_style"
                 android:layout_centerInParent="true"
                 android:text="Info" />
         </RelativeLayout>
@@ -74,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:background="@drawable/button_login_style"
                 android:layout_centerInParent="true"
                 android:text="Aceitar" />
         </RelativeLayout>
