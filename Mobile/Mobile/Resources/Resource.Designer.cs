@@ -227,8 +227,8 @@ namespace Mobile
 			// aapt resource value: 0x7f050019
 			public const int btnNota = 2131034137;
 			
-			// aapt resource value: 0x7f05000c
-			public const int gravar = 2131034124;
+			// aapt resource value: 0x7f05000a
+			public const int desc_voz = 2131034122;
 			
 			// aapt resource value: 0x7f05001b
 			public const int imageView1 = 2131034139;
@@ -287,11 +287,11 @@ namespace Mobile
 			// aapt resource value: 0x7f050023
 			public const int relativeLayout2 = 2131034147;
 			
-			// aapt resource value: 0x7f05000a
-			public const int start = 2131034122;
-			
 			// aapt resource value: 0x7f05000b
-			public const int stop = 2131034123;
+			public const int start = 2131034123;
+			
+			// aapt resource value: 0x7f05000c
+			public const int stop = 2131034124;
 			
 			// aapt resource value: 0x7f050024
 			public const int swipeLayout = 2131034148;

@@ -4,23 +4,37 @@
     android:background="#D2D2D2"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <EditText
+        android:id="@+id/desc_voz"
+        android:hint="Descrição"
+        android:inputType="textPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_style"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="#000" />
     <Button
         android:id="@+id/start"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_login_style"
-        android:text="Start Recording" />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Iniciar gravação" />
     <Button
         android:id="@+id/stop"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
         android:background="@drawable/button_login_style"
-        android:text="Stop Recording" />
-    <Button
-        android:id="@+id/gravar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_login_style"
-        android:text="Gravar ficheiro de voz" />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Terminar gravação" />
 </LinearLayout>

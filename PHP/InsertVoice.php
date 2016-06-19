@@ -1,5 +1,5 @@
 <?php
-	require_once(dirname(__FILE__).'/ConnectionInfo.php');
+	require_once(dirname(__FILE__).'/ConnectionInfo2.php');
 
 	
 if (isset($_POST['Descricao']) && isset($_POST['Voz']) && isset($_POST['IdVis']))
@@ -10,7 +10,7 @@ if (isset($_POST['Descricao']) && isset($_POST['Voz']) && isset($_POST['IdVis'])
 	$idVis = $_POST['IdVis'];
 	
 	//Set up our connection
-	$connectionInfo = new ConnectionInfo();
+	$connectionInfo = new ConnectionInfo2();
 	$connectionInfo->GetConnection();
 	
 	if (!$connectionInfo->conn)
@@ -24,7 +24,7 @@ if (isset($_POST['Descricao']) && isset($_POST['Voz']) && isset($_POST['IdVis'])
 		$imgData = base64_decode($foto);
 		
 		//Insert foto
-		$query = "INSERT INTO Voz(descricao,voz_file,visita) VALUES
+		$query = "INSERT INTO Voz(descricao,voz_file,Visita) VALUES
 					(?, CONVERT(VARBINARY(MAX), ?), ?)";
 		//$parameters = array($foto, $idVis);
 		$parameters = array($desc, $imgData, $idVis);
