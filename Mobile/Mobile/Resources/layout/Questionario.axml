@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/mainView"
+    android:background="#D2D2D2"
+    android:weightSum="100"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:id="@+id/pergunta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bem Vindo!"
+        android:gravity="center"
+        android:textColor="#4A6EA9"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp" />
+    <EditText
+        android:id="@+id/txtResposta"
+        android:hint="Resposta"
+        android:gravity="top|left"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:minHeight="300px"
+        android:layout_height="300dp"
+        android:background="@drawable/edit_text_style"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000" />
+    <Button
+        android:id="@+id/btnProxima"
+        android:text="Pergunta seguinte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:background="@drawable/button_login_style" />
+    <Button
+        android:id="@+id/btnAnterior"
+        android:text="Pergunta anterior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:background="@drawable/button_login_style" />
+    <Button
+        android:id="@+id/btnGuardar"
+        android:text="Guardar respostas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:background="@drawable/button_login_style" />
+</LinearLayout>

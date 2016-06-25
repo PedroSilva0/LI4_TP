@@ -22,7 +22,7 @@ if (isset($_POST['IdQuestao']) && isset($_POST['IdVis']) && isset($_POST['Respos
 	else
 	{
 		
-		$query = "INSERT INTO VisitaQuestao(Questao,Visita,Respota) VALUES (?, ?, ?)";
+		$query = 'INSERT INTO VisitaQuestao(Questao,Visita,Respota) VALUES (?, ?, ?)';
 		
 		$parameters = array($idQuest, $idVis, $resposta);
 

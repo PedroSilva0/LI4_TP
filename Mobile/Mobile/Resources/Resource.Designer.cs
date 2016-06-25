@@ -200,6 +200,9 @@ namespace Mobile
 			// aapt resource value: 0x7f050034
 			public const int btnAdd = 2131034164;
 			
+			// aapt resource value: 0x7f050043
+			public const int btnAnterior = 2131034179;
+			
 			// aapt resource value: 0x7f050004
 			public const int btnCancel = 2131034116;
 			
@@ -209,23 +212,29 @@ namespace Mobile
 			// aapt resource value: 0x7f050006
 			public const int btnForm = 2131034118;
 			
-			// aapt resource value: 0x7f050044
-			public const int btnGPS = 2131034180;
+			// aapt resource value: 0x7f050048
+			public const int btnGPS = 2131034184;
 			
 			// aapt resource value: 0x7f050033
 			public const int btnGallery = 2131034163;
 			
+			// aapt resource value: 0x7f050044
+			public const int btnGuardar = 2131034180;
+			
 			// aapt resource value: 0x7f050038
 			public const int btnInfo = 2131034168;
 			
-			// aapt resource value: 0x7f050045
-			public const int btnIniciar = 2131034181;
+			// aapt resource value: 0x7f050049
+			public const int btnIniciar = 2131034185;
 			
 			// aapt resource value: 0x7f05002a
 			public const int btnLogin = 2131034154;
 			
 			// aapt resource value: 0x7f05002f
 			public const int btnNota = 2131034159;
+			
+			// aapt resource value: 0x7f050042
+			public const int btnProxima = 2131034178;
 			
 			// aapt resource value: 0x7f050020
 			public const int desc_voz = 2131034144;
@@ -260,8 +269,8 @@ namespace Mobile
 			// aapt resource value: 0x7f050024
 			public const int listViewI = 2131034148;
 			
-			// aapt resource value: 0x7f050042
-			public const int listViewV = 2131034178;
+			// aapt resource value: 0x7f050046
+			public const int listViewV = 2131034182;
 			
 			// aapt resource value: 0x7f050026
 			public const int mainView = 2131034150;
@@ -269,14 +278,17 @@ namespace Mobile
 			// aapt resource value: 0x7f050032
 			public const int myButton = 2131034162;
 			
+			// aapt resource value: 0x7f050041
+			public const int pergunta = 2131034177;
+			
 			// aapt resource value: 0x7f05002c
 			public const int progBar = 2131034156;
 			
 			// aapt resource value: 0x7f050025
 			public const int progBarI = 2131034149;
 			
-			// aapt resource value: 0x7f050043
-			public const int progBarV = 2131034179;
+			// aapt resource value: 0x7f050047
+			public const int progBarV = 2131034183;
 			
 			// aapt resource value: 0x7f05002b
 			public const int relativeLayout1 = 2131034155;
@@ -299,8 +311,8 @@ namespace Mobile
 			// aapt resource value: 0x7f050023
 			public const int swipeLayoutI = 2131034147;
 			
-			// aapt resource value: 0x7f050041
-			public const int swipeLayoutV = 2131034177;
+			// aapt resource value: 0x7f050045
+			public const int swipeLayoutV = 2131034181;
 			
 			// aapt resource value: 0x7f050001
 			public const int textView1 = 2131034113;
@@ -457,13 +469,16 @@ namespace Mobile
 			public const int PVFN = 2130903052;
 			
 			// aapt resource value: 0x7f03000d
-			public const int visita = 2130903053;
+			public const int Questionario = 2130903053;
 			
 			// aapt resource value: 0x7f03000e
-			public const int Visitas = 2130903054;
+			public const int visita = 2130903054;
 			
 			// aapt resource value: 0x7f03000f
-			public const int VisitasGPSAccept = 2130903055;
+			public const int Visitas = 2130903055;
+			
+			// aapt resource value: 0x7f030010
+			public const int VisitasGPSAccept = 2130903056;
 			
 			static Layout()
 			{

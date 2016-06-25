@@ -76,7 +76,7 @@ namespace Mobile
                 mNota.Text = "";
             }else
             {
-                Toast.MakeText(this, "Insira um Nota", ToastLength.Long).Show();
+                Toast.MakeText(this, "Insira uma Nota", ToastLength.Long).Show();
             }
             
         }
