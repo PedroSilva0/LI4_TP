@@ -52,7 +52,7 @@ namespace Mobile
 
             mFiscal = Intent.GetStringExtra("Fiscal");
             mClient = new WebClient();
-            mUri = new Uri("http://192.168.1.69:8080/GetPlanos.php");
+            mUri = new Uri("http://169.254.80.80:8080/GetPlanos.php");
 
             //NameValueCollection parameters = new NameValueCollection();
             //parameters.Add("Fiscal", mFiscal);

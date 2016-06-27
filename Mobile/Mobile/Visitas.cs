@@ -1,20 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Support.V4.Widget;
 using System.Net;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using Newtonsoft.Json;
-using Java.Lang;
 
 namespace Mobile
 {
@@ -44,7 +39,7 @@ namespace Mobile
             mFiscal = Intent.GetStringExtra("Fiscal");
 
             mClient = new WebClient();
-            mUri = new Uri("http://192.168.1.69:8080/UpdateGetEstabelecimentos.php");
+            mUri = new Uri("http://169.254.80.80:8080/UpdateGetEstabelecimentos.php");
 
             mId = Intent.GetStringExtra("Id");
             NameValueCollection parameters = new NameValueCollection();

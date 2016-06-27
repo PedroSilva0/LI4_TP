@@ -38,7 +38,7 @@ namespace Mobile
             mProgressBar = FindViewById<ProgressBar>(Resource.Id.progBarI);
             mListView = FindViewById<ListView>(Resource.Id.listViewI);
             mClient = new WebClient();
-            mUri = new Uri("http://192.168.1.69:8080/GetEstabelecimentos.php");
+            mUri = new Uri("http://169.254.80.80:8080/GetEstabelecimentos.php");
 
             mId = Intent.GetStringExtra("Id");
             NameValueCollection parameters = new NameValueCollection();
