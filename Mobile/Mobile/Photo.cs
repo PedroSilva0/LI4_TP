@@ -238,7 +238,7 @@ namespace Mobile
             SendBroadcast(mediaScanIntent);
             
             mClient = new WebClient();
-            mUri = new Uri("http://192.168.1.69:8080/InsertPhoto.php");
+            mUri = new Uri("http://169.254.80.80:8080/InsertPhoto.php");
             
             NameValueCollection parameters = new NameValueCollection();
             mIdVis = Intent.GetStringExtra("IdVis");

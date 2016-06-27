@@ -34,7 +34,7 @@ namespace Mobile
             mListView = FindViewById<ListView>(Resource.Id.listViewF);
 
             mClient = new WebClient();
-            mUri = new Uri("http://192.168.1.69:8080/GetQuestoes.php");
+            mUri = new Uri("http://169.254.80.80:8080/GetQuestoes.php");
             
             mClient.DownloadDataAsync(mUri);
             mClient.DownloadDataCompleted += MClient_DownloadDataCompleted;
