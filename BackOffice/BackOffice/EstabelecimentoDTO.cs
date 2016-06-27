@@ -30,7 +30,7 @@ namespace BackOffice
             var lista = data.Estabelecimento.ToList();
             foreach (Estabelecimento e in lista)
             {
-                if (e.latitude == latitude && e.longitude == longitude)
+                if ((Math.Abs(e.latitude - latitude) + Math.Abs(e.longitude - longitude)) < 0.1)
                 {
                     return true;
                 }

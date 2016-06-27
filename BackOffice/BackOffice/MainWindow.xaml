@@ -65,18 +65,22 @@
         </TabItem>
         <TabItem Header="Estabelecimentos">
             <Grid HorizontalAlignment="Left" Height="297" Margin="0,-1,-4,-5" VerticalAlignment="Top" Width="566">
-                <Label x:Name="label1" Content="Nome" HorizontalAlignment="Left" Margin="36,36,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="label2" Content="Morada" HorizontalAlignment="Left" Margin="36,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-0.173"/>
-                <Label x:Name="label3" Content="Coordenadas GPS" HorizontalAlignment="Left" Margin="36,114,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <Label x:Name="label4" Content="Longitude" HorizontalAlignment="Left" Margin="36,208,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="label5" Content="Latitude" HorizontalAlignment="Left" Margin="36,162,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="button6" Content="Registar estabelecimento" HorizontalAlignment="Left" Margin="382,238,0,0" VerticalAlignment="Top" Click="registar_estabelecimento_Click"/>
-                <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="125,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
-                <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="125,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
-                <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="125,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
-                <TextBox x:Name="textBox6" HorizontalAlignment="Left" Height="23" Margin="125,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
-                <Image x:Name="image" HorizontalAlignment="Left" Height="109" Margin="318,36,0,0" VerticalAlignment="Top" Width="238" Source="imagens/logo_rest.png" Stretch="Fill"/>
-                <Label x:Name="label10" Content="" HorizontalAlignment="Left" Margin="110,258,0,0" VerticalAlignment="Top"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="22*"/>
+                    <ColumnDefinition Width="261*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="label1" Content="Nome" HorizontalAlignment="Left" Margin="36,36,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                <Label x:Name="label2" Content="Morada" HorizontalAlignment="Left" Margin="36,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-0.173" Grid.ColumnSpan="2"/>
+                <Label x:Name="label3" Content="Coordenadas GPS" HorizontalAlignment="Left" Margin="36,114,0,0" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2"/>
+                <Label x:Name="label4" Content="Longitude" HorizontalAlignment="Left" Margin="36,208,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                <Label x:Name="label5" Content="Latitude" HorizontalAlignment="Left" Margin="36,162,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                <Button x:Name="button6" Content="Registar estabelecimento" HorizontalAlignment="Left" Margin="337.667,238,0,0" VerticalAlignment="Top" Click="registar_estabelecimento_Click" Grid.Column="1"/>
+                <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="80.667,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Grid.Column="1"/>
+                <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="80.667,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Grid.Column="1"/>
+                <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="80.667,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Grid.Column="1"/>
+                <TextBox x:Name="textBox6" HorizontalAlignment="Left" Height="23" Margin="80.667,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Grid.Column="1"/>
+                <Image x:Name="image" HorizontalAlignment="Left" Height="109" Margin="273.667,36,0,0" VerticalAlignment="Top" Width="238" Source="imagens/logo_rest.png" Stretch="Fill" Grid.Column="1"/>
+                <Label x:Name="label10" Content="" HorizontalAlignment="Left" Margin="65.667,258,0,0" VerticalAlignment="Top" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="Conversão de voz" Selector.Selected="vozTabSelected">

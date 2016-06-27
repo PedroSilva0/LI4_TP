@@ -61,8 +61,10 @@ namespace BackOffice
 
         public void playAudio(int id_voz)
         {
-            voz = new Nota_Voz();
-            voz.playAudio(id_voz);
+            voz = new Nota_Voz(id_voz);
+            Thread t = new Thread(voz.playAudio);
+            t.Start();
+            t.Join();
         }
 
         public string converter_xml(int e)

@@ -153,25 +153,26 @@ namespace BackOffice
             if (textBox3.Text.Equals("") || textBox4.Text.Equals("") || textBox5.Text.Equals("") || textBox6.Text.Equals(""))
             {
                 label10.Content = "Por favor preencha todos os campos";
+                inserir = false;
             }
             else
             {
-                if (!IsValid(textBox5.Text) || !IsValid(textBox6.Text))
+                if(Double.TryParse(textBox5.Text,out latitude) && 
+                            Double.TryParse(textBox6.Text, out longitude))
                 {
-                    textBox5.Text = "";
-                    textBox6.Text = "";
-                    label10.Content = "Coordenadas GPS com formato inválido";
-                }
-                else
-                {
-                    latitude = Convert.ToDouble(textBox5.Text.Replace('.', ','));
-                    longitude = Convert.ToDouble(textBox5.Text.Replace('.', ','));
                     if (fac.demasiado_perto(latitude, longitude))
                     {
                         Add_Est_PopUp getup = new Add_Est_PopUp();
                         getup.ShowDialog();
                         inserir = getup.resposta;
                     }
+                }
+                else
+                {
+                    textBox5.Text = "";
+                    textBox6.Text = "";
+                    label10.Content = "Coordenadas GPS com formato inválido";
+                    inserir = false;
                 }
             }
 
@@ -191,21 +192,11 @@ namespace BackOffice
                 textBox4.Text = "";
                 textBox5.Text = "";
                 textBox6.Text = "";
-                label10.Content = "Restaurante não adicionado";
             }
-            inserir = true;
+ 
         }
 
-        private static bool IsValid(string str)
-        {
-            foreach (char c in str)
-            {
-                if (c < '0' || c > '9' || c == ',' || c == '.')
-                    return false;
-            }
 
-            return true;
-        }
 
         private void add_to_map_Click(object sender, RoutedEventArgs e)
         {
@@ -230,7 +221,12 @@ namespace BackOffice
                     pushpin.Location = new Location(est.latitude, est.longitude);
                     myMap.Children.Add(pushpin);
                     label7.Content = "Estabelecimento adicionado";
-                }else
+                    //centrar mapa
+                    Location center = pushpin.Location;
+                    double zoom = 15;
+                    this.myMap.SetView(center, zoom);
+                }
+                else
                 {
                     label7.Content = "Estabelecimento já adicionado";
                 }

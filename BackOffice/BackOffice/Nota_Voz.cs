@@ -6,6 +6,8 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Media;
 using System.IO;
+using System.Threading;
+using System.Diagnostics;
 
 namespace BackOffice
 {
@@ -14,6 +16,7 @@ namespace BackOffice
         private int id_voz;
         private LI4Entities data = new LI4Entities();
         private string transcript;
+
 
         public string getTranscript()
         {
@@ -30,6 +33,24 @@ namespace BackOffice
 
         }
 
+        private void convert3gppToWav(string inFile, string outFile)
+        {
+
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C ffmpeg -y -i "+ inFile + " -acodec pcm_u8 "+ outFile;
+            process.StartInfo = startInfo;
+        
+            process.Start();
+       
+           // process.WaitForExit(2000);
+
+        }
+
+     
+
         public void convert()
         {
             Voz v = data.Voz.Find(id_voz);
@@ -40,13 +61,16 @@ namespace BackOffice
             }
             else
             {
-                String path_voz = "C:\\Windows\\Temp\\voz" + v.id_voz.ToString() + ".wav";
-                System.IO.File.WriteAllBytes(path_voz, v.voz_file);
+                String file3gpp = "C:\\Windows\\Temp\\voz" + v.id_voz.ToString() + ".3gpp";
+                String fileWav = "C:\\Windows\\Temp\\voz" + v.id_voz.ToString() + ".wav";
+                System.IO.File.WriteAllBytes(file3gpp, v.voz_file);
+                convert3gppToWav(file3gpp, fileWav);
+
                 CultureInfo c = new System.Globalization.CultureInfo("en-US");
                 SpeechRecognitionEngine sre = new SpeechRecognitionEngine(c);
                 Grammar gr = new DictationGrammar();
                 sre.LoadGrammar(gr);
-                sre.SetInputToWaveFile(path_voz);
+                sre.SetInputToWaveFile(fileWav);
                 sre.BabbleTimeout = new TimeSpan(Int32.MaxValue);
                 sre.InitialSilenceTimeout = new TimeSpan(Int32.MaxValue);
                 sre.EndSilenceTimeout = new TimeSpan(100000000);
@@ -142,7 +166,11 @@ namespace BackOffice
                     }
                     res = res + "\"/>\n</toilet>\n";
                 }
-                i--;
+                else //sem match
+                {
+                    res = res + " " + ssize[i] + " ";
+                }
+                //i--;
             }
             return res;
         }
@@ -164,11 +192,22 @@ namespace BackOffice
             return res;
         }
 
-        public void playAudio(int id_voz)
+        public void playAudio()
         {
             Voz v = data.Voz.Find(id_voz);
-            var stream = new MemoryStream(v.voz_file, true);
-            SoundPlayer simpleSound = new SoundPlayer(stream);
+            //var stream = new MemoryStream(v.voz_file, true);
+            //SoundPlayer simpleSound = new SoundPlayer(stream);
+
+            String file3gpp = "C:\\Windows\\Temp\\voz" + v.id_voz.ToString() + ".3gpp";
+            String fileWav = "C:\\Windows\\Temp\\voz" + v.id_voz.ToString() + ".wav";
+
+            if (!File.Exists(fileWav))
+            {
+                System.IO.File.WriteAllBytes(file3gpp, v.voz_file);
+                convert3gppToWav(file3gpp, fileWav);
+            }
+
+            SoundPlayer simpleSound = new SoundPlayer(fileWav);
             simpleSound.Play();
         }
 
