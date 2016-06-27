@@ -18,24 +18,23 @@ if (isset($_POST['id_vis']))
 	
 	else
 	{
+
+		$today = date("Y-m-d"); 
 		$query = 'UPDATE visita 
 					set concluido=1,
-					dataVisita = ? 
+					dataVisita=? 
 					WHERE id_vis = ?';
-					
-		$parameters = array($visita);
+
+		$parameters = array($today,$visita);
 		
 		//Execute query
-		$stmt = sqlsrv_query($connectionInfo->conn, $query, $parameters);
+		$stmt1 = sqlsrv_query($connectionInfo->conn, $query, $parameters);
 
-		if (!$stmt)
+		if (!$stmt1)
 		{
-			//Query failed
-			echo 'Query failed';
-		}
-		
-		else
-		{
+			//Query1 failed
+			echo 'Query1 failed';
+		}else{
 			echo 'Query sucess';
 		}
 			
