@@ -1,4 +1,4 @@
-use li4
+use li4;
 
 INSERT INTO Questao(id_quest, pergunta) VALUES
 (1,'Condições de acesso ao estabelecimento?'),
@@ -18,15 +18,15 @@ INSERT INTO Fiscal(id_fisc,pass) VALUES
 (2,'123');
 
 INSERT INTO Estabelecimento(id_est, latitude, morada, nome, longitude) VALUES
-(1, 41.53468, 'Rua do Bairro, Braga', 'DankBraga', -8.482436),
-(2, 41.15794, 'Av. Boavista, Porto', 'DankPorto', -8.629105);
+(1, 41.53468, 'Rua do Bairro, Braga', 'DankBraga1', -8.482436),
+(2, 41.15794, 'Av. Boavista, Porto', 'DankPorto1', -8.629105);
 
 INSERT INTO Plano(id_plano, disponivel, fiscalCriador,fiscal) VALUES
 (1, 1, 1, 2);
 
 INSERT INTO Visita(id_vis, plano, estabelecimento, concluido, dataVisita) VALUES
 (1, 1, 1, 1, GETDATE()),
-(2, 1, 2, 1, GETDATE());
+(2, 1, 2, 0, GETDATE());
 
 INSERT INTO VisitaQuestao(questao, visita, resposta) VALUES
 (1,1,'Boas condições, incluindo para deficientes'),
@@ -49,7 +49,7 @@ INSERT INTO Foto(descricao, foto_file, visita) VALUES
 ('sala de refeições', (SELECT * FROM OPENROWSET(BULK N'C:\sala.jpg', SINGLE_BLOB) AS src2), 1);
 
 INSERT INTO Voz(descricao, voz_file, visita) VALUES
-('frigorifico', (SELECT * FROM OPENROWSET(BULK N'C:\teste7.wav', SINGLE_BLOB) AS src1), 1);
+('frigorifico', (SELECT * FROM OPENROWSET(BULK N'C:\test.3gpp', SINGLE_BLOB) AS src1), 1);
 
 
 
