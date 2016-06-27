@@ -60,7 +60,7 @@ namespace Mobile
                 if (voice_data != null)
                 {
                     WebClient client = new WebClient();
-                    Uri uri = new Uri("http://169.254.80.80:8080/InsertVoice.php");
+                    Uri uri = new Uri("http://172.26.33.115:8080/InsertVoice.php");
 
                     NameValueCollection parameters = new NameValueCollection();
                     parameters.Add("Descricao", _desc_voz.Text);
@@ -70,7 +70,7 @@ namespace Mobile
                     client.UploadValuesAsync(uri, parameters);
                     client.UploadValuesCompleted += Client_UploadValuesCompleted;
 
-                    voice_data = null;
+                    
                 }
                 else
                 {
@@ -100,6 +100,8 @@ namespace Mobile
             RunOnUiThread(() =>
             {
                 Toast.MakeText(this, "Gravação inserida com sucesso", ToastLength.Long).Show();
+                voice_data = null;
+                _desc_voz.Text = "";
             });
         }
 

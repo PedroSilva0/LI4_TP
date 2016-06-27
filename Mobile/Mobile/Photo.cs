@@ -46,6 +46,7 @@ namespace Mobile
             SetContentView(Resource.Layout.Photo);
             ActionBar.SetHomeButtonEnabled(true);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
+            //App._file.
             if (IsThereAnAppToTakePictures())
             {
                 CreateDirectoryForPictures();
@@ -114,10 +115,12 @@ namespace Mobile
 
         private void MAdd_Click(object sender, EventArgs e)
         {
+            picData = System.IO.File.ReadAllBytes(App._file.AbsolutePath);
+            //Toast.MakeText(this, App._file.AbsolutePath, ToastLength.Long).Show();
             if (picData != null)
             {
                 WebClient client = new WebClient();
-                Uri uri = new Uri("http://169.254.80.80:8080/InsertPhoto.php");
+                Uri uri = new Uri("http://172.26.33.115:8080/InsertPhoto.php");
 
                 NameValueCollection parameters = new NameValueCollection();
                 parameters.Add("Descricao", mDescricao.Text);
@@ -127,9 +130,7 @@ namespace Mobile
                 client.UploadValuesAsync(uri, parameters);
                 client.UploadValuesCompleted += Client_UploadValuesCompleted;
 
-                picData = null;
-                mPic.SetImageResource(Resource.Drawable.ic_menu_gallery);
-                mDescricao.Text = "";
+               
             }
             else
             {
@@ -182,6 +183,9 @@ namespace Mobile
             RunOnUiThread(() =>
             {
                 Toast.MakeText(this, "Foto inserida com sucesso", ToastLength.Long).Show();
+                picData = null;
+                mPic.SetImageResource(Resource.Drawable.ic_menu_gallery);
+                mDescricao.Text = "";
             });
         }
 
@@ -238,7 +242,7 @@ namespace Mobile
             SendBroadcast(mediaScanIntent);
             
             mClient = new WebClient();
-            mUri = new Uri("http://169.254.80.80:8080/InsertPhoto.php");
+            mUri = new Uri("http://172.26.33.115:8080/InsertPhoto.php");
             
             NameValueCollection parameters = new NameValueCollection();
             mIdVis = Intent.GetStringExtra("IdVis");

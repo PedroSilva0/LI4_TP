@@ -50,7 +50,7 @@ namespace Mobile
         private void MFinVis_Click(object sender, EventArgs e)
         {
             WebClient client = new WebClient();
-            Uri uri = new Uri("http://169.254.80.80:8080/TerminarVisita.php");
+            Uri uri = new Uri("http://172.26.33.115:8080/TerminarVisita.php");
             NameValueCollection parameters = new NameValueCollection();
             //Toast.MakeText(this, mIdVis, ToastLength.Long).Show();
             parameters.Add("id_vis", mIdVis);
@@ -81,7 +81,8 @@ namespace Mobile
 
         private void MForm_Click(object sender, EventArgs e)
         {
-            Intent intent = new Intent(this, typeof(Form));
+            Intent intent = new Intent(this, typeof(Questionario));
+            intent.PutExtra("visita", mIdVis);
             this.StartActivity(intent);
         }
 

@@ -54,7 +54,7 @@ namespace Mobile
 
             //Buscar as perguntas
             WebClient mClient = new WebClient();
-            Uri mUri = new Uri("http://169.254.80.80:8080/GetQuestoes2.php");
+            Uri mUri = new Uri("http://172.26.33.115:8080/GetQuestoes2.php");
 
             mClient.DownloadDataAsync(mUri);
             mClient.DownloadDataCompleted += MClient_DownloadDataCompleted;
@@ -107,7 +107,7 @@ namespace Mobile
             for(int i=0;i< questoes.Count; i++) {
 
                 WebClient client = new WebClient();
-                Uri uri = new Uri("http://169.254.80.80:8080/InsertResposta.php");
+                Uri uri = new Uri("http://172.26.33.115:8080/InsertResposta.php");
 
                 NameValueCollection parameters = new NameValueCollection();
                 parameters.Add("visita", id_vis);
@@ -116,6 +116,7 @@ namespace Mobile
                 client.UploadValuesCompleted += Client_UploadValuesCompleted;
                 client.UploadValuesAsync(uri, parameters);
             }
+            Toast.MakeText(this, "Respostas inseridas com sucesso", ToastLength.Long).Show();
         }
 
         private void MClient_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
@@ -142,7 +143,7 @@ namespace Mobile
         {
             RunOnUiThread(() =>
             {
-                Toast.MakeText(this, "Respostas inseridas com sucesso", ToastLength.Long).Show();
+                
             });
         }
 
