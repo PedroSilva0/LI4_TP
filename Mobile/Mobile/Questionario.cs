@@ -54,7 +54,7 @@ namespace Mobile
 
             //Buscar as perguntas
             WebClient mClient = new WebClient();
-            Uri mUri = new Uri("http://192.168.1.69:8080/GetQuestoes2.php");
+            Uri mUri = new Uri("http://169.254.80.80:8080/GetQuestoes2.php");
 
             mClient.DownloadDataAsync(mUri);
             mClient.DownloadDataCompleted += MClient_DownloadDataCompleted;
@@ -107,7 +107,7 @@ namespace Mobile
             for(int i=0;i< questoes.Count; i++) {
 
                 WebClient client = new WebClient();
-                Uri uri = new Uri("http://192.168.1.69:8080/InsertResposta.php");
+                Uri uri = new Uri("http://169.254.80.80:8080/InsertResposta.php");
 
                 NameValueCollection parameters = new NameValueCollection();
                 parameters.Add("visita", id_vis);
