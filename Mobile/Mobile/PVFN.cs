@@ -50,7 +50,7 @@ namespace Mobile
         private void MFinVis_Click(object sender, EventArgs e)
         {
             WebClient client = new WebClient();
-            Uri uri = new Uri("http://192.168.1.69:8080/TerminarVisita.php");
+            Uri uri = new Uri("http://169.254.80.80:8080/TerminarVisita.php");
             NameValueCollection parameters = new NameValueCollection();
             //Toast.MakeText(this, mIdVis, ToastLength.Long).Show();
             parameters.Add("id_vis", mIdVis);

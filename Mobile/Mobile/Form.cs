@@ -117,7 +117,7 @@ namespace Mobile
             mIdVis = Intent.GetStringExtra("visita");
 
             mClient = new WebClient();
-            mUri = new Uri("http://192.168.1.69:8080/GetQuestoes.php");
+            mUri = new Uri("http://169.254.80.80:8080/GetQuestoes.php");
 
             mEnviaForm.Click += MEnviaForm_Click;
             mClient.DownloadDataAsync(mUri);
@@ -147,7 +147,7 @@ namespace Mobile
                 for (i = 1; i <= mPerguntas.Count; i++)
                 {
                     WebClient client = new WebClient();
-                    Uri uri = new Uri("http://192.168.1.69:8080/InsertResposta.php");
+                    Uri uri = new Uri("http://169.254.80.80:8080/InsertResposta.php");
 
                     NameValueCollection parameters = new NameValueCollection();
                     parameters.Add("IdQuestao", i.ToString());

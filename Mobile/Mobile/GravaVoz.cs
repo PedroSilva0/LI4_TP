@@ -62,7 +62,7 @@ namespace Mobile
                 if (voice_data != null)
                 {
                     WebClient client = new WebClient();
-                    Uri uri = new Uri("http://192.168.1.69:8080/InsertVoice.php");
+                    Uri uri = new Uri("http://169.254.80.80:8080/InsertVoice.php");
 
                     NameValueCollection parameters = new NameValueCollection();
                     parameters.Add("Descricao", _desc_voz.Text);
