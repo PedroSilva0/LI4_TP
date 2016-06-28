@@ -40,12 +40,12 @@ namespace BackOffice
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C ffmpeg -y -i "+ inFile + " -acodec pcm_u8 "+ outFile;
+            startInfo.Arguments = "/C ffmpeg -y -i "+ inFile + " -acodec pcm_u8 "+ outFile + "& exit";
             process.StartInfo = startInfo;
         
             process.Start();
        
-           // process.WaitForExit(2000);
+            process.WaitForExit();
 
         }
 
