@@ -1,5 +1,5 @@
 <?php
-	require_once(dirname(__FILE__).'/ConnectionInfo.php');
+	require_once(dirname(__FILE__).'/ConnectionInfo2.php');
 
 	
 if (isset($_POST['Descricao']) && isset($_POST['Foto']) && isset($_POST['IdVis']))
@@ -10,7 +10,7 @@ if (isset($_POST['Descricao']) && isset($_POST['Foto']) && isset($_POST['IdVis']
 	$idVis = $_POST['IdVis'];
 	
 	//Set up our connection
-	$connectionInfo = new ConnectionInfo();
+	$connectionInfo = new ConnectionInfo2();
 	$connectionInfo->GetConnection();
 	
 	if (!$connectionInfo->conn)
