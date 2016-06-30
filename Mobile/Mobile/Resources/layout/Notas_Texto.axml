@@ -11,7 +11,6 @@
     <EditText
         android:id="@+id/txtDescricao"
         android:hint="Descrição"
-        android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_style"
@@ -22,9 +21,9 @@
         android:textColor="#000" />
     <EditText
         android:id="@+id/txtNota"
+        android:inputType="textMultiLine"
         android:hint="Nota"
         android:gravity="top|left"
-        android:inputType="text"
         android:layout_width="match_parent"
         android:minHeight="300px"
         android:layout_height="343.5dp"

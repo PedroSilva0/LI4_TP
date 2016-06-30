@@ -15,6 +15,7 @@
         android:id="@+id/txtDescricao"
         android:hint="Descrição"
         android:layout_width="match_parent"
+        android:inputType="textPersonName"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_style"
         android:layout_marginLeft="20dp"

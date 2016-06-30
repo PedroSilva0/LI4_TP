@@ -17,6 +17,7 @@
     <EditText
         android:id="@+id/txtResposta"
         android:hint="Resposta"
+        android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="64.0dp"
         android:background="@drawable/edit_text_style"
