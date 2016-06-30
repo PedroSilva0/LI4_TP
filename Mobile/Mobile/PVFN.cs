@@ -25,6 +25,7 @@ namespace Mobile
         private string mIdVis;
         private string mPlano;
         private string mFiscal;
+        private bool flag;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,6 +40,7 @@ namespace Mobile
             mIdVis = Intent.GetStringExtra("IdVis");
             mPlano = Intent.GetStringExtra("IdPlano");
             mFiscal = Intent.GetStringExtra("IdFiscal");
+            flag = false;
 
             mPhoto.Click += MPhoto_Click;
             mNote.Click += MNote_Click;
@@ -47,10 +49,19 @@ namespace Mobile
             mFinVis.Click += MFinVis_Click;
         }
 
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if(resultCode == Result.Ok && requestCode == 0)
+            {
+                flag = true;
+            }
+        }
+
         private void MFinVis_Click(object sender, EventArgs e)
         {
             WebClient client = new WebClient();
-            Uri uri = new Uri("http://172.26.33.115:8080/TerminarVisita.php");
+            Uri uri = new Uri("http://192.168.1.69:8080/TerminarVisita.php");
             NameValueCollection parameters = new NameValueCollection();
             //Toast.MakeText(this, mIdVis, ToastLength.Long).Show();
             parameters.Add("id_vis", mIdVis);
@@ -62,6 +73,7 @@ namespace Mobile
             intent.PutExtra("Id", mPlano);
             intent.PutExtra("Fiscal", mFiscal);
             this.StartActivity(intent);
+            Finish();
         }
 
         private void Client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
@@ -81,9 +93,16 @@ namespace Mobile
 
         private void MForm_Click(object sender, EventArgs e)
         {
-            Intent intent = new Intent(this, typeof(Questionario));
-            intent.PutExtra("visita", mIdVis);
-            this.StartActivity(intent);
+            if(flag == false)
+            {
+                Intent intent = new Intent(this, typeof(Questionario));
+                intent.PutExtra("visita", mIdVis);
+                this.StartActivityForResult(intent, 0);
+            }else
+            {
+                Toast.MakeText(this, "Só pode preencher o formulário uma vez!", ToastLength.Long).Show();
+            }
+            
         }
 
         private void MNote_Click(object sender, EventArgs e)

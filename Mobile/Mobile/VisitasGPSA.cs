@@ -62,7 +62,9 @@ namespace Mobile
             intent.PutExtra("IdPlano", mPlano);
             intent.PutExtra("IdFiscal", mFiscal);
             this.StartActivity(intent);
-            FinishAffinity();
+            Intent visitas = new Intent(this, typeof(Visitas));
+            SetResult(Result.Ok, visitas);
+            Finish();
         }
     }
 }

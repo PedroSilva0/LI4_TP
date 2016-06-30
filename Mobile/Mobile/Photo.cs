@@ -56,7 +56,9 @@ namespace Mobile
                 mDescricao = FindViewById<EditText>(Resource.Id.txtDescricao);
                 mLinearLayout = FindViewById<LinearLayout>(Resource.Id.linearLayout);
                 mGallery = FindViewById<Button>(Resource.Id.btnGallery);
-                
+
+                //picData = null;
+
                 mBtnTakePicture.Click += MBtnTakePicture_Click;
                 mGallery.Click -= MGallery_Click;
                 mGallery.Click += MGallery_Click;
@@ -115,12 +117,12 @@ namespace Mobile
 
         private void MAdd_Click(object sender, EventArgs e)
         {
-            picData = System.IO.File.ReadAllBytes(App._file.AbsolutePath);
-            //Toast.MakeText(this, App._file.AbsolutePath, ToastLength.Long).Show();
             if (picData != null)
             {
+                picData = System.IO.File.ReadAllBytes(App._file.AbsolutePath);
+                mAdd.Enabled = false;
                 WebClient client = new WebClient();
-                Uri uri = new Uri("http://172.26.33.115:8080/InsertPhoto.php");
+                Uri uri = new Uri("http://192.168.1.69:8080/InsertPhoto.php");
 
                 NameValueCollection parameters = new NameValueCollection();
                 parameters.Add("Descricao", mDescricao.Text);
@@ -186,6 +188,7 @@ namespace Mobile
                 picData = null;
                 mPic.SetImageResource(Resource.Drawable.ic_menu_gallery);
                 mDescricao.Text = "";
+                mAdd.Enabled = true;
             });
         }
 
@@ -225,107 +228,4 @@ namespace Mobile
             return inSampleSize;
         }
     }
-
-        /*private WebClient mClient;
-        private Uri mUri;
-        String namefoto;
-        private string mIdVis;
-
-        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
-        {
-            base.OnActivityResult(requestCode, resultCode, data);
-
-            // Make it available in the gallery
-            Intent mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
-            Android.Net.Uri contentUri = Android.Net.Uri.FromFile(App._file);
-            mediaScanIntent.SetData(contentUri);
-            SendBroadcast(mediaScanIntent);
-            
-            mClient = new WebClient();
-            mUri = new Uri("http://172.26.33.115:8080/InsertPhoto.php");
-            
-            NameValueCollection parameters = new NameValueCollection();
-            mIdVis = Intent.GetStringExtra("IdVis");
-            parameters.Add("Foto", namefoto);
-            parameters.Add("IdVis", mIdVis);
-
-            mClient.UploadValuesCompleted += MClient_UploadValuesCompleted;
-            mClient.UploadValuesAsync(mUri, parameters);
-            // Dispose of the Java side bitmap.
-            GC.Collect();
-        }
-
-        private void MClient_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
-        {
-            RunOnUiThread(() =>
-            {
-                string result = Encoding.UTF8.GetString(e.Result);
-                if (result.Equals("ok"))
-                {
-                    Toast.MakeText(this, "OK", ToastLength.Long).Show();
-                }
-                else
-                {
-                    Toast.MakeText(this, "KO", ToastLength.Long).Show();
-                }
-            });
-        }
-
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Photo);
-
-            if (IsThereAnAppToTakePictures())
-            {
-                CreateDirectoryForPictures();
-                Button button = FindViewById<Button>(Resource.Id.myButton);
-
-                button.Click += TakeAPicture;
-                //id++;
-            }
-
-        }
-
-        private void CreateDirectoryForPictures()
-        {
-            App._dir = new File(Environment.GetExternalStoragePublicDirectory(Environment.DirectoryPictures), "CameraAppDemo");
-            if (!App._dir.Exists())
-            {
-                App._dir.Mkdirs();
-            }
-        }
-
-        private bool IsThereAnAppToTakePictures()
-        {
-            Intent intent = new Intent(MediaStore.ActionImageCapture);
-            IList<ResolveInfo> availableActivities = PackageManager.QueryIntentActivities(intent, PackageInfoFlags.MatchDefaultOnly);
-            return availableActivities != null && availableActivities.Count > 0;
-        }
-
-        private void TakeAPicture(object sender, EventArgs eventArgs)
-        {
-
-            // String namefotoaux = String.Concat("myPhoto_",id);
-            // String namefoto = String.Concat(namefotoaux,".jpg");
-            DateTime localDate = DateTime.Now;
-            string cultureName = "de-DE";
-            var culture = new CultureInfo(cultureName);
-            //String namefoto = String.Format("myPhoto_{0}.jpg", Guid.NewGuid());
-            namefoto = String.Format("{0}.jpg",localDate.ToString(culture));
-
-            Intent intent = new Intent(MediaStore.ActionImageCapture);
-            App._file = new File(App._dir, namefoto);
-            intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(App._file));
-            StartActivityForResult(intent, 0);
-        }
-    }
-
-    public static class App
-    {
-
-        public static File _file;
-        public static File _dir;
-        public static Bitmap bitmap;
-    }*/
 }

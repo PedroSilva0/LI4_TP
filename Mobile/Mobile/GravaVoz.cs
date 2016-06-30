@@ -8,6 +8,7 @@ using Android.Media;
 using System.IO;
 using System.Net;
 using System.Collections.Specialized;
+using Android.Views.InputMethods;
 
 namespace Mobile
 {
@@ -17,6 +18,7 @@ namespace Mobile
     {
 
         private MediaRecorder _recorder;
+        private LinearLayout mLinearLayout;
         private Button _start;
         private Button _stop;
         private string id_vis;
@@ -30,10 +32,13 @@ namespace Mobile
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             SetContentView(Resource.Layout.GravaVoz);
 
+            mLinearLayout = FindViewById<LinearLayout>(Resource.Id.linearLayoutVoz);
             _desc_voz = FindViewById<EditText>(Resource.Id.desc_voz);
             _start = FindViewById<Button>(Resource.Id.start);
             _stop = FindViewById<Button>(Resource.Id.stop);
             id_vis = Intent.GetStringExtra("visita");
+
+            mLinearLayout.Click += MLinearLayout_Click;
 
             string path = "/sdcard/test.3gpp";
 
@@ -60,7 +65,7 @@ namespace Mobile
                 if (voice_data != null)
                 {
                     WebClient client = new WebClient();
-                    Uri uri = new Uri("http://172.26.33.115:8080/InsertVoice.php");
+                    Uri uri = new Uri("http://192.168.1.69:8080/InsertVoice.php");
 
                     NameValueCollection parameters = new NameValueCollection();
                     parameters.Add("Descricao", _desc_voz.Text);
@@ -77,6 +82,12 @@ namespace Mobile
                     Toast.MakeText(this, "Insira um ficheiro de voz", ToastLength.Long).Show();
                 }
             };
+        }
+
+        private void MLinearLayout_Click(object sender, EventArgs e)
+        {
+            InputMethodManager inputManager = (InputMethodManager)this.GetSystemService(Activity.InputMethodService);
+            inputManager.HideSoftInputFromWindow(this.CurrentFocus.WindowToken, HideSoftInputFlags.None);
         }
 
         protected override void OnResume()

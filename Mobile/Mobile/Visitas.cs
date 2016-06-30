@@ -10,6 +10,7 @@ using Android.Widget;
 using System.Net;
 using System.Collections.Specialized;
 using Newtonsoft.Json;
+using Android.Runtime;
 
 namespace Mobile
 {
@@ -39,7 +40,7 @@ namespace Mobile
             mFiscal = Intent.GetStringExtra("Fiscal");
 
             mClient = new WebClient();
-            mUri = new Uri("http://172.26.33.115:8080/UpdateGetEstabelecimentos.php");
+            mUri = new Uri("http://192.168.1.69:8080/UpdateGetEstabelecimentos.php");
 
             mId = Intent.GetStringExtra("Id");
             NameValueCollection parameters = new NameValueCollection();
@@ -50,6 +51,15 @@ namespace Mobile
             mListView.ItemClick += MListView_ItemClick;
         }
 
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (resultCode == Result.Ok && requestCode == 51)
+            {
+                Finish();
+            }
+        }
+
         private void MListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             Intent intent = new Intent(this, typeof(VisitasGPSA));
@@ -57,26 +67,8 @@ namespace Mobile
             intent.PutExtra("IdVis", mEstabelecimentos[e.Position].id_vis.ToString());
             intent.PutExtra("IdPlano", mId);
             intent.PutExtra("IdFiscal", mFiscal);
-            this.StartActivity(intent);
+            this.StartActivityForResult(intent,51);
         }
-
-        /*
-public override void OnBackPressed()
-{
-   if (doubleBackToExitPressedOnce)
-   {
-       base.OnBackPressed();
-       return;
-   }
-   this.doubleBackToExitPressedOnce = true;
-   Toast.MakeText(this, "Please click BACK again to exit", ToastLength.Short).Show();
-   RunOnUiThread(() =>
-   {
-       Thread.Sleep(2000);
-
-   });
-   doubleBackToExitPressedOnce = false;
-}*/
 
         private void MClient_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
         {
@@ -92,6 +84,7 @@ public override void OnBackPressed()
                     Intent intent = new Intent(this, typeof(Planos));
                     intent.PutExtra("Fiscal", mFiscal);
                     this.StartActivity(intent);
+                    Finish();
                 }
             });
         }

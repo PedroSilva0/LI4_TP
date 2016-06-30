@@ -52,7 +52,7 @@ namespace Mobile
 
             mFiscal = Intent.GetStringExtra("Fiscal");
             mClient = new WebClient();
-            mUri = new Uri("http://172.26.33.115:8080/GetPlanos.php");
+            mUri = new Uri("http://192.168.1.69:8080/GetPlanos.php");
 
             //NameValueCollection parameters = new NameValueCollection();
             //parameters.Add("Fiscal", mFiscal);
@@ -61,6 +61,15 @@ namespace Mobile
             //mClient.UploadValuesCompleted += MClient_UploadValuesCompleted;
             //mClient.UploadValuesAsync(mUri, parameters);
             mListView.ItemClick += MListView_ItemClick;
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (resultCode == Result.Ok && requestCode == 50)
+            {
+                Finish();
+            }
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -82,7 +91,7 @@ namespace Mobile
             intent.PutExtra("Pos", e.Position.ToString());
             intent.PutExtra("Id", mPlanos[e.Position].id.ToString());
             intent.PutExtra("Fiscal", mFiscal);
-            this.StartActivity(intent);
+            this.StartActivityForResult(intent,50);
         }
 
         private void MSwipeRefreshLayout_Refresh(object sender, EventArgs e)

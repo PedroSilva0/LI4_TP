@@ -58,7 +58,7 @@ namespace Mobile
             if(mNota.Text != "")
             {
                 WebClient client = new WebClient();
-                Uri uri = new Uri("http://172.26.33.115:8080/InsertNota.php");
+                Uri uri = new Uri("http://192.168.1.69:8080/InsertNota.php");
                 NameValueCollection parameters = new NameValueCollection();
 
                 parameters.Add("descricao", mDescricao.Text);

@@ -53,6 +53,13 @@ namespace Mobile
             intent.PutExtra("Id", mPlano);
             intent.PutExtra("Fiscal", mFiscal);
             this.Activity.StartActivity(intent);
+            Intent planos = new Intent(this.Activity, typeof(Planos));
+            Intent planoIA = new Intent(this.Activity, typeof(PlanoIA));
+            //Intent planoI = new Intent(this.Activity, typeof(PlanoI));
+            this.Activity.SetResult(Result.Ok, planos);
+            this.Activity.SetResult(Result.Ok, planoIA);
+            //this.Activity.SetResult(Result.Ok, planoI);
+            this.Activity.Finish();
         }
     }
 }

@@ -12,6 +12,7 @@ using Android.Widget;
 using Newtonsoft.Json;
 using System.Net;
 using System.Collections.Specialized;
+using Android.Views.InputMethods;
 
 namespace Mobile
 {
@@ -25,7 +26,9 @@ namespace Mobile
         private string id_vis;
         private int id_pergunta;
         private EditText _resposta;
+        private LinearLayout mLinearLayout;
         private TextView _pergunta;
+        string flag;
         List<string> questoes;
         List<string> respostas;
 
@@ -38,6 +41,7 @@ namespace Mobile
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             SetContentView(Resource.Layout.Questionario);
 
+            mLinearLayout = FindViewById<LinearLayout>(Resource.Id.mainView);
             _proxima = FindViewById<Button>(Resource.Id.btnProxima);
             _anterior = FindViewById<Button>(Resource.Id.btnAnterior);
             _guardar = FindViewById<Button>(Resource.Id.btnGuardar);
@@ -46,6 +50,7 @@ namespace Mobile
             id_vis = Intent.GetStringExtra("visita");
             id_pergunta = 0;
 
+            mLinearLayout.Click += MLinearLayout_Click;
             _proxima.Click += pergunta_seguinte_click;
             _anterior.Click += pergunta_anterior_click;
             _guardar.Click += guardar_respostas_click;
@@ -54,10 +59,16 @@ namespace Mobile
 
             //Buscar as perguntas
             WebClient mClient = new WebClient();
-            Uri mUri = new Uri("http://172.26.33.115:8080/GetQuestoes2.php");
+            Uri mUri = new Uri("http://192.168.1.69:8080/GetQuestoes2.php");
 
             mClient.DownloadDataAsync(mUri);
             mClient.DownloadDataCompleted += MClient_DownloadDataCompleted;
+        }
+
+        private void MLinearLayout_Click(object sender, EventArgs e)
+        {
+            InputMethodManager inputManager = (InputMethodManager)this.GetSystemService(Activity.InputMethodService);
+            inputManager.HideSoftInputFromWindow(this.CurrentFocus.WindowToken, HideSoftInputFlags.None);
         }
 
         private void pergunta_seguinte_click(object sender, EventArgs e)
@@ -107,7 +118,7 @@ namespace Mobile
             for(int i=0;i< questoes.Count; i++) {
 
                 WebClient client = new WebClient();
-                Uri uri = new Uri("http://172.26.33.115:8080/InsertResposta.php");
+                Uri uri = new Uri("http://192.168.1.69:8080/InsertResposta.php");
 
                 NameValueCollection parameters = new NameValueCollection();
                 parameters.Add("visita", id_vis);
@@ -117,6 +128,9 @@ namespace Mobile
                 client.UploadValuesAsync(uri, parameters);
             }
             Toast.MakeText(this, "Respostas inseridas com sucesso", ToastLength.Long).Show();
+            Intent resultIntent = new Intent(this,typeof(PVFN));
+            SetResult(Result.Ok, resultIntent);
+            Finish();
         }
 
         private void MClient_DownloadDataCompleted(object sender, DownloadDataCompletedEventArgs e)
